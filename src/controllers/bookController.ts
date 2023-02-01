@@ -25,16 +25,6 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   return res.json(oneBook);
 };
 
-export const searchingForBookFn = async (req: Request, res: Response) => {
-  const requestedBook = await prisma.book.findMany({
-    where: {
-      name: req.query.name as string
-    }
-  })
-
-  return res.json(requestedBook);
-}
-
 export const createBookFn = async (req: Request, res: Response) => {
   validate(createBookSchema);
   const newBook = await prisma.book.create({
