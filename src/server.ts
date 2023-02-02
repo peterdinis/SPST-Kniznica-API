@@ -6,7 +6,7 @@ import bookRoutes from "./routes/bookRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
 
-const app: Application = express();
+export const app: Application = express();
 
 app.use(cors({
     origin: "*"
