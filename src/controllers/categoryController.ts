@@ -10,6 +10,22 @@ export const displayAllCategoriesFn = async (req: Request, res: Response) =>{
     return res.json(allCategories);
 }
 
+export const categoryDetailsFn = async (req: Request, res: Response) => {
+    const {id} = req.params;
+
+    const oneCategoy = await prisma.category.findFirst({
+        where: {
+            id: Number(id)
+        }
+    })
+
+    if(!oneCategoy) {
+        throw new Error("Category does not exists")
+    }
+
+    return oneCategoy;
+}
+
 export const createCategoryFn = async (req: Request, res: Response) => {
     validate(createCategorySchema);
     const newCategory = await prisma.category.create({
