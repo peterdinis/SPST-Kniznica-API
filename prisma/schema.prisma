@@ -28,6 +28,7 @@ model Book {
   status      String
   pages       Int
   year        Int
+  quantity    Int @default(1)
 }
 
 model Category {
