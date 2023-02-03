@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
@@ -16,7 +16,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   email     String?  @unique
-  hash      String
+  password  String
   role      Role     @default(USER)
 }
 
@@ -29,7 +29,7 @@ model Book {
   status      String
   pages       Int
   year        Int
-  quantity    Int @default(1)
+  quantity    Int    @default(1)
 }
 
 model Category {
