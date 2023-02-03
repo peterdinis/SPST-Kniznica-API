@@ -5,6 +5,17 @@ import { uuid } from 'uuidv4';
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import { generateTokens } from "../helpers/jwt";
+import hashToken from "../helpers/hashToken";
+
+const addRefreshTokenToWhiteList = (tokId: string, refreshToken: string, userId: string) => {
+    return db.refreshToken.create({
+        data: {
+            id: tokId,
+            hashedToken: hashToken(refreshToken),
+            userId
+        }
+    })
+}
 
 export const registerStudent = async (req: Request, res: Response) => {
     try {
@@ -41,7 +52,9 @@ export const registerStudent = async (req: Request, res: Response) => {
 
         const tokId = uuid() as unknown as number;
         const {accessToken, refreshToken} = generateTokens(newStudent, tokId);
-
+        
+        // TODO: Fixing this later
+        // await addRefreshTokenToWhiteList({ tokId, refreshToken, userId: user.id });
         return res.status(201).json({
             student: newStudent,
             accessToken,
