@@ -5,6 +5,7 @@ import exampleRoute from "./routes/exampleRoute";
 import bookRoutes from "./routes/bookRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
+import helmet from "helmet";
 
 export const app: Application = express();
 
@@ -13,6 +14,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(helmet())
 dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
