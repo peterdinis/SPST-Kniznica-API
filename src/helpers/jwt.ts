@@ -25,7 +25,7 @@ export function generateRefreshToken(user: IUser, tokId: number) {
 }
 
 
-export function generateTokens(user: IUser, tokId: number) {
+export function generateTokens(user: any, tokId: number) {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user, tokId);
   
