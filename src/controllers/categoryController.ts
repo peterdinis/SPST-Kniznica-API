@@ -1,19 +1,17 @@
-import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import validate from "../schemas/validateSchema";
 import { createCategorySchema } from "../schemas/categorySchema";
-
-const prisma = new PrismaClient();
+import db from "../helpers/db";
 
 export const displayAllCategoriesFn = async (req: Request, res: Response) =>{
-    const allCategories = await prisma.category.findMany();
+    const allCategories = await db.category.findMany();
     return res.json(allCategories);
 }
 
 export const categoryDetailsFn = async (req: Request, res: Response) => {
     const {id} = req.params;
 
-    const oneCategoy = await prisma.category.findFirst({
+    const oneCategoy = await db.category.findFirst({
         where: {
             id: Number(id)
         }
@@ -28,7 +26,7 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
 
 export const createCategoryFn = async (req: Request, res: Response) => {
     validate(createCategorySchema);
-    const newCategory = await prisma.category.create({
+    const newCategory = await db.category.create({
         data: {
             ...req.body
         }
