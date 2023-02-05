@@ -45,22 +45,55 @@ export const registerStudent = async (req: Request, res: Response) => {
       },
     });
 
-    const {accessToken, refreshToken} = generateTokens(newStudent, tokId);
+    const { accessToken, refreshToken } = generateTokens(newStudent, tokId);
 
     await addRefreshTokenToWhiteList(tokId, refreshToken, newStudent.id);
 
     return res.status(201).json({
-        newStudent,
-        accessToken,
-        refreshToken
+      newStudent,
+      accessToken,
+      refreshToken,
     });
   } catch (err) {
     getErrorMessage(err);
   }
 };
 
-export const loginStudent = (req: Request, res: Response) => {
+export const loginStudent = async (req: Request, res: Response) => {
   try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400);
+      throw new Error("You must provide an email and a password.");
+    }
+
+    const existingUser = await db.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!existingUser) {
+      res.status(403);
+      throw new Error("Invalid login credentials.");
+    }
+
+    const validPassword = await bcrypt.compare(password, existingUser.password);
+    if (!validPassword) {
+      res.status(403);
+      throw new Error('Invalid login credentials.');
+    }
+
+    const tokId = uuid() as unknown as number;
+    const { accessToken, refreshToken } = generateTokens(existingUser, tokId);
+    await addRefreshTokenToWhiteList(tokId, refreshToken, existingUser.id);
+
+    return {
+        accessToken,
+        refreshToken,
+    }
+
   } catch (err) {
     getErrorMessage(err);
   }
