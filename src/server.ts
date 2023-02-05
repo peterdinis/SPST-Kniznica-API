@@ -5,7 +5,6 @@ import exampleRoute from "./routes/exampleRoute";
 import bookRoutes from "./routes/bookRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import studentRoutes from "./routes/studentRoutes";
-
 import morgan from "morgan";
 
 export const app: Application = express();
