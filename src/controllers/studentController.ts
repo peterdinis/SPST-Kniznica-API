@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import bcrypt from "bcryptjs";
@@ -99,3 +99,15 @@ export const loginStudent = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const refreshTokenFn = (req: Request, res: Response, next: NextFunction) => {
+    return;
+}   
+
+export const revokeRefreshTokenFn = (req: Request, res: Response, next: NextFunction) => {
+    return;
+}
+
+export const profileFn = (req: Request, res: Response, next: NextFunction) => {
+    return;
+}
