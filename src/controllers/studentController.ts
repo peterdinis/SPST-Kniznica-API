@@ -89,10 +89,11 @@ export const loginStudent = async (req: Request, res: Response) => {
     const { accessToken, refreshToken } = generateTokens(existingUser, tokId);
     await addRefreshTokenToWhiteList(tokId, refreshToken, existingUser.id);
 
-    return {
+    return res.json({
+        existingUser,
         accessToken,
-        refreshToken,
-    }
+        refreshToken
+    })
 
   } catch (err) {
     getErrorMessage(err);
