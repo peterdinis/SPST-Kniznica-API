@@ -4,6 +4,7 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { uuid } from "uuidv4";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
+import * as jwt from "jsonwebtoken";
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
@@ -100,15 +101,9 @@ export const loginStudent = async (req: Request, res: Response) => {
   }
 };
 
-export const refreshTokenFn = async (req: Request, res: Response, next: NextFunction) => {
-    const {refreshToken} = req.body;
-    if (!refreshToken) {
-      res.status(400);
-      throw new Error('Missing refresh token.');
-    }
-    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-    const savedRefreshToken = await findRefreshTokenById()
-}   
+export const logoutStudent = (req: Request, res: Response) => {
+  
+}
 
 export const profileFn = async (req: any, res: Response, next: NextFunction) => {
     try {

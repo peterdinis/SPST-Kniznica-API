@@ -13,6 +13,14 @@ export function addRefreshTokenToWhiteList(tokId: any, refreshToken: string, use
   });
 }
 
+export function removeRefreshToken(refreshTokenId: string) {
+  return db.refreshToken.delete({
+    where: {
+      id: refreshTokenId
+    }
+  });
+}
+
 
 export function generateAccessToken(user: IUser) {
   return jwt.sign(
