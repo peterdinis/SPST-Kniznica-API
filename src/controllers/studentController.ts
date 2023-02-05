@@ -1,12 +1,8 @@
 import {Request, Response} from "express";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
-import { uuid } from 'uuidv4';
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
-import { generateTokens } from "../helpers/jwt";
 import hashToken from "../helpers/hashToken";
-import { STUDENT } from "../constants/roles";
 
 const addRefreshTokenToWhiteList = (tokId: string, refreshToken: string, userId: string) => {
     return db.refreshToken.create({
@@ -19,7 +15,6 @@ const addRefreshTokenToWhiteList = (tokId: string, refreshToken: string, userId:
 }
 
 export const registerStudent = async (req: Request, res: Response) => {
-    try {
         const {name, lastName, email, password, role} = req.body;
 
         if(!name || !lastName || !email || !password || !role) {
@@ -51,24 +46,20 @@ export const registerStudent = async (req: Request, res: Response) => {
               lastName,
               email,
               password: hashedPassword,
-              role
+              role,
             }
         })
 
-        const tokId = uuid() as unknown as number;
+        console.log(newStudent);
+
+        /* const tokId = uuid() as unknown as number;
         const {accessToken, refreshToken} = generateTokens(newStudent, tokId);
         
-        // TODO: Fixing this later
-        // await addRefreshTokenToWhiteList({ tokId, refreshToken, userId: user.id });
         return res.status(201).json({
             student: newStudent,
             accessToken,
             refreshToken
-        })
-
-    } catch (err) {
-        getErrorMessage(err);
-    }
+        }) */
 }
 
 export const loginStudent = (req: Request, res: Response) => {
