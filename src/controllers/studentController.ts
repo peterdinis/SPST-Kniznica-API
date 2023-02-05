@@ -6,6 +6,7 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import { generateTokens } from "../helpers/jwt";
 import hashToken from "../helpers/hashToken";
+import { STUDENT } from "../constants/roles";
 
 const addRefreshTokenToWhiteList = (tokId: string, refreshToken: string, userId: string) => {
     return db.refreshToken.create({
@@ -32,10 +33,14 @@ export const registerStudent = async (req: Request, res: Response) => {
             }
         })
 
-
         if(existingStudent) {
             res.status(400);
             throw new Error("Student already exists");
+        }
+
+        if(password.length < 5) {
+            res.status(400);
+            throw new Error("Password must be at least 5 characters");
         }
 
         const hashedPassword = bcrypt.hash(password, 10) as unknown as string;
