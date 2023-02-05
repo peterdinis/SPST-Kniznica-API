@@ -100,14 +100,32 @@ export const loginStudent = async (req: Request, res: Response) => {
   }
 };
 
-export const refreshTokenFn = (req: Request, res: Response, next: NextFunction) => {
-    return;
+export const refreshTokenFn = async (req: Request, res: Response, next: NextFunction) => {
+    const {refreshToken} = req.body;
+    if (!refreshToken) {
+      res.status(400);
+      throw new Error('Missing refresh token.');
+    }
+    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const savedRefreshToken = await findRefreshTokenById()
 }   
 
-export const revokeRefreshTokenFn = (req: Request, res: Response, next: NextFunction) => {
-    return;
-}
+export const profileFn = async (req: any, res: Response, next: NextFunction) => {
+    try {
+      const {userId} = req.payload;
+      const user = await db.user.findUnique({
+        where: {
+          id: userId,
+        }
+      });
 
-export const profileFn = (req: Request, res: Response, next: NextFunction) => {
-    return;
+      if(!user) {
+        res.status(404);
+        throw new Error(`User not found`);
+      }
+
+      return res.status(200).json(user);
+    } catch (err) {
+      getErrorMessage(err);
+    }
 }
