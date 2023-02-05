@@ -43,6 +43,7 @@ model Book {
   pages       Int
   year        Int
   quantity    Int    @default(1)
+  isBorrowed  Booking[]
 }
 
 model Category {
@@ -55,4 +56,12 @@ enum Role {
   STUDENT
   ADMIN
   TEACHER
+}
+
+model Booking {
+  id          Int    @id @default(autoincrement())
+  email       String
+  days        String
+  bookId      Int
+  Book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }

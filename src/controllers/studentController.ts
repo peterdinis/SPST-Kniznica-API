@@ -4,7 +4,6 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { uuid } from "uuidv4";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
-import * as jwt from "jsonwebtoken";
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
@@ -100,10 +99,6 @@ export const loginStudent = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-export const logoutStudent = (req: Request, res: Response) => {
-  
-}
 
 export const profileFn = async (req: any, res: Response, next: NextFunction) => {
     try {
