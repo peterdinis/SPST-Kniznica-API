@@ -7,9 +7,9 @@ import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, email, password, role } = req.body;
+    const { name, lastName, email, password, role, gender } = req.body;
 
-    if (!name || !lastName || !email || !password || !role) {
+    if (!name || !lastName || !email || !password || !role || !gender) {
       res.status(400);
       throw new Error("All fields are required");
     }

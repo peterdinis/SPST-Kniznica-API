@@ -27,14 +27,15 @@ model User {
   updatedAt     DateTime       @updatedAt
   name          String
   lastName      String
-  email         String        @unique
+  email         String         @unique
   password      String
   role          Role           @default(STUDENT)
+  gender        Gender         @default(MEN)
   refreshTokens RefreshToken[]
 }
 
 model Book {
-  id          Int    @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
   image       String
@@ -42,7 +43,7 @@ model Book {
   status      String
   pages       Int
   year        Int
-  quantity    Int    @default(1)
+  quantity    Int       @default(1)
   isBorrowed  Booking[]
 }
 
@@ -58,10 +59,15 @@ enum Role {
   TEACHER
 }
 
+enum Gender {
+  MEN
+  WOMEN
+}
+
 model Booking {
-  id          Int    @id @default(autoincrement())
-  email       String
-  days        String
-  bookId      Int
-  Book        Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id     Int    @id @default(autoincrement())
+  email  String
+  days   String
+  bookId Int
+  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
