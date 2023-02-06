@@ -23,6 +23,23 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   return res.json(oneBook);
 };
 
+export const searchBook = async (req: Request, res: Response) => {
+  const books = await db.book.findMany({
+    where: {
+      name: {
+        contains: String(req.query.q)
+      }
+    }
+  });
+
+  if(!books) {
+    res.status(404);
+    throw new Error("Books not found");
+  }
+
+  return res.json(books);
+}
+
 export const createBookFn = async (req: Request, res: Response) => {
   validate(createBookSchema);
   const newBook = await db.book.create({
