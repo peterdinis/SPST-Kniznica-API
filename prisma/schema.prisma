@@ -32,6 +32,7 @@ model User {
   role          Role           @default(STUDENT)
   gender        Gender         @default(MEN)
   refreshTokens RefreshToken[]
+  borrowedBooks Booking[]
 }
 
 model Book {
@@ -66,8 +67,9 @@ enum Gender {
 
 model Booking {
   id     Int    @id @default(autoincrement())
-  email  String
   days   String
+  email  String
+  User   User   @relation(fields: [email], references: [id], onDelete: Cascade)
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
