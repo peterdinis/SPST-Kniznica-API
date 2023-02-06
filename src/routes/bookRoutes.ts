@@ -4,6 +4,7 @@ import {
   deleteBookFn,
   displayAllBooksFn,
   displayOneBookFn,
+  findAllAvaiableBooks,
   searchBook,
   updateBookFn,
 } from "../controllers/bookController";
@@ -11,6 +12,7 @@ import {
 const router = express.Router();
 
 router.get("/books", displayAllBooksFn);
+router.get("/books/avaiable", findAllAvaiableBooks);
 router.get("/book/:id", displayOneBookFn);
 router.get("/books/search", searchBook);
 router.post("/books", createBookFn);
