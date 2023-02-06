@@ -49,7 +49,6 @@ export const registerStudent = async (req: Request, res: Response) => {
 
     await addRefreshTokenToWhiteList(tokId, refreshToken, newStudent.id);
 
-    console.log(newStudent);
     return res.status(201).json({
       newStudent,
       accessToken,
@@ -90,7 +89,7 @@ export const loginStudent = async (req: Request, res: Response) => {
     const { accessToken, refreshToken } = generateTokens(existingUser, tokId);
     await addRefreshTokenToWhiteList(tokId, refreshToken, existingUser.id);
 
-    return res.json({
+    return res.status(201).json({
         existingUser,
         accessToken,
         refreshToken
