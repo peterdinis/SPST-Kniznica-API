@@ -1,5 +1,12 @@
 import express from "express";
-import { createBookFn, deleteBookFn, displayAllBooksFn, displayOneBookFn, searchBook, updateBookFn } from "../controllers/bookController";
+import {
+  createBookFn,
+  deleteBookFn,
+  displayAllBooksFn,
+  displayOneBookFn,
+  searchBook,
+  updateBookFn,
+} from "../controllers/bookController";
 
 const router = express.Router();
 
