@@ -11,7 +11,9 @@ import morgan from "morgan";
 export const app: Application = express();
 
 app.use(cors({
-    origin: "*"
+    origin: "*",
+    methods: "*",
+    
 }));
 app.use(express.json());
 app.use(morgan("dev"));
