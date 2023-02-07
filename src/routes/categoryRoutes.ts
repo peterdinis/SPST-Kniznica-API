@@ -7,7 +7,7 @@ import {
 
 const router = express.Router();
 
-router.get("/category", displayAllCategoriesFn);
+router.get("/categories", displayAllCategoriesFn);
 router.get("/category/:id", categoryDetailsFn);
 router.post("/category", createCategoryFn);
 
