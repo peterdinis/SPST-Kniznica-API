@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  booksPagination,
   createBookFn,
   deleteBookFn,
   displayAllBooksFn,
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.get("/books", displayAllBooksFn);
 router.get("/books/avaiable", findAllAvaiableBooks);
+router.get("/books/paginate", booksPagination);
 router.get("/book/:id", displayOneBookFn);
 router.get("/books/search", searchBook);
 router.post("/books", createBookFn);

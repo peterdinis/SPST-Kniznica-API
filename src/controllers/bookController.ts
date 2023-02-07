@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import validate from "../schemas/validateSchema";
 import { createBookSchema } from "../schemas/bookSchema";
 import db from "../helpers/db";
+import { Pool } from "pg";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
@@ -11,16 +13,16 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
 export const findAllAvaiableBooks = async (req: Request, res: Response) => {
   const allAvaiableBooks = await db.book.findMany({
     where: {
-      status: "Dostupná"
-    }
+      status: "Dostupná",
+    },
   });
 
-  if(allAvaiableBooks.length === 0) {
+  if (allAvaiableBooks.length === 0) {
     return res.send("No avaiable books");
   }
 
   return res.json(allAvaiableBooks);
-}
+};
 
 export const displayOneBookFn = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -41,18 +43,40 @@ export const searchBook = async (req: Request, res: Response) => {
   const books = await db.book.findMany({
     where: {
       name: {
-        contains: String(req.query.q)
-      }
-    }
+        contains: String(req.query.q),
+      },
+    },
   });
 
-  if(!books) {
+  if (!books) {
     res.status(404);
     throw new Error("Books not found");
   }
 
   return res.json(books);
-}
+};
+
+export const booksPagination = async (req: Request, res: Response) => {
+  try {
+    const { skip, take } = req.params;
+    if (isNaN(Number(skip))) {
+      const paginatedBooks = await db.book.findMany({
+        take: Number(take),
+      });
+
+      return res.json(paginatedBooks);
+    } else {
+      const paginatedBooks = await db.book.findMany({
+        skip: Number(skip),
+        take: Number(take),
+      });
+
+      return paginatedBooks;
+    }
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
 
 export const createBookFn = async (req: Request, res: Response) => {
   validate(createBookSchema);
