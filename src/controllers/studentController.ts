@@ -4,6 +4,45 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { uuid } from "uuidv4";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
+import { STUDENT, TEACHER } from "../constants/roles";
+
+export const displayAllStudents = async (req: Request, res: Response) => {
+  const allStudents = await db.user.findMany({
+    where: {
+      role: STUDENT
+    }
+  })
+
+  return res.status(200).json(allStudents);
+}
+
+export const displayAllTeachers = async (req: Request, res: Response) => {
+  const allTeachers = await db.user.findMany({
+    where: {
+      role: TEACHER
+    }
+  })
+
+  return res.status(200).json(allTeachers);
+}
+
+export const displayOneStudent = async (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  const oneStudent = await db.user.findUnique({
+    where: {
+      id: Number(id) as any
+    }
+  })
+
+  if(!oneStudent) {
+    res.status(404);
+    throw new Error("Student not found");
+  }
+
+
+  return oneStudent
+}
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
