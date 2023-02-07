@@ -58,21 +58,15 @@ export const searchBook = async (req: Request, res: Response) => {
 
 export const booksPagination = async (req: Request, res: Response) => {
   try {
-    const { skip, take } = req.params;
-    if (isNaN(Number(skip))) {
-      const paginatedBooks = await db.book.findMany({
-        take: Number(take),
-      });
+    const limitValue = req.query.limit ||2;
+    const skipValue = req.query.skip || 0;
 
-      return res.json(paginatedBooks);
-    } else {
-      const paginatedBooks = await db.book.findMany({
-        skip: Number(skip),
-        take: Number(take),
-      });
+    const allBooks = await db.book.findMany({
+      take: limitValue as unknown as number,
+      skip: skipValue as unknown as number
+    })
 
-      return paginatedBooks;
-    }
+    return res.json(allBooks);
   } catch (err) {
     getErrorMessage(err);
   }
