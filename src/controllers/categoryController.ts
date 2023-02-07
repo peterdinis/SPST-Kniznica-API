@@ -24,23 +24,6 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
   return oneCategoy;
 };
 
-export const searchCategory = async (req: Request, res: Response) => {
-  const categories = await db.category.findMany({
-    where: {
-      name: {
-        contains: String(req.query.q),
-      },
-    },
-  });
-
-  if (!categories) {
-    res.status(404);
-    throw new Error("Categories not found");
-  }
-
-  return res.json(categories);
-};
-
 export const createCategoryFn = async (req: Request, res: Response) => {
   validate(createCategorySchema);
   const newCategory = await db.category.create({

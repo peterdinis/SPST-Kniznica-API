@@ -12,9 +12,9 @@ export const app: Application = express();
 
 app.use(cors({
     origin: "*",
-    methods: "*",
-    
+    methods: "*",    
 }));
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
