@@ -4,7 +4,7 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { uuid } from "uuidv4";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
-import { STUDENT, TEACHER } from "../constants/roles";
+import { STUDENT} from "../constants/roles";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
@@ -14,16 +14,6 @@ export const displayAllStudents = async (req: Request, res: Response) => {
   })
 
   return res.status(200).json(allStudents);
-}
-
-export const displayAllTeachers = async (req: Request, res: Response) => {
-  const allTeachers = await db.user.findMany({
-    where: {
-      role: TEACHER
-    }
-  })
-
-  return res.status(200).json(allTeachers);
 }
 
 export const displayOneStudent = async (req: Request, res: Response) => {
