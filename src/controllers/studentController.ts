@@ -149,3 +149,7 @@ export const profileFn = async (req: any, res: Response, next: NextFunction) => 
       getErrorMessage(err);
     }
 }
+
+export const studentProfilePicture = async (req: any, res: Response, next: NextFunction) => {
+  return;
+}
