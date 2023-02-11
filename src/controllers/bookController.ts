@@ -58,15 +58,17 @@ export const searchBook = async (req: Request, res: Response) => {
 
 export const booksPagination = async (req: Request, res: Response) => {
   try {
-    const limitValue = req.query.limit ||2;
-    const skipValue = req.query.skip || 0;
+    const limitValue = req.query.limit;
+    const skipValue = req.query.skip;
 
-    const allBooks = await db.book.findMany({
+    console.log(limitValue)
+
+    /* const allBooks = await db.book.findMany({
       take: limitValue as unknown as number,
       skip: skipValue as unknown as number
     })
 
-    return res.json(allBooks);
+    return res.json(allBooks); */
   } catch (err) {
     getErrorMessage(err);
   }
