@@ -3,6 +3,7 @@ import validate from "../schemas/validateSchema";
 import { createBookSchema } from "../schemas/bookSchema";
 import db from "../helpers/db";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import { AVAIABLE } from "../constants/books";
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
@@ -12,7 +13,7 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
 export const findAllAvaiableBooks = async (req: Request, res: Response) => {
   const allAvaiableBooks = await db.book.findMany({
     where: {
-      status: "Dostupná",
+      status: AVAIABLE
     },
   });
 
