@@ -2,9 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import bcrypt from "bcryptjs";
-import { uuid } from "uuidv4";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { STUDENT} from "../constants/roles";
+import { v4 } from "uuid";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
@@ -62,7 +62,7 @@ export const registerStudent = async (req: Request, res: Response) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const tokId = uuid() as unknown as number;
+    const tokId = v4() as unknown as number;
 
     const newStudent = await db.user.create({
       data: {
@@ -114,7 +114,7 @@ export const loginStudent = async (req: Request, res: Response) => {
       throw new Error('Invalid login credentials.');
     }
 
-    const tokId = uuid() as unknown as number;
+    const tokId = v4() as unknown as number;
     const { accessToken, refreshToken } = generateTokens(existingUser, tokId);
     await addRefreshTokenToWhiteList(tokId, refreshToken, existingUser.id);
 
