@@ -56,24 +56,6 @@ export const searchBook = async (req: Request, res: Response) => {
   return res.json(books);
 };
 
-export const booksPagination = async (req: Request, res: Response) => {
-  try {
-    const limitValue = req.query.limit;
-    const skipValue = req.query.skip;
-
-    console.log(limitValue)
-
-    /* const allBooks = await db.book.findMany({
-      take: limitValue as unknown as number,
-      skip: skipValue as unknown as number
-    })
-
-    return res.json(allBooks); */
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
 export const createBookFn = async (req: Request, res: Response) => {
   validate(createBookSchema);
   const newBook = await db.book.create({
