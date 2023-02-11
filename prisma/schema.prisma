@@ -32,6 +32,7 @@ model User {
   profilePic    String?
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]
+  role          String        @default("STUDENT")
 }
 
 model Book {

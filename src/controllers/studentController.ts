@@ -3,15 +3,14 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
-import { STUDENT} from "../constants/roles";
 import { v4 } from "uuid";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
     where: {
-      role: STUDENT
+      role: "STUDENT"
     }
-  })
+  });
 
   return res.status(200).json(allStudents);
 }
@@ -36,9 +35,9 @@ export const displayOneStudent = async (req: Request, res: Response) => {
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, email, password, role, gender } = req.body;
+    const { name, lastName, email, password, role } = req.body;
 
-    if (!name || !lastName || !email || !password || !role || !gender) {
+    if (!name || !lastName || !email || !password || !role) {
       res.status(400);
       throw new Error("All fields are required");
     }
@@ -70,7 +69,7 @@ export const registerStudent = async (req: Request, res: Response) => {
         lastName,
         email,
         password: hashedPassword,
-        role,
+        role
       },
     });
 
