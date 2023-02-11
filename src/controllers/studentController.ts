@@ -150,6 +150,19 @@ export const profileFn = async (req: any, res: Response, next: NextFunction) => 
     }
 }
 
-export const studentProfilePicture = async (req: any, res: Response, next: NextFunction) => {
-  return;
+export const studentProfilePicture = async (req: Request, res: Response, next: NextFunction) => {
+   const existingStudent = await db.user.findUnique({
+      where: {
+        id: req.params.id,
+      }
+   })
+
+   if(!existingStudent) {
+      res.status(404);
+      throw new Error(`Student not found`);
+   }
+
+   const url = req.protocol + '://' + req.get('host');
+
+   
 }
