@@ -29,8 +29,6 @@ model User {
   lastName      String
   email         String         @unique
   password      String
-  role          Role           @default(STUDENT)
-  gender        Gender         @default(MEN)
   profilePic    String?
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]

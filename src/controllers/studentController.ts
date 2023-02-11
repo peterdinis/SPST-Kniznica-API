@@ -5,8 +5,6 @@ import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { STUDENT} from "../constants/roles";
 import { v4 } from "uuid";
-import axios from "axios";
-import { blockedEmails } from "../helpers/blockEmailsDomains";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
@@ -43,13 +41,6 @@ export const registerStudent = async (req: Request, res: Response) => {
     if (!name || !lastName || !email || !password || !role || !gender) {
       res.status(400);
       throw new Error("All fields are required");
-    }
-
-    if(email.includes(blockedEmails)) {
-      const checkEmail = await axios.get(`https://api.mailcheck.ai/email/${email}`);
-      console.log(checkEmail.data);
-
-      return res.status(400).json("Email is blocked");
     }
 
     const existingStudent = await db.user.findUnique({
