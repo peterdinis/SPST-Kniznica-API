@@ -164,5 +164,6 @@ export const studentProfilePicture = async (req: Request, res: Response, next: N
 
    const url = req.protocol + '://' + req.get('host');
 
-   
+   // 1. Upload picture to server
+   // 2. Assign to user
 }
