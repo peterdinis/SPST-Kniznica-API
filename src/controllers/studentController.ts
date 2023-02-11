@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { STUDENT} from "../constants/roles";
 import { v4 } from "uuid";
+import multer from "multer";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
