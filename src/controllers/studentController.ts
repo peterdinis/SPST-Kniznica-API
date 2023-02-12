@@ -4,11 +4,12 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { v4 } from "uuid";
+import { STUDENT } from "../helpers/roles";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
     where: {
-      role: "STUDENT"
+      role: STUDENT
     }
   });
 
