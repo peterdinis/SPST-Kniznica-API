@@ -60,6 +60,13 @@ export const registerStudent = async (req: Request, res: Response) => {
 
     await addRefreshTokenToWhiteList(tokId, refreshToken, newStudent.id);
 
+    /* TODO: Adding cookie to login and register */
+    res.cookie('isLoggedin', true, {
+      secure: true,
+      httpOnly: true,
+      // expiresIn: 
+  })
+
     return res.status(201).json({
       newStudent,
       accessToken,
