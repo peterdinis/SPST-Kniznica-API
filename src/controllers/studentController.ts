@@ -16,24 +16,6 @@ export const displayAllStudents = async (req: Request, res: Response) => {
   return res.status(200).json(allStudents);
 }
 
-export const displayOneStudent = async (req: Request, res: Response) => {
-  const {id} = req.params;
-
-  const oneStudent = await db.user.findUnique({
-    where: {
-      id: Number(id) as any
-    }
-  })
-
-  if(!oneStudent) {
-    res.status(404);
-    throw new Error("Student not found");
-  }
-
-
-  return oneStudent
-}
-
 export const registerStudent = async (req: Request, res: Response) => {
   try {
     const { name, lastName, email, password, role } = req.body;
@@ -129,7 +111,6 @@ export const loginStudent = async (req: Request, res: Response) => {
   }
 };
 
-/* TODO: Logic is broken later fixing thiss */
 export const profileFn = async (req: any, res: Response) => {
     try {
       const {userId} = req.payload;
