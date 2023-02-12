@@ -60,11 +60,6 @@ enum Role {
   TEACHER
 }
 
-enum Gender {
-  MEN
-  WOMEN
-}
-
 model Booking {
   id     Int    @id @default(autoincrement())
   days   String

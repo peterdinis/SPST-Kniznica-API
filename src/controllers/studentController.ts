@@ -128,7 +128,8 @@ export const loginStudent = async (req: Request, res: Response) => {
   }
 };
 
-export const profileFn = async (req: any, res: Response, next: NextFunction) => {
+/* TODO: Logic is broken later fixing thiss */
+export const profileFn = async (req: any, res: Response) => {
     try {
       const {userId} = req.payload;
       const user = await db.user.findUnique({
