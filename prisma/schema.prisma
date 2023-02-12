@@ -54,12 +54,6 @@ model Category {
   description String
 }
 
-enum Role {
-  STUDENT
-  ADMIN
-  TEACHER
-}
-
 model Booking {
   id     Int    @id @default(autoincrement())
   days   String
