@@ -166,3 +166,7 @@ export const studentProfilePicture = async (req: Request, res: Response, next: N
    // 1. Upload picture to server
    // 2. Assign to user
 }
+
+export const updateProfile = (req: Request, res: Response) => {
+  return;
+}
