@@ -1,14 +1,13 @@
-enum Role {
-  USER,
-  ADMIN,
-  TEACHER,
-}
-
 export interface IUser {
-  id?: number;
-  email: string;
+  id?: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
   name: string;
   lastName: string;
+  email: string;
   password: string;
-  role: Role;
+  profilePic?: string | null;
+  refreshToken: string;
+  borrowedBooks: any; // TODO: Update later,
+  role: string;
 }
