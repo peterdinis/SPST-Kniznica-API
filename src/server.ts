@@ -7,6 +7,7 @@ import categoryRoutes from "./routes/categoryRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import morgan from "morgan";
 import helmet from "helmet";
+import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
 
 export const app: Application = express();
@@ -28,6 +29,7 @@ app.use(exampleRoute);
 app.use(bookRoutes);
 app.use(categoryRoutes);
 app.use(studentRoutes);
+app.use(bookingRoutes);
 
 app.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`);
