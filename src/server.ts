@@ -14,7 +14,9 @@ export const app: Application = express();
 
 app.use(cors({
     origin: "*",
-    methods: "*",    
+    methods: "*", 
+    allowedHeaders: "*",
+       
 }));
 
 app.use(express.json());
