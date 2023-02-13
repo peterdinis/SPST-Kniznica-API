@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import bcrypt from "bcryptjs";
@@ -139,7 +139,7 @@ export const profileFn = async (req: any, res: Response) => {
     }
 }
 
-export const studentProfilePicture = async (req: Request, res: Response, next: NextFunction) => {
+export const studentProfilePicture = async (req: Request, res: Response) => {
    const existingStudent = await db.user.findUnique({
       where: {
         id: req.params.id,
@@ -158,5 +158,9 @@ export const studentProfilePicture = async (req: Request, res: Response, next: N
 }
 
 export const updateProfile = (req: Request, res: Response) => {
+  return;
+}
+
+export const deleteProfile = (req: Request, res: Response) => {
   return;
 }
