@@ -3,7 +3,7 @@ import validate from "../schemas/validateSchema";
 import { createBookSchema } from "../schemas/bookSchema";
 import db from "../helpers/db";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
-import { AVAIABLE } from "../constants/books";
+import { AVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
