@@ -4,7 +4,7 @@ import db from "../helpers/db";
 import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { v4 } from "uuid";
-import { STUDENT } from "../helpers/roles";
+import { STUDENT } from "../constants/roles";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({

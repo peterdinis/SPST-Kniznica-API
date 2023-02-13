@@ -46,7 +46,7 @@ export const displayMyBorrowedBooks = async (req: Request, res: Response) => {
 export const createNewBooking = async (req: Request, res: Response) => {
   validate(borrowBookSchema);
 
-  const { email, bookId } = req.body;
+  const { from, to, email, bookId } = req.body;
 
   const findStudentOrTeacher = await db.user.findUnique({
     where: {
@@ -98,3 +98,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
 export const returnBooking = (req: Request, res: Response) => {
   return;
 };
+
+export const updateBookingLength = (req: Request, res: Response) => {
+    return;
+}
