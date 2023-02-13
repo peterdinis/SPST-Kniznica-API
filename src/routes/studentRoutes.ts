@@ -1,7 +1,6 @@
 import express from "express";
 import { displayAllStudents, loginStudent, profileFn, registerStudent, studentProfilePicture} from "../controllers/studentController";
 import isLogged from "../middleware/isLogged";
-import { upload } from "../middleware/multer";
 
 const router = express.Router();
 
@@ -9,6 +8,6 @@ router.get("/students", displayAllStudents);
 router.post("/student/register", registerStudent);
 router.post("/student/login", loginStudent);
 router.get("/student/profile", isLogged, profileFn);
-router.post("/student/:id/picture/upload", upload.single("profileImg"), studentProfilePicture);
+router.post("/student/:id/picture/upload", studentProfilePicture);
 
 export default router;

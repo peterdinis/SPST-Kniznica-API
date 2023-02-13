@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cookieParser());
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
