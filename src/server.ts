@@ -10,7 +10,7 @@ import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
 import http from "http";
-import io from "socket.io";
+import { Server, Socket } from "socket.io";
 
 export const app: Application = express();
 
@@ -29,8 +29,18 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 dotenv.config();
 
 /* Socket.io initialization */
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: "*",
+        allowedHeaders: "*"
+    }
+})
 
-
+io.on("connection", (socket: Socket) => {
+    console.log("Connection work");
+})
 
 const PORT = process.env.PORT as unknown as number;
 
