@@ -11,6 +11,7 @@ import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
 import http from "http";
 import { Server, Socket } from "socket.io";
+import { SocketServer } from "./SocketServer";
 
 export const app: Application = express();
 
@@ -40,6 +41,7 @@ const io = new Server(server, {
 
 io.on("connection", (socket: Socket) => {
     console.log("Connection work");
+    SocketServer(socket);
 })
 
 const PORT = process.env.PORT as unknown as number;
