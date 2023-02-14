@@ -18,7 +18,7 @@ export const app: Application = express();
 app.use(cors({
     origin: "*",
     methods: "*", 
-    allowedHeaders: "*",
+    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept Bearer",
     credentials: true   
 }));
 
