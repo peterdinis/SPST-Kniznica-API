@@ -31,7 +31,7 @@ dotenv.config();
 
 /* Socket.io initialization */
 const server = http.createServer(app);
-const io = new Server(server, {
+/* const io = new Server(server, {
     cors: {
         origin: "*",
         methods: "*",
@@ -42,7 +42,7 @@ const io = new Server(server, {
 io.on("connection", (socket: Socket) => {
     console.log("Connection work");
     SocketServer(socket);
-})
+}) */
 
 const PORT = process.env.PORT as unknown as number;
 
