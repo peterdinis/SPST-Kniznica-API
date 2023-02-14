@@ -29,7 +29,6 @@ model User {
   lastName      String
   email         String         @unique
   password      String
-  profilePic    String?
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]
   role          String        @default("STUDENT")
@@ -62,4 +61,10 @@ model Booking {
   User   User   @relation(fields: [email], references: [id], onDelete: Cascade)
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+}
+
+// TODO: For cloudinary in the future
+model UserAvatar {
+  id     Int    @id @default(autoincrement())
+  source String
 }
