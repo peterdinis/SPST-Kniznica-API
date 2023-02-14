@@ -10,16 +10,13 @@ import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
 import http from "http";
-import { Server, Socket } from "socket.io";
-import { SocketServer } from "./SocketServer";
 
 export const app: Application = express();
 
 app.use(cors({
-    origin: "*",
-    methods: "*", 
-    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept Bearer",
-    credentials: true   
+    origin: true,
+    methods: "*",
+    credentials: true
 }));
 
 app.use(express.json());
