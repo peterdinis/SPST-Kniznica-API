@@ -9,6 +9,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
+import http from "http";
+import io from "socket.io";
 
 export const app: Application = express();
 
@@ -25,6 +27,10 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 dotenv.config();
+
+/* Socket.io initialization */
+
+
 
 const PORT = process.env.PORT as unknown as number;
 
