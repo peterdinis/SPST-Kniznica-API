@@ -26,11 +26,11 @@ export const findBookingDetails = async (req: Request, res: Response) => {
 };
 
 export const displayMyBorrowedBooks = async (req: Request, res: Response) => {
-  const { email } = req.params;
+  const { id } = req.params;
 
   const findAllMyBorrowedBooks = await db.booking.findMany({
     where: {
-      email,
+      id: Number(id),
     },
   });
 
