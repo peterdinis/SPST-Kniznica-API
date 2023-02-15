@@ -30,7 +30,6 @@ model User {
   email         String         @unique
   password      String
   refreshTokens RefreshToken[]
-  borrowedBooks Booking[]
   role          String        @default("STUDENT")
 }
 
@@ -58,8 +57,6 @@ model Booking {
   from   String
   to     String
   days   Int    @default(7)
-  name String
-  User   User   @relation(fields: [name], references: [id], onDelete: Cascade)
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
