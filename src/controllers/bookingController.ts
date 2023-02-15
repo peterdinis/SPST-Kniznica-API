@@ -21,3 +21,4 @@ export const findBookingDetails = async (req: Request, res: Response) => {
 
   return res.json(findBookingDetail);
 };
+
