@@ -10,6 +10,8 @@ import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes"
 import cookieParser from "cookie-parser";
 import http from "http";
+import { SocketServer } from "./SocketServer";
+import { Server, Socket } from "socket.io";
 
 export const app: Application = express();
 
@@ -28,18 +30,17 @@ dotenv.config();
 
 /* Socket.io initialization */
 const server = http.createServer(app);
-/* const io = new Server(server, {
+const io = new Server(server, {
+    pingTimeout: 60000,
     cors: {
-        origin: "*",
-        methods: "*",
-        allowedHeaders: "*"
+        origin: true,
     }
 })
 
 io.on("connection", (socket: Socket) => {
     console.log("Connection work");
     SocketServer(socket);
-}) */
+})
 
 const PORT = process.env.PORT as unknown as number;
 
