@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import validate from "../schemas/validateSchema";
 import { createBookSchema } from "../schemas/bookSchema";
 import db from "../helpers/db";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import { AVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {

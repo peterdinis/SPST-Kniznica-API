@@ -75,7 +75,10 @@ export const createNewBooking = async (req: Request, res: Response) => {
 
   const createNewBooking = await db.booking.create({
     data: {
-      ...req.body,
+      from,
+      to,
+      bookId,
+      email,
     },
   });
 
@@ -100,5 +103,5 @@ export const returnBooking = (req: Request, res: Response) => {
 };
 
 export const updateBookingLength = (req: Request, res: Response) => {
-    return;
-}
+  return;
+};
