@@ -159,10 +159,55 @@ export const studentProfilePicture = async (req: Request, res: Response) => {
    // 2. Assign to user
 }
 
-export const updateProfile = (req: Request, res: Response) => {
-  return;
+export const updateProfile = async (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  const findOneStudent = await db.user.findFirst({
+    where: {
+      id: Number(id) as any,
+      role: STUDENT
+    }
+  })
+
+  if(!findOneStudent) {
+    res.status(404);
+    throw new Error(`Student not found`);
+  }
+
+  const updateStudentProfile = await db.user.update({
+    where: {
+      id: Number(id) as any,
+    },
+
+    data: req.body
+  })
+
+  return res.json(updateStudentProfile)
 }
 
-export const deleteProfile = (req: Request, res: Response) => {
-  return;
+export const deleteProfile = async (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  /* TODO: Later update delete profile */
+  /* if user borrowed some books first must return these borrowed books*/
+
+  const findOneStudent = await db.user.findFirst({
+    where: {
+      id: Number(id) as any,
+      role: STUDENT
+    }
+  })
+
+  if(!findOneStudent) {
+    res.status(404);
+    throw new Error(`Student not found`);
+  }
+
+  const deleteStudentProfile = await db.user.delete({
+    where: {
+      id: Number(id) as any,
+    }
+  })
+
+  return res.json(deleteStudentProfile)
 }
