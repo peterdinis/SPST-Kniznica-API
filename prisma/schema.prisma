@@ -58,8 +58,8 @@ model Booking {
   from   String
   to     String
   days   Int    @default(7)
-  email  String
-  User   User   @relation(fields: [email], references: [id], onDelete: Cascade)
+  userId String
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }

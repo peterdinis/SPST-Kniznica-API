@@ -30,7 +30,7 @@ export const displayMyBorrowedBooks = async (req: Request, res: Response) => {
 
   const findAllMyBorrowedBooks = await db.booking.findMany({
     where: {
-      id: Number(id),
+      id: Number(id)
     },
   });
 

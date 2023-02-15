@@ -28,10 +28,11 @@ describe("Test GET /books/:id", () => {
         expect(allBooksRequest.status).to.equal(404);
     })
 
-    it.only("Trying to find book by id but requested id is not nmber", async() => {
+    it.only("Trying to find book by id but requested id is not nmber", async(done) => {
         const testId = "EOEOEOEOE"
 
         const allBooksRequest = await request(app).get(`/book/${testId}`)
         expect(allBooksRequest.status).to.equal(404);
+        done();
     })
 })
