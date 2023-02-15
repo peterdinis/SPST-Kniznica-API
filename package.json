@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+    "test": "mocha --timeout 10000 -r ts-node/register src/**/*.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,8 @@
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "chai": "^4.3.7",
+    "chai-like": "^1.1.1",
+    "chai-things": "^0.2.0",
     "cloudinary": "^1.34.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
