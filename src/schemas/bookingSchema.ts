@@ -9,8 +9,8 @@ export const borrowBookSchema = z.object({
         required_error: "To date is required"
     }),
 
-    email: z.string({
-        required_error: "Email is required"
+    userId: z.string({
+        required_error: "UserId is required"
     }),
 
     bookId: z.number({
