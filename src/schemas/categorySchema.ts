@@ -9,3 +9,7 @@ export const createCategorySchema = z.object({
         required_error: "Description is required"
     }),
 })
+
+export type createCategoryType = z.infer<typeof createCategorySchema>;
+
+export type updateCategoryType = Partial<createCategoryType>;

@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import validate from "../schemas/validateSchema";
-import { createBookSchema } from "../schemas/bookSchema";
 import db from "../helpers/db";
 import { AVAIABLE } from "../constants/bookStatus";
+import { createBookType } from "../schemas/bookSchema";
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
@@ -55,8 +54,7 @@ export const searchBook = async (req: Request, res: Response) => {
   return res.json(books);
 };
 
-export const createBookFn = async (req: Request, res: Response) => {
-  validate(createBookSchema);
+export const createBookFn = async (req: Request<{}, {}, createBookType>, res: Response) => {
   const newBook = await db.book.create({
     data: {
       ...req.body,

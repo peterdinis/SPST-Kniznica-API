@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import validate from "../schemas/validateSchema";
-import { createCategorySchema } from "../schemas/categorySchema";
 import db from "../helpers/db";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import { createCategoryType } from "../schemas/categorySchema";
 
 export const displayAllCategoriesFn = async (req: Request, res: Response) => {
   const allCategories = await db.category.findMany();
@@ -41,8 +40,7 @@ export const categoryPagination = async (req: Request, res: Response) => {
   }
 }
 
-export const createCategoryFn = async (req: Request, res: Response) => {
-  validate(createCategorySchema);
+export const createCategoryFn = async (req: Request<{}, {}, createCategoryType>, res: Response) => {
   const newCategory = await db.category.create({
     data: {
       ...req.body,

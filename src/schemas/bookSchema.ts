@@ -31,3 +31,7 @@ export const createBookSchema = z.object({
         required_error: "Year is required"
     })
 })
+
+export type createBookType = z.infer<typeof createBookSchema>;
+
+export type updateBookType = Partial<createBookType>;
