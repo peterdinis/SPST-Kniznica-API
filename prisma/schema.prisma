@@ -31,7 +31,8 @@ model User {
   password      String
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]
-  role          String        @default("STUDENT")
+  role          String         @default("STUDENT")
+  classRoom     String?        @default("1.A")
 }
 
 model Book {
