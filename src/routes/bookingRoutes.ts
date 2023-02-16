@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/booking", findAllBookings);
 router.get("/booking/:id", findBookingDetails);
-router.get("/booking/me/:id", myBorrowedBooks);
-router.post("/booking/:bookId/:id", createNewBooking);
+router.get("/booking/me/:userId", myBorrowedBooks);
+router.post("/booking/:bookId/:userId", createNewBooking);
 
 export default router;

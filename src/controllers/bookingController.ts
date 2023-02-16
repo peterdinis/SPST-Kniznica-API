@@ -24,11 +24,11 @@ export const findBookingDetails = async (req: Request, res: Response) => {
 };
 
 export const myBorrowedBooks = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { userId } = req.params;
 
   const findExistingUser = await db.user.findFirst({
     where: {
-      id,
+      id: userId,
     },
   });
 
@@ -39,7 +39,7 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 
   const userBorrowedBooks = await db.booking.findMany({
     where: {
-      userId: id,
+      userId
     },
   });
 
@@ -48,11 +48,11 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 
 
 export const createNewBooking = async (req: Request, res: Response) => {
-  const {id, bookId} = req.params;
+  const {userId, bookId} = req.params;
 
   const findStudentById = await db.user.findUnique({
     where: {
-      id: Number(id) as any,
+      id: Number(userId) as any,
     }
   })
 
@@ -80,7 +80,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
   const newOrder = await db.booking.create({
     data: {
       bookId: Number(bookId),
-      userId: id,
+      userId,
       ...req.body
     }
   })
