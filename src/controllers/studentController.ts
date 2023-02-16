@@ -5,8 +5,6 @@ import bcrypt from "bcryptjs";
 import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
 import { v4 } from "uuid";
 import { STUDENT } from "../constants/roles";
-import cloudinary from "cloudinary";
-import multer from "multer";
 
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
@@ -20,9 +18,9 @@ export const displayAllStudents = async (req: Request, res: Response) => {
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, email, password, role } = req.body;
+    const { name, lastName, email, password, role, classRoom} = req.body;
 
-    if (!name || !lastName || !email || !password || !role) {
+    if (!name || !lastName || !email || !password || !role || !classRoom) {
       res.status(400);
       throw new Error("All fields are required");
     }
@@ -54,7 +52,8 @@ export const registerStudent = async (req: Request, res: Response) => {
         lastName,
         email,
         password: hashedPassword,
-        role
+        role,
+        classRoom
       },
     });
 
@@ -210,4 +209,8 @@ export const deleteProfile = async (req: Request, res: Response) => {
   })
 
   return res.json(deleteStudentProfile)
+}
+
+export const changeStudentPassword = async(req: Request, res: Response) => {
+  return;
 }
