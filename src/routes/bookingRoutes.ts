@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/booking", findAllBookings);
 router.get("/booking/:id", findBookingDetails);
 router.get("/booking/me/:userId", myBorrowedBooks);
-router.post("/booking/:bookId/:userId", createNewBooking);
+router.post("/booking", createNewBooking);
 router.delete("/booking/:bookId", returnBook);
 router.patch("/booking/:bookId/:userId/update", extensionForBook);
 

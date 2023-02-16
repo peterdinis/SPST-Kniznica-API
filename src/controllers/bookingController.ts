@@ -48,7 +48,7 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 
 
 export const createNewBooking = async (req: Request, res: Response) => {
-  const {userId, bookId} = req.params;
+  const {from, to, userId, bookId} = req.body;
 
   const findStudentById = await db.user.findFirst({
     where: {
