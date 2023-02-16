@@ -50,9 +50,9 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 export const createNewBooking = async (req: Request, res: Response) => {
   const {userId, bookId} = req.params;
 
-  const findStudentById = await db.user.findUnique({
+  const findStudentById = await db.user.findFirst({
     where: {
-      id: Number(userId) as any,
+      id: userId
     }
   })
 
