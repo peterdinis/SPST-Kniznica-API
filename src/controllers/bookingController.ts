@@ -97,3 +97,11 @@ export const createNewBooking = async (req: Request, res: Response) => {
 
   return res.json(newOrder);
 }
+
+export const returnBook = async (req: Request, res: Response) => {
+  return;
+}
+
+export const extensionForBook = (req: Request, res: Response) => {
+  return;
+}
