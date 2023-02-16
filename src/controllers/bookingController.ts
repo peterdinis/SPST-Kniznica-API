@@ -85,5 +85,15 @@ export const createNewBooking = async (req: Request, res: Response) => {
     }
   })
 
+  await db.book.update({
+    where: {
+      id: newOrder.bookId,
+    },
+
+    data: {
+      status: NONAVAIABLE
+    }
+  })
+
   return res.json(newOrder);
 }
