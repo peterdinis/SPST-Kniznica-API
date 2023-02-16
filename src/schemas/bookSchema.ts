@@ -29,6 +29,10 @@ export const createBookSchema = z.object({
     year: z.number({
         invalid_type_error: "Year must be positive number",
         required_error: "Year is required"
+    }),
+
+    categoryId: z.number({
+        description: "Category ID must be defined"
     })
 })
 

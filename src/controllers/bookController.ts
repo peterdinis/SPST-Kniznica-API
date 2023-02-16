@@ -55,9 +55,29 @@ export const searchBook = async (req: Request, res: Response) => {
 };
 
 export const createBookFn = async (req: Request<{}, {}, createBookType>, res: Response) => {
+  const {name, description, image, author, status, pages, year, categoryId} = req.body;
+
+  const newCategoryForBook = await db.category.findUnique({
+    where: {
+      id: categoryId,
+    }
+  })
+
+  if(!newCategoryForBook) {
+    res.status(404);
+    throw new Error("Category not found")
+  }
+ 
   const newBook = await db.book.create({
     data: {
-      ...req.body,
+      name,
+      description,
+      image,
+      author,
+      status,
+      pages,
+      year,
+      categoryId: newCategoryForBook.id,
     },
   });
 
