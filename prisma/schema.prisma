@@ -61,6 +61,7 @@ model Booking {
   id     Int    @id @default(autoincrement())
   from   String
   to     String
+  bookingId Int @default(autoincrement())
   userId String
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookId Int
