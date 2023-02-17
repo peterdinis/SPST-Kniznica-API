@@ -95,7 +95,19 @@ export const createNewBooking = async (req: Request, res: Response) => {
     }
   })
 
-  return res.json(newOrder);
+  const findBorrowedBook = await db.book.findUnique({
+    where: {
+      id: newOrder.bookId,
+    }
+  })
+
+
+
+  return res.json({
+    message: "Požičanie knihy bolo úspesšné",
+    requestedBook: findBorrowedBook!.name,
+    orderInfo: newOrder
+  });
 }
 
 export const returnBook = async (req: Request, res: Response) => {
