@@ -14,7 +14,7 @@ router.get("/booking", findAllBookings);
 router.get("/booking/:id", findBookingDetails);
 router.get("/booking/me/:userId", myBorrowedBooks);
 router.post("/booking", createNewBooking);
-router.delete("/booking/:bookId", returnBook);
+router.delete("/booking/return", returnBook);
 router.patch("/booking/:bookId/:userId/update", extensionForBook);
 
 export default router;
