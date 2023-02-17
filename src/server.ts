@@ -10,8 +10,7 @@ import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes";
 import cookieParser from "cookie-parser";
 import http from "http";
-import { SocketServer } from "./SocketServer";
-import { Server, Socket } from "socket.io";
+import socket, { Server, Socket } from "socket.io";
 
 export const app: Application = express();
 
@@ -31,12 +30,14 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 dotenv.config();
 
 /* Socket.io initialization */
-/* const server = http.createServer(app);
+const server = http.createServer(app);
 const io = new Server(server, {
-  pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
+    allowedHeaders: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"]
   },
+
   path: "/socket"
 });
 
@@ -46,7 +47,7 @@ io.on("connection", (socket: Socket) => {
   io.on("disconnect", () => {
     console.log("🔥: A user disconnected");
   });
-}); */
+});
 
 const PORT = process.env.PORT as unknown as number;
 
