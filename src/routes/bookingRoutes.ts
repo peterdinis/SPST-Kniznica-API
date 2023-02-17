@@ -1,7 +1,6 @@
 import express from "express";
 import {
   createNewBooking,
-  extensionForBook,
   findAllBookings,
   findBookingDetails,
   myBorrowedBooks,
@@ -15,6 +14,5 @@ router.get("/booking/:id", findBookingDetails);
 router.get("/booking/me/:userId", myBorrowedBooks);
 router.post("/booking", createNewBooking);
 router.delete("/booking/return", returnBook);
-router.patch("/booking/:bookId/:userId/update", extensionForBook);
 
 export default router;

@@ -1,5 +1,6 @@
 import { NONAVAIABLE } from "../constants/bookStatus";
 import db from "../helpers/db";
+import {format, toDate} from "date-fns";
 import { Request, Response } from "express";
 
 export const findAllBookings = async (req: Request, res: Response) => {
@@ -81,7 +82,8 @@ export const createNewBooking = async (req: Request, res: Response) => {
     data: {
       bookId: Number(bookId),
       userId,
-      ...req.body
+      from: format(toDate(from), "MM/dd/yyyy"),
+      to: format(toDate(to), "MM/dd/yyyy")
     }
   })
 
@@ -147,8 +149,4 @@ export const returnBook = async (req: Request, res: Response) => {
     message: "Kniha bola vrátená",
     requestedBook: findBookById.name,
   })
-}
-
-export const extensionForBook = (req: Request, res: Response) => {
-  return;
 }
