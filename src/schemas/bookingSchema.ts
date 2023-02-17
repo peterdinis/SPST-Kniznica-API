@@ -9,6 +9,10 @@ export const borrowBookSchema = z.object({
         required_error: "To date is required"
     }),
 
+    bookingId: z.number({
+        required_error: "Booking Id is required"
+    }),
+
     userId: z.string({
         required_error: "UserId is required"
     }),
