@@ -1,6 +1,6 @@
 import { NONAVAIABLE } from "../constants/bookStatus";
 import db from "../helpers/db";
-import {format, toDate} from "date-fns";
+import {format, toDate, add} from "date-fns";
 import { Request, Response } from "express";
 
 export const findAllBookings = async (req: Request, res: Response) => {
@@ -149,4 +149,9 @@ export const returnBook = async (req: Request, res: Response) => {
     message: "Kniha bola vrátená",
     requestedBook: findBookById.name,
   })
+}
+
+// default 7 days if we want to update to in our booking we call this endpoint
+export const updateBookingTo = async(req: Request, res: Response) => {
+  return;
 }
