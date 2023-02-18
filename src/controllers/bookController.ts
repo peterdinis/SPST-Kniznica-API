@@ -8,6 +8,10 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
   return res.json(allBooks);
 };
 
+export const booksPagination = async ({ paginate, prisma }: any, res: Response) => {
+  return await paginate(prisma.book);
+}
+
 export const findAllAvaiableBooks = async (req: Request, res: Response) => {
   const allAvaiableBooks = await db.book.findMany({
     where: {
