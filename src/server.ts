@@ -12,6 +12,8 @@ import cookieParser from "cookie-parser";
 import http from "http";
 import { Server, Socket } from "socket.io";
 import { pagination } from "./middleware/pagination";
+import swaggerJsDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express"
 
 export const app: Application = express();
 
