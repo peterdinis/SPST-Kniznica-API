@@ -4,7 +4,7 @@ function sendRefreshToken(res: Response, token: string) {
     res.cookie('refresh_token', token, {
         httpOnly: true,
         sameSite: true,
-        path: '', // TODO: Update path later
+        path: '/student/refreshToken', // TODO: Update path later
       });
 }
 

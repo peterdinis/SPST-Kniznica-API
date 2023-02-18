@@ -10,7 +10,7 @@ import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes";
 import cookieParser from "cookie-parser";
 import http from "http";
-import socket, { Server, Socket } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 export const app: Application = express();
 
@@ -39,7 +39,7 @@ const io = new Server(server, {
     methods: ["GET", "POST", "PUT", "DELETE"]
   },
 
-  path: "/socket"
+  /* path: "/socket" */
 });
 
 io.on("connection", (socket: Socket) => {
