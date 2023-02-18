@@ -31,6 +31,7 @@ model User {
   password      String
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]
+  avatars       UserAvatar[] 
   role          String         @default("STUDENT")
   classRoom     String?        @default("1.A")
 }
@@ -70,5 +71,7 @@ model Booking {
 
 model UserAvatar {
   id     Int    @id @default(autoincrement())
-  sourceUrl String
+  source String
+  userId String
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

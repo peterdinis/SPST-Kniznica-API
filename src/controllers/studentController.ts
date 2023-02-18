@@ -6,6 +6,8 @@ import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/auth/jwt"
 import { v4 } from "uuid";
 import { STUDENT } from "../constants/roles";
 
+/* Fix problem in auth */
+
 export const displayAllStudents = async (req: Request, res: Response) => {
   const allStudents = await db.user.findMany({
     where: {
@@ -192,24 +194,6 @@ export const deleteProfile = async (req: Request, res: Response) => {
   })
 
   return res.json(deleteStudentProfile)
-}
-
-export const emailCheck = async (req: Request, res: Response) => {
-  const {email} = req.params;
-
-  const findEmailInStudentDB = await db.user.findUnique({
-    where: {
-      email
-    }
-  })
-
-  if(!findEmailInStudentDB) {
-    return res.status(409).json({
-      message: "Student with this email does not exists"
-    })
-  }
-
-  return res.send("OK");
 }
 
 export const changeStudentPassword = async(req: Request, res: Response) => {
