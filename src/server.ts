@@ -11,6 +11,7 @@ import bookingRoutes from "./routes/bookingRoutes";
 import cookieParser from "cookie-parser";
 import http from "http";
 import { Server, Socket } from "socket.io";
+import { pagination } from "./middleware/pagination";
 
 export const app: Application = express();
 
@@ -57,6 +58,7 @@ app.use(bookRoutes);
 app.use(categoryRoutes);
 app.use(studentRoutes);
 app.use(bookingRoutes);
+app.use(pagination);
 
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
