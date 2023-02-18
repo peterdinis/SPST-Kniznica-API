@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import db from "../helpers/db";
 import bcrypt from "bcryptjs";
-import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/jwt";
+import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/auth/jwt";
 import { v4 } from "uuid";
 import { STUDENT } from "../constants/roles";
 

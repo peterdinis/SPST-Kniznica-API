@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
-import { IUser } from "../interfaces/IUser";
+import { IUser } from "../../interfaces/IUser";
 import hashToken from "./hashToken";
-import db from "./db"
+import db from "../db"
 
 export function addRefreshTokenToWhiteList(tokId: any, refreshToken: string, userId: any) {
   return db.refreshToken.create({
