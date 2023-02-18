@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  changeStudentPassword,
   deleteProfile,
   displayAllStudents,
   loginStudent,
@@ -19,5 +20,6 @@ router.get("/student/profile", isLogged, profileFn);
 router.post("/student/:id/picture/upload", studentProfilePicture);
 router.patch("/student/:id/update", updateProfile);
 router.delete("/student/:id/delete", deleteProfile);
+router.patch("/student/:id/password/update", changeStudentPassword)
 
 export default router;

@@ -141,21 +141,7 @@ export const profileFn = async (req: any, res: Response) => {
 }
 
 export const studentProfilePicture = async (req: Request, res: Response) => {
-   const existingStudent = await db.user.findUnique({
-      where: {
-        id: req.params.id,
-      }
-   })
-
-   if(!existingStudent) {
-      res.status(404);
-      throw new Error(`Student not found`);
-   }
-
-   const url = req.protocol + '://' + req.get('host');
-
-   // 1. Upload picture to server
-   // 2. Assign to user
+   return;
 }
 
 export const updateProfile = async (req: Request, res: Response) => {
@@ -187,9 +173,6 @@ export const updateProfile = async (req: Request, res: Response) => {
 export const deleteProfile = async (req: Request, res: Response) => {
   const {id} = req.params;
 
-  /* TODO: Later update delete profile */
-  /* if user borrowed some books first must return these borrowed books*/
-
   const findOneStudent = await db.user.findFirst({
     where: {
       id: Number(id) as any,
@@ -212,5 +195,34 @@ export const deleteProfile = async (req: Request, res: Response) => {
 }
 
 export const changeStudentPassword = async(req: Request, res: Response) => {
-  return;
+  const {id} = req.params;
+
+  const newPassword = req.body;
+
+  const findOneStudent = await db.user.findFirst({
+    where: {
+      id: Number(id) as any,
+      role: STUDENT
+    }
+  })
+
+  if(!findOneStudent) {
+    res.status(404);
+    throw new Error(`Student not found`);
+  }
+
+  const updateUserPassword = await db.user.update({
+    where: {
+      id: Number(id) as any
+    },
+
+    data: {
+      password: newPassword
+    }
+  })
+
+  return res.status(201).json({
+    message: "Password was updated",
+    updateUserPassword
+  })
 }

@@ -68,8 +68,7 @@ model Booking {
   status String @default("POŽIČANA")
 }
 
-// TODO: For cloudinary in the future
 model UserAvatar {
   id     Int    @id @default(autoincrement())
-  source String
+  sourceUrl String
 }
