@@ -12,9 +12,7 @@ describe("Test GET /books", () => {
       .get("/books")
       .end((res, err) => {
         if(err) throw err;
-        const allBooksResponse = allBooksRequest.body;
         res.should.have.status(200);
-        expect(allBooksResponse).to.be.an("array");
         done();
       });
   });

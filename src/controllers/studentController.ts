@@ -194,6 +194,24 @@ export const deleteProfile = async (req: Request, res: Response) => {
   return res.json(deleteStudentProfile)
 }
 
+export const emailCheck = async (req: Request, res: Response) => {
+  const {email} = req.params;
+
+  const findEmailInStudentDB = await db.user.findUnique({
+    where: {
+      email
+    }
+  })
+
+  if(!findEmailInStudentDB) {
+    return res.status(409).json({
+      message: "Student with this email does not exists"
+    })
+  }
+
+  return res.send("OK");
+}
+
 export const changeStudentPassword = async(req: Request, res: Response) => {
   const {id} = req.params;
 
