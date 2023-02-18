@@ -62,16 +62,15 @@ app.use(categoryRoutes);
 app.use(studentRoutes);
 app.use(bookingRoutes);
 
-const specs = swaggerJsdoc(options);
+/* Fix this later */
+/* const specs = swaggerJsdoc(options);
 app.use(
   "/docs",
   swaggerUi.serve,
   swaggerUi.setup(specs, {
     explorer: true,
-    customCssUrl:
-      "https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-newspaper.css",
   })
-);
+); */
 
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
