@@ -14,25 +14,3 @@ describe("Test GET /books", () => {
         expect(allBooksResponse).to.be.an("array");
     })
 })
-
-describe("Test GET /books/:id", () => {
-
-    it.skip("Trying to find one book be id", async() => {
-        return;
-    })
-
-    it.skip("Trying to find book but id does not exists", async() => {
-        const testId = 3030;
-
-        const allBooksRequest = await request(app).get(`/book/${testId}`)
-        expect(allBooksRequest.status).to.equal(404);
-    })
-
-    it.only("Trying to find book by id but requested id is not nmber", async(done) => {
-        const testId = "EOEOEOEOE"
-
-        const allBooksRequest = await request(app).get(`/book/${testId}`)
-        expect(allBooksRequest.status).to.equal(404);
-        done();
-    })
-})
