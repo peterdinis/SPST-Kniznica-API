@@ -65,6 +65,7 @@ model Booking {
   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  status String @default("POŽIČANA")
 }
 
 // TODO: For cloudinary in the future
