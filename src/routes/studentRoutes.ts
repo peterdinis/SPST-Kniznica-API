@@ -19,7 +19,7 @@ router.post("/student/login", loginStudent);
 router.get("/student/profile", isLogged, profileFn);
 router.post("/student/:id/picture/upload", studentProfilePicture);
 router.patch("/student/:id/update", updateProfile);
-router.delete("/student/:id/delete", deleteProfile);
 router.patch("/student/:id/password/update", changeStudentPassword)
+router.delete("/student/:id/delete", deleteProfile);
 
 export default router;
