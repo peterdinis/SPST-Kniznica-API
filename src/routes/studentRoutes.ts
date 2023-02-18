@@ -3,7 +3,6 @@ import {
   changeStudentPassword,
   deleteProfile,
   displayAllStudents,
-  emailCheck,
   loginStudent,
   profileFn,
   registerStudent,
@@ -16,7 +15,6 @@ const router = express.Router();
 
 router.get("/students", displayAllStudents);
 router.post("/student/register", registerStudent);
-router.get("/student/:email/check", emailCheck);
 router.post("/student/login", loginStudent);
 router.get("/student/profile", isLogged, profileFn);
 router.post("/student/:id/picture/upload", studentProfilePicture);
