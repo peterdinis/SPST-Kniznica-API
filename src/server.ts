@@ -12,6 +12,7 @@ import cookieParser from "cookie-parser";
 import http from "http";
 import { Server, Socket } from "socket.io";
 import adminRoutes from "./routes/adminRoutes";
+import uploadRoutes from "./routes/uploadRoutes";
 
 export const app: Application = express();
 
@@ -59,6 +60,7 @@ app.use(categoryRoutes);
 app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
+app.use(uploadRoutes);
 
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
