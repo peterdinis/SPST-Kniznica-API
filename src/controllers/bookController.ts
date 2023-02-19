@@ -15,7 +15,7 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
 };
 
 export const findAllPaginatedBooks = async(req: Request, res: Response) => {
-  const allPaginatedBooks = await paginate.book.paginate({limit: Number(req.query.limit), page: 1, where: {}});
+  const allPaginatedBooks = await paginate.book.paginate({limit: Number(req.query.limit), page: Number(req.query.page), where: {}});
   return res.json(allPaginatedBooks);
 }
 
