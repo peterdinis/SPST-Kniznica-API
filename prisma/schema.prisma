@@ -29,9 +29,9 @@ model User {
   lastName      String
   email         String         @unique
   password      String
+  profilePic    String?
   refreshTokens RefreshToken[]
   borrowedBooks Booking[]
-  avatars       UserAvatar[] 
   role          String         @default("STUDENT")
   classRoom     String?        @default("1.A")
 }
@@ -67,11 +67,4 @@ model Booking {
   bookId Int
   Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
   status String @default("POŽIČANA")
-}
-
-model UserAvatar {
-  id     Int    @id @default(autoincrement())
-  source String
-  userId String
-  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
