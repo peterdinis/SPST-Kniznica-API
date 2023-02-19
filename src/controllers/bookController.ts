@@ -8,21 +8,24 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
 
-
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
   return res.json(allBooks);
 };
 
-export const findAllPaginatedBooks = async(req: Request, res: Response) => {
-  const allPaginatedBooks = await paginate.book.paginate({limit: Number(req.query.limit), page: Number(req.query.page), where: {}});
+export const findAllPaginatedBooks = async (req: Request, res: Response) => {
+  const allPaginatedBooks = await paginate.book.paginate({
+    page: Number(req.query.page),
+    limit: Number(req.query.lmit),
+    where: {},
+  });
   return res.json(allPaginatedBooks);
-}
+};
 
 export const findAllAvaiableBooks = async (req: Request, res: Response) => {
   const allAvaiableBooks = await db.book.findMany({
     where: {
-      status: AVAIABLE
+      status: AVAIABLE,
     },
   });
 
@@ -65,20 +68,33 @@ export const searchBook = async (req: Request, res: Response) => {
   return res.json(books);
 };
 
-export const createBookFn = async (req: Request<{}, {}, createBookType>, res: Response) => {
-  const {name, description, image, author, status, pages, year, quantity, categoryId} = req.body;
+export const createBookFn = async (
+  req: Request<{}, {}, createBookType>,
+  res: Response
+) => {
+  const {
+    name,
+    description,
+    image,
+    author,
+    status,
+    pages,
+    year,
+    quantity,
+    categoryId,
+  } = req.body;
 
   const newCategoryForBook = await db.category.findUnique({
     where: {
       id: categoryId,
-    }
-  })
+    },
+  });
 
-  if(!newCategoryForBook) {
+  if (!newCategoryForBook) {
     res.status(404);
-    throw new Error("Category not found")
+    throw new Error("Category not found");
   }
- 
+
   const newBook = await db.book.create({
     data: {
       name,
