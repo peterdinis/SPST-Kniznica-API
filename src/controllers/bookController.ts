@@ -2,14 +2,21 @@ import { Request, Response } from "express";
 import db from "../helpers/db";
 import { AVAIABLE } from "../constants/bookStatus";
 import { createBookType } from "../schemas/bookSchema";
+import paginator from "prisma-paginate";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+const paginate = paginator(prisma);
+
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
   const allBooks = await db.book.findMany();
   return res.json(allBooks);
 };
 
-export const booksPagination = async ({ paginate, prisma }: any, res: Response) => {
-  return await paginate(prisma.book);
+export const findAllPaginatedBooks = async(req: Request, res: Response) => {
+  const allPaginatedBooks = await paginate.book.paginate({limit: Number(req.query.limit), page: 1, where: {}});
+  return res.json(allPaginatedBooks);
 }
 
 export const findAllAvaiableBooks = async (req: Request, res: Response) => {

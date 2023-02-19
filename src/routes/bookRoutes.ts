@@ -5,6 +5,7 @@ import {
   displayAllBooksFn,
   displayOneBookFn,
   findAllAvaiableBooks,
+  findAllPaginatedBooks,
   searchBook,
   updateBookFn,
 } from "../controllers/bookController";
@@ -12,6 +13,7 @@ import {
 const router = express.Router();
 
 router.get("/books", displayAllBooksFn);
+router.get("/books/paginate", findAllPaginatedBooks);
 router.get("/books/avaiable", findAllAvaiableBooks);
 router.get("/book/:id", displayOneBookFn);
 router.get("/books/search", searchBook);
