@@ -18,13 +18,16 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
     where: {
       id: Number(id),
     },
+    include: {
+      Books: true
+    }
   });
 
   if (!oneCategoy) {
     throw new Error("Category does not exists");
   }
 
-  return oneCategoy;
+  return res.json(oneCategoy);
 };
 
 export const createCategoryFn = async (req: Request<{}, {}, createCategoryType>, res: Response) => {
