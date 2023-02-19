@@ -21,6 +21,10 @@ export const createBookSchema = z.object({
         required_error: "Status is required"
     }),
 
+    quantity: z.number({
+        required_error: "Quantity is required"
+    }),
+
     pages: z.number({
         required_error: "Pages is required",
         invalid_type_error: "Page must be positive number"

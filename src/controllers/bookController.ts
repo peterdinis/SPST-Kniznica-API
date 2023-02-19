@@ -59,7 +59,7 @@ export const searchBook = async (req: Request, res: Response) => {
 };
 
 export const createBookFn = async (req: Request<{}, {}, createBookType>, res: Response) => {
-  const {name, description, image, author, status, pages, year, categoryId} = req.body;
+  const {name, description, image, author, status, pages, year, quantity, categoryId} = req.body;
 
   const newCategoryForBook = await db.category.findUnique({
     where: {
@@ -81,6 +81,7 @@ export const createBookFn = async (req: Request<{}, {}, createBookType>, res: Re
       status,
       pages,
       year,
+      quantity,
       categoryId: newCategoryForBook.id,
     },
   });

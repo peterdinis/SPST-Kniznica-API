@@ -45,7 +45,7 @@ model Book {
   status      String
   pages       Int
   year        Int
-  quantity    Int       @default(1)
+  quantity    Int       @default(0)
   isBorrowed  Booking[]
   categoryId  Int       @default(1)
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
