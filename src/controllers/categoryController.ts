@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import { createCategoryType } from "../schemas/categorySchema";
 
 export const displayAllCategoriesFn = async (req: Request, res: Response) => {
-  const allCategories = await db.category.findMany();
+  const allCategories = await db.category.findMany({
+    include: {
+      Books: true
+    }
+  });
   return res.json(allCategories);
 };
 
