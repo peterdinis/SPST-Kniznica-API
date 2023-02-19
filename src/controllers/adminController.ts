@@ -75,3 +75,11 @@ export const findBookingDetails = async (req: Request, res: Response) => {
 
   return res.json(findBookingDetail);
 };
+
+export const studentDetail = (req: Request, res: Response) => {
+    return;
+}
+
+export const teacherDetail = async(req: Request, res: Response) => {
+    return;
+}
