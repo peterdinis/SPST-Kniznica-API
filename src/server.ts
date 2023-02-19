@@ -11,10 +11,7 @@ import bookingRoutes from "./routes/bookingRoutes";
 import cookieParser from "cookie-parser";
 import http from "http";
 import { Server, Socket } from "socket.io";
-import swaggerJsDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
-import {options} from "./options";
-import swaggerJsdoc from "swagger-jsdoc";
+import adminRoutes from "./routes/adminRoutes";
 
 export const app: Application = express();
 
@@ -61,17 +58,7 @@ app.use(bookRoutes);
 app.use(categoryRoutes);
 app.use(studentRoutes);
 app.use(bookingRoutes);
-
-const specs = swaggerJsdoc(options);
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(specs, {
-    explorer: true,
-    customCssUrl:
-      "https://cdn.jsdelivr.net/npm/swagger-ui-themes@3.0.0/themes/3.x/theme-newspaper.css",
-  })
-);
+app.use(adminRoutes);
 
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);

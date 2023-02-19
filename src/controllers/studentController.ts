@@ -6,18 +6,6 @@ import { addRefreshTokenToWhiteList, generateTokens } from "../helpers/auth/jwt"
 import { v4 } from "uuid";
 import { STUDENT } from "../constants/roles";
 
-/* Fix problem in auth */
-
-export const displayAllStudents = async (req: Request, res: Response) => {
-  const allStudents = await db.user.findMany({
-    where: {
-      role: STUDENT
-    }
-  });
-
-  return res.status(200).json(allStudents);
-}
-
 export const registerStudent = async (req: Request, res: Response) => {
   try {
     const { name, lastName, email, password, role, classRoom} = req.body;
@@ -238,5 +226,5 @@ export const getMyProfilePicture = async() => {
 }
 
 export const deleteMyProfilePicture = async() => {
-  
+
 }

@@ -2,7 +2,6 @@ import express from "express";
 import {
   changeStudentPassword,
   deleteProfile,
-  displayAllStudents,
   loginStudent,
   profileFn,
   registerStudent,
@@ -13,7 +12,6 @@ import isLogged from "../middleware/isLogged";
 
 const router = express.Router();
 
-router.get("/students", displayAllStudents);
 router.post("/student/register", registerStudent);
 router.post("/student/login", loginStudent);
 router.get("/student/profile", isLogged, profileFn);
