@@ -1,6 +1,6 @@
 import { NONAVAIABLE } from "../constants/bookStatus";
 import db from "../helpers/db";
-import {format, toDate, add} from "date-fns";
+import {format, toDate} from "date-fns";
 import { Request, Response } from "express";
 
 export const myBorrowedBooks = async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 
 
 export const createNewBooking = async (req: Request, res: Response) => {
-  const {from, to, userId, bookId} = req.body;
+  const {name, lastName, from, to, userId, bookId} = req.body;
 
   const findStudentById = await db.user.findFirst({
     where: {
@@ -59,6 +59,8 @@ export const createNewBooking = async (req: Request, res: Response) => {
 
   const newOrder = await db.booking.create({
     data: {
+      name,
+      lastName,
       bookId: Number(bookId),
       userId,
       from: format(toDate(from), "MM/dd/yyyy"),

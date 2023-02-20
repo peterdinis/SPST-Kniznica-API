@@ -59,12 +59,14 @@ model Category {
 }
 
 model Booking {
-  id     Int    @id @default(autoincrement())
-  from   String
-  to     String
-  userId String
-  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bookId Int
-  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
-  status String @default("POŽIČANA")
+  id       Int    @id @default(autoincrement())
+  from     String
+  to       String
+  name     String @default("John")
+  lastName String @default("Doe")
+  userId   String
+  User     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId   Int
+  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  status   String @default("POŽIČANA")
 }
