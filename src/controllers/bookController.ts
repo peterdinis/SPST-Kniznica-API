@@ -67,6 +67,7 @@ export const createBookFn = async (
     pages,
     year,
     quantity,
+    publisher,
     categoryId,
   } = req.body;
 
@@ -91,6 +92,7 @@ export const createBookFn = async (
       pages,
       year,
       quantity,
+      publisher,
       categoryId: newCategoryForBook.id,
     },
   });

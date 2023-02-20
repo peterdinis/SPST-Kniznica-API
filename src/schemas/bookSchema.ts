@@ -17,6 +17,10 @@ export const createBookSchema = z.object({
         required_error: "Author is required"
     }),
 
+    publisher: z.string({
+        required_error: "Publisher is required"
+    }),
+
     status: z.string({
         required_error: "Status is required"
     }),
