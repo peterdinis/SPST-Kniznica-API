@@ -4,7 +4,6 @@ import {
   deleteBookFn,
   displayAllBooksFn,
   displayOneBookFn,
-  findAllAvaiableBooks,
   findAllPaginatedBooks,
   searchBook,
   updateBookFn,
@@ -14,7 +13,6 @@ const router = express.Router();
 
 router.get("/books", displayAllBooksFn);
 router.get("/books/paginate", findAllPaginatedBooks);
-router.get("/books/avaiable", findAllAvaiableBooks);
 router.get("/book/:id", displayOneBookFn);
 router.get("/books/search", searchBook);
 router.post("/books", createBookFn);

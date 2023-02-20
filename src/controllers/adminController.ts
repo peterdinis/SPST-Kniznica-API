@@ -41,20 +41,6 @@ export const getAllTeachers = async (req: Request, res: Response) => {
   return allTeachersInApp;
 };
 
-export const getAllImagesFromCloudinary = async (
-  req: Request,
-  res: Response
-) => {
-  return;
-};
-
-export const deleteAllImagesFromCloudinary = async (
-  req: Request,
-  res: Response
-) => {
-  return;
-};
-
 export const findAllBookings = async (req: Request, res: Response) => {
   const findAllBookings = await db.booking.findMany({});
   return res.json(findAllBookings);
@@ -83,3 +69,12 @@ export const studentDetail = (req: Request, res: Response) => {
 export const teacherDetail = async(req: Request, res: Response) => {
     return;
 }
+
+export const getAllAvaiableBooks = async() => {
+  return;
+}
+
+export const getAllNonAvaiableBooks = async() => {
+  return;
+}
+

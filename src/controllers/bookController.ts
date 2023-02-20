@@ -22,20 +22,6 @@ export const findAllPaginatedBooks = async (req: Request, res: Response) => {
   return res.json(allPaginatedBooks);
 };
 
-export const findAllAvaiableBooks = async (req: Request, res: Response) => {
-  const allAvaiableBooks = await db.book.findMany({
-    where: {
-      status: AVAIABLE,
-    },
-  });
-
-  if (allAvaiableBooks.length === 0) {
-    return res.send("No avaiable books");
-  }
-
-  return res.json(allAvaiableBooks);
-};
-
 export const displayOneBookFn = async (req: Request, res: Response) => {
   const { id } = req.params;
   const oneBook = await db.book.findFirst({
