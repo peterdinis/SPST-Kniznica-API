@@ -1,14 +1,18 @@
 import * as jwt from "jsonwebtoken";
 import { IUser } from "../../interfaces/IUser";
 import hashToken from "./hashToken";
-import db from "../db"
+import db from "../db";
 
-export function addRefreshTokenToWhiteList(tokId: any, refreshToken: string, userId: any) {
+export function addRefreshTokenToWhiteList(
+  tokId: any,
+  refreshToken: string,
+  userId: any
+) {
   return db.refreshToken.create({
     data: {
       id: tokId,
       hashedToken: hashToken(refreshToken),
-      userId
+      userId,
     },
   });
 }
@@ -16,18 +20,17 @@ export function addRefreshTokenToWhiteList(tokId: any, refreshToken: string, use
 export function removeRefreshToken(refreshTokenId: string) {
   return db.refreshToken.delete({
     where: {
-      id: refreshTokenId
-    }
+      id: refreshTokenId,
+    },
   });
 }
-
 
 export function generateAccessToken(user: IUser) {
   return jwt.sign(
     { userId: user.id },
     process.env.JWT_ACCESS_SECRET as string,
     {
-      expiresIn: "5m",
+      expiresIn: process.env.EXPIRES_IN as string,
     }
   );
 }
@@ -40,18 +43,17 @@ export function generateRefreshToken(user: IUser, tokId: number) {
     },
     process.env.JWT_REFRESH_SECRET as string,
     {
-      expiresIn: "4h",
+      expiresIn: process.env.EXPIRES_IN as string,
     }
   );
 }
 
-
 export function generateTokens(user: any, tokId: number) {
-    const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshToken(user, tokId);
-  
-    return {
-      accessToken,
-      refreshToken,
-    };
+  const accessToken = generateAccessToken(user);
+  const refreshToken = generateRefreshToken(user, tokId);
+
+  return {
+    accessToken,
+    refreshToken,
+  };
 }

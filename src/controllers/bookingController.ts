@@ -57,6 +57,19 @@ export const createNewBooking = async (req: Request, res: Response) => {
     throw new Error("Can not borrowed book because is not avaiable");
   }
 
+  const checkIfUserExistsWithNameAndLastName = await db.user.findFirst({
+    where: {
+      name,
+      lastName
+    }
+  })
+
+  if(!checkIfUserExistsWithNameAndLastName) {
+    res.status(404);
+    return "User with this name and last name does not exist";
+    
+  }
+
   const newOrder = await db.booking.create({
     data: {
       name,
@@ -83,9 +96,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
       id: newOrder.bookId,
     }
   })
-
-
-
+  
   return res.status(201).json({
     message: "Požičanie knihy bolo úspesšné",
     requestedBook: findBorrowedBook!.name,

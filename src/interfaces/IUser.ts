@@ -1,3 +1,5 @@
+import { IBooking } from "./IBooking";
+
 export interface IUser {
   id?: string;
   createdAt: string | Date;
@@ -8,6 +10,6 @@ export interface IUser {
   password: string;
   profilePic?: string | null;
   refreshToken: string;
-  borrowedBooks: any; // TODO: Update later,
+  borrowedBooks: IBooking[];
   role: string;
 }
