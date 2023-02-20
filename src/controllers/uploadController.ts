@@ -8,5 +8,11 @@ export const checkGoFileServerStatus = async(req: Request, res: Response) => {
 }
 
 export const checkAccountInfo = async(req: Request, res: Response) => {
+    const checkAccountInfo = await axios.get(`https://api.gofile.io/getAccountDetails?token=${process.env.GOFILE_API_TOKEN as string}`);
+    const checkAccountInfoResponse = checkAccountInfo.data;
+    return res.json(checkAccountInfoResponse);
+}
+
+export const uploadPicture = async() => {
     return;
 }
