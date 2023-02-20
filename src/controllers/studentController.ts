@@ -51,10 +51,6 @@ export const registerStudent = async (req: Request, res: Response) => {
 
     await addRefreshTokenToWhiteList(tokId, refreshToken, newStudent.id);
 
-    res.setHeader('Set-Cookie', 'newStudent=true');
-    res.setHeader("Set-Cookie", `email=${email}`);
-    res.setHeader('Set-Cookie', 'Max-Age=60')
-
     return res.status(201).json({
       newStudent,
       accessToken,
@@ -94,10 +90,6 @@ export const loginStudent = async (req: Request, res: Response) => {
     const tokId = v4() as unknown as number;
     const { accessToken, refreshToken } = generateTokens(existingUser, tokId);
     await addRefreshTokenToWhiteList(tokId, refreshToken, existingUser.id);
-
-    res.setHeader('Set-Cookie', 'loggedStudent=true');
-    res.setHeader("Set-Cookie", `email=${email}`);
-    res.setHeader('Set-Cookie', 'Max-Age=60')
 
     return res.status(201).json({
         existingUser,
