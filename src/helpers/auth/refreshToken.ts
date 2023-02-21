@@ -1,11 +1,11 @@
 import { Response } from "express";
 
 function sendRefreshToken(res: Response, token: string) {
-    res.cookie('refresh_token', token, {
-        httpOnly: true,
-        sameSite: true,
-        path: '/student/refreshToken', // TODO: Update path later
-      });
+  res.cookie("refresh_token", token, {
+    httpOnly: true,
+    sameSite: true,
+    path: "/student/refreshToken",
+  });
 }
 
-export default sendRefreshToken
+export default sendRefreshToken;

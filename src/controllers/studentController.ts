@@ -220,3 +220,7 @@ export const getMyProfilePicture = async() => {
 export const deleteMyProfilePicture = async() => {
 
 }
+
+export const refreshTokenFn = async() => {
+  return;
+}

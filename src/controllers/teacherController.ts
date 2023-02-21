@@ -45,7 +45,7 @@ export const registerTeacher = async (req: Request, res: Response) => {
 
     const tokId = v4() as unknown as number;
 
-    const newStudent = await db.user.create({
+    const newTeacher = await db.user.create({
       data: {
         name,
         lastName,
@@ -55,12 +55,12 @@ export const registerTeacher = async (req: Request, res: Response) => {
       },
     });
 
-    const { accessToken, refreshToken } = generateTokens(newStudent, tokId);
+    const { accessToken, refreshToken } = generateTokens(newTeacher, tokId);
 
-    await addRefreshTokenToWhiteList(tokId, refreshToken, newStudent.id);
+    await addRefreshTokenToWhiteList(tokId, refreshToken, newTeacher.id);
 
     return res.status(201).json({
-      newStudent,
+      newTeacher,
       accessToken,
       refreshToken,
     });
@@ -126,3 +126,7 @@ export const teacherProfile = async (req: any, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const refreshTokenFn = (req: Request, res: Response) => {
+  return;
+}
