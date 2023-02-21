@@ -38,10 +38,8 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
     allowedHeaders: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   },
-
-  /* path: "/socket" */
 });
 
 io.on("connection", (socket: Socket) => {
