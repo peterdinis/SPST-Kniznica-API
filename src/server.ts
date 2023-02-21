@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application,Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import exampleRoute from "./routes/exampleRoute";
@@ -38,10 +38,8 @@ const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
     allowedHeaders: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"]
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   },
-
-  /* path: "/socket" */
 });
 
 io.on("connection", (socket: Socket) => {
