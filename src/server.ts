@@ -13,6 +13,7 @@ import http from "http";
 import { Server, Socket } from "socket.io";
 import adminRoutes from "./routes/adminRoutes";
 import uploadRoutes from "./routes/uploadRoutes";
+import teacherRoutes from "./routes/teacherRoutes";
 
 export const app: Application = express();
 
@@ -59,6 +60,7 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(uploadRoutes);
+app.use(teacherRoutes);
 
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
