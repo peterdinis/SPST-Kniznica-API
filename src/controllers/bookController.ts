@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
-import { AVAIABLE } from "../constants/bookStatus";
 import { createBookType } from "../schemas/bookSchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
@@ -15,9 +14,8 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
 
 export const findAllPaginatedBooks = async (req: Request, res: Response) => {
   const allPaginatedBooks = await paginate.book.paginate({
-    page: Number(req.query.page),
-    limit: Number(req.query.lmit),
-    where: {},
+    page: Number(req.query.page) as unknown as number,
+    limit: Number(req.query.limit) as unknown as number,
   });
   return res.json(allPaginatedBooks);
 };
