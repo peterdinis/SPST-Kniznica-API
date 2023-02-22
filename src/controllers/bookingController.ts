@@ -28,7 +28,7 @@ export const myBorrowedBooks = async (req: Request, res: Response) => {
 
 
 export const createNewBooking = async (req: Request, res: Response) => {
-  const {name, lastName, from, to, userId, bookId, status} = req.body;
+  const {name, lastName, from, to, userId, bookId} = req.body;
 
   const findStudentById = await db.user.findFirst({
     where: {
@@ -78,7 +78,6 @@ export const createNewBooking = async (req: Request, res: Response) => {
       userId,
       from: format(toDate(from), "MM/dd/yyyy"),
       to: format(toDate(to), "MM/dd/yyyy"),
-      status
     }
   })
 
