@@ -126,7 +126,3 @@ export const teacherProfile = async (req: any, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-export const refreshTokenFn = (req: Request, res: Response) => {
-  return;
-}

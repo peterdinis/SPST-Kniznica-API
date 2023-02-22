@@ -208,19 +208,3 @@ export const changeStudentPassword = async(req: Request, res: Response) => {
     updateUserPassword
   })
 }
-
-export const uploadNewProfilePicture = async() => {
-  return;
-}
-
-export const getMyProfilePicture = async() => {
-  return;
-}
-
-export const deleteMyProfilePicture = async() => {
-
-}
-
-export const refreshTokenFn = async() => {
-  return;
-}
