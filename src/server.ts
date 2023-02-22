@@ -1,4 +1,4 @@
-import express, { Application,Response, NextFunction } from "express";
+import express, { Application} from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import exampleRoute from "./routes/exampleRoute";
@@ -32,25 +32,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 dotenv.config();
 
-/* Socket.io initialization */
-const server = http.createServer(app);
-
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    allowedHeaders: "*",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
-  },
-});
-
-io.on("connection", (socket: Socket) => {
-  console.log("Connection work");
-  console.log(`⚡: ${socket.id} user just connected!`);
-  io.on("disconnect", () => {
-    console.log("🔥: A user disconnected");
-  });
-});
-
 const PORT = process.env.PORT as unknown as number;
 
 app.use(exampleRoute);
@@ -62,6 +43,6 @@ app.use(adminRoutes);
 app.use(uploadRoutes);
 app.use(teacherRoutes);
 
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
 });

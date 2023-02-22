@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
-import { STUDENT, TEACHER } from "../constants/roles";
+import {TEACHER } from "../constants/roles";
 import bcrypt from "bcryptjs";
 import {
   addRefreshTokenToWhiteList,
