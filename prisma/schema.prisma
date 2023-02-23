@@ -25,6 +25,7 @@ model User {
   id            String         @id @unique @default(uuid())
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  username      String         @default("USERNAME")
   name          String
   lastName      String
   email         String         @unique
@@ -62,8 +63,7 @@ model Booking {
   id       Int    @id @default(autoincrement())
   from     String
   to       String
-  name     String @default("John")
-  lastName String @default("Doe")
+  username String @default("USERNAME")
   bookName String @default("BookInfo")
-  User     User   @relation(fields: [name], references: [id], onDelete: Cascade)
+  User     User   @relation(fields: [username], references: [id], onDelete: Cascade)
 }
