@@ -31,7 +31,6 @@ model User {
   password      String
   profilePic    String?
   refreshTokens RefreshToken[]
-  borrowedBooks Booking[]
   role          String         @default("STUDENT")
   classRoom     String?        @default("1.A")
 }
@@ -47,7 +46,6 @@ model Book {
   pages       Int
   year        Int
   quantity    Int       @default(0)
-  isBorrowed  Booking[]
   categoryId  Int       @default(1)
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
@@ -65,8 +63,4 @@ model Booking {
   to       String
   name     String @default("John")
   lastName String @default("Doe")
-  userId   String
-  User     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  bookId   Int
-  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
