@@ -6,6 +6,7 @@ export interface IUser {
   updatedAt: string | Date;
   name: string;
   lastName: string;
+  username: string;
   email: string;
   password: string;
   profilePic?: string | null;

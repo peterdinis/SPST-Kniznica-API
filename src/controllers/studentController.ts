@@ -8,9 +8,9 @@ import { STUDENT } from "../constants/roles";
 
 export const registerStudent = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, email, password, role, classRoom} = req.body;
+    const { name, lastName, username, email, password, role, classRoom} = req.body;
 
-    if (!name || !lastName || !email || !password || !role || !classRoom) {
+    if (!name || !lastName || !username || !email || !password || !role || !classRoom) {
       res.status(400);
       throw new Error("All fields are required");
     }
@@ -40,6 +40,7 @@ export const registerStudent = async (req: Request, res: Response) => {
       data: {
         name,
         lastName,
+        username,
         email,
         password: hashedPassword,
         role,
