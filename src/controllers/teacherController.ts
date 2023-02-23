@@ -21,7 +21,7 @@ export const displayAllTeachers = async (req: Request, res: Response) => {
 
 export const registerTeacher = async (req: Request, res: Response) => {
   try {
-    const { name, lastName, email, password, role } = req.body;
+    const { name, lastName, username, email, password, role } = req.body;
 
     const existingTeacher = await db.user.findFirst({
       where: {
@@ -50,6 +50,7 @@ export const registerTeacher = async (req: Request, res: Response) => {
         name,
         lastName,
         email,
+        username,
         password: hashedPassword,
         role,
       },
