@@ -209,3 +209,7 @@ export const changeStudentPassword = async(req: Request, res: Response) => {
     updateUserPassword
   })
 }
+
+export async function refreshTokenForStudent(req: Request, res: Response) {
+  return;
+}

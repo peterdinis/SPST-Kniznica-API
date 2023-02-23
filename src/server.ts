@@ -9,8 +9,6 @@ import morgan from "morgan";
 import helmet from "helmet";
 import bookingRoutes from "./routes/bookingRoutes";
 import cookieParser from "cookie-parser";
-import http from "http";
-import { Server, Socket } from "socket.io";
 import adminRoutes from "./routes/adminRoutes";
 import uploadRoutes from "./routes/uploadRoutes";
 import teacherRoutes from "./routes/teacherRoutes";
