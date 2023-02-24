@@ -6,7 +6,8 @@ import bookRoutes from "./routes/bookRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
 import helmet from "helmet";
-import cookieParser from "cookie-parser";
+import teacherRoutes from "./routes/teacherRoutes";
+import studentRoutes from "./routes/studentRoutes";
 
 export const app: Application = express();
 
@@ -21,7 +22,6 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(cookieParser());
 dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
@@ -29,6 +29,8 @@ const PORT = process.env.PORT as unknown as number;
 app.use(exampleRoute);
 app.use(bookRoutes);
 app.use(categoryRoutes);
+app.use(teacherRoutes);
+app.use(studentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
