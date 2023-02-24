@@ -12,18 +12,19 @@ datasource db {
 }
 
 model Book {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
   description String
   image       String
   author      String
   status      String
-  publisher   String   @default("Mlade Léta")
+  publisher   String    @default("Mlade Léta")
   pages       Int
   year        Int
-  quantity    Int      @default(0)
-  categoryId  Int      @default(1)
-  Category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  quantity    Int       @default(0)
+  categoryId  Int       @default(1)
+  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  Borrowed    Booking[]
 }
 
 model Category {
@@ -34,29 +35,38 @@ model Category {
 }
 
 model Student {
-  id             Int      @id @default(autoincrement())
-  email          String
-  password       String
-  role           String   @default("STUDENT")
-  classRoom      String   @default("1.A")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String
+  password  String
+  role      String   @default("STUDENT")
+  classRoom String   @default("1.A")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Teacher {
-  id             Int      @id @default(autoincrement())
-  email          String
-  password       String
-  role           String   @default("TEACHER")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String
+  password  String
+  role      String   @default("TEACHER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Admin {
-  id             Int      @id @default(autoincrement())
-  email          String
-  password       String
-  role           String   @default("ADMIN")
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  email     String
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id     Int    @id @default(autoincrement())
+  from   String
+  to     String
+  email  String
+  bookId Int
+  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
