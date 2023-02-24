@@ -11,32 +11,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model RefreshToken {
-  id          String   @id @unique @default(uuid())
-  hashedToken String
-  userId      String
-  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  revoked     Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model User {
-  id            String         @id @unique @default(uuid())
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  username      String         @default("USERNAME")
-  name          String
-  lastName      String
-  email         String         @unique
-  password      String
-  profilePic    String?
-  refreshTokens RefreshToken[]
-  borrowedBooks Booking[]
-  role          String         @default("STUDENT")
-  classRoom     String?        @default("1.A")
-}
-
 model Book {
   id          Int      @id @default(autoincrement())
   name        String
@@ -59,11 +33,30 @@ model Category {
   Books       Book[]
 }
 
-model Booking {
-  id       Int    @id @default(autoincrement())
-  from     String
-  to       String
-  username String @default("USERNAME")
-  bookName String @default("BookInfo")
-  User     User   @relation(fields: [username], references: [id], onDelete: Cascade)
+model Student {
+  id             Int      @id @default(autoincrement())
+  email          String
+  password       String
+  role           String   @default("STUDENT")
+  classRoom      String   @default("1.A")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Teacher {
+  id             Int      @id @default(autoincrement())
+  email          String
+  password       String
+  role           String   @default("TEACHER")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Admin {
+  id             Int      @id @default(autoincrement())
+  email          String
+  password       String
+  role           String   @default("ADMIN")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

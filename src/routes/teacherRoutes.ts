@@ -1,11 +1,10 @@
 import express from "express";
-import { registerTeacher, loginTeacher, teacherProfile } from "../controllers/teacherController";
-import isLogged from "../middleware/isLogged";
+import { saveTeacher, teacherInfo, removeTeacher } from "../controllers/teacherController";
 
 const router = express.Router();
 
-router.post("/teacher/register", registerTeacher);
-router.post("/teacher/login", loginTeacher);
-router.get("/teacher/profile", isLogged, teacherProfile);
+router.post("/teacher", saveTeacher);
+router.get("/teacher/:email", teacherInfo);
+router.delete("/teacher/delete/:email", removeTeacher);
 
 export default router

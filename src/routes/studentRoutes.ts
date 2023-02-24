@@ -1,23 +1,10 @@
 import express from "express";
-import {
-  changeStudentPassword,
-  deleteProfile,
-  loginStudent,
-  profileFn,
-  registerStudent,
-  studentProfilePicture,
-  updateProfile,
-} from "../controllers/studentController";
-import isLogged from "../middleware/isLogged";
+import { saveStudent, studentInfo, removeStudent } from "../controllers/studentController";
 
 const router = express.Router();
 
-router.post("/student/register", registerStudent);
-router.post("/student/login", loginStudent);
-router.get("/student/profile", isLogged, profileFn);
-router.post("/student/:id/picture/upload", studentProfilePicture);
-router.patch("/student/:id/update", updateProfile);
-router.patch("/student/:id/password/update", changeStudentPassword)
-router.delete("/student/:id/delete", deleteProfile);
+router.post("/student", saveStudent);
+router.get("/student/:email", studentInfo);
+router.delete("/student/delete/:email", removeStudent);
 
-export default router;
+export default router
