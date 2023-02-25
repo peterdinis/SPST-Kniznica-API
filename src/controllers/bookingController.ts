@@ -65,7 +65,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
   const { from, to, email, bookId } = req.body;
   const findBook = await db.book.findFirst({
     where: {
-      id: bookId,
+      id: Number(bookId),
       status: AVAIABLE,
     },
   });
@@ -90,15 +90,15 @@ export const createNewBooking = async (req: Request, res: Response) => {
   const createNewBooking = await db.booking.create({
     data: {
       email,
-      from: format(from, "MM/dd/yyyy"),
-      to: format(to, "MM/dd/yyyy"),
-      bookId,
+      from,
+      to,
+      bookId: Number(bookId),
     },
   });
 
   await db.book.update({
     where: {
-      id: bookId,
+      id: Number(bookId),
     },
 
     data: {
