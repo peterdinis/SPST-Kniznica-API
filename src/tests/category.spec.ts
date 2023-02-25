@@ -5,10 +5,10 @@ import chaiHttp from "chai-http";
 chai.should();
 chai.use(chaiHttp);
 
-describe("Get all books", () => {
-    it("GET /books", (done) => {
+describe("Get all categories", () => {
+    it("GET /categories", (done) => {
         chai.request(app)
-        .get("/books")
+        .get("/categories")
         .end((err, response) => {
             expect(response).to.have.status(200);
             expect(response).to.have.property("body")
