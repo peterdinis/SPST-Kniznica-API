@@ -8,6 +8,10 @@ export const displayAllBookings = async (req: Request, res: Response) => {
   return res.json(allBookings);
 }
 
+export const bookingInfo = async (req: Request, res: Response) => {
+  return;
+}
+
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
   const email = String(req.query);
   const findStudent = await db.student.findFirst({
@@ -102,3 +106,7 @@ export const extendedExistingBooking = async (req: Request, res: Response) => {
 export const returnMyBorrowedBook = async (req: Request, res: Response) => {
   return;
 };
+
+export const deleteAllBooking = async (req: Request, res: Response) => {
+  return;
+}
