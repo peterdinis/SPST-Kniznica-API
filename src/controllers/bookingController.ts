@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
 import { STUDENT, TEACHER } from "../constants/roles";
+import {format} from "date-fns";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBookings = async (req: Request, res: Response) => {
@@ -89,11 +90,21 @@ export const createNewBooking = async (req: Request, res: Response) => {
   const createNewBooking = await db.booking.create({
     data: {
       email,
-      from,
-      to,
+      from: format(from, "MM/dd/yyyy"),
+      to: format(to, "MM/dd/yyyy"),
       bookId,
     },
   });
+
+  await db.book.update({
+    where: {
+      id: bookId,
+    },
+
+    data: {
+      status: NONAVAIABLE
+    }
+  })
 
   return res.json(createNewBooking);
 };
