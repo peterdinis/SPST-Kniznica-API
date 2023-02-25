@@ -5,7 +5,7 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBookings = async (req: Request, res: Response) => {
   const allBookings = await db.booking.findMany();
-  return allBookings;
+  return res.json(allBookings);
 }
 
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
@@ -28,7 +28,7 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
     },
   });
 
-  return allMyBorrowedBooks;
+  return res.json(allMyBorrowedBooks);
 };
 
 export const getMyTeacherBorrowedBooks = async (
@@ -54,7 +54,7 @@ export const getMyTeacherBorrowedBooks = async (
     },
   });
 
-  return allMyBorrowedBooks;
+  return res.json(allMyBorrowedBooks);
 };
 
 export const createNewBooking = async (req: Request, res: Response) => {
@@ -92,7 +92,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
     },
   });
 
-  return createNewBooking;
+  return res.json(createNewBooking);
 };
 
 export const extendedExistingBooking = async (req: Request, res: Response) => {

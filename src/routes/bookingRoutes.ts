@@ -3,9 +3,9 @@ import { createNewBooking, displayAllBookings, getMyBorrowedBooks, getMyTeacherB
 
 const router = express.Router();
 
-router.get("/bookings", displayAllBookings)
 router.get("/student/borrowed/:email", getMyBorrowedBooks);
 router.get("/teacher/borrowed/:email", getMyTeacherBorrowedBooks);
+router.get("/bookings", displayAllBookings)
 router.post("/booking", createNewBooking);
 
 export default router;
