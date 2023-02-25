@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
 
+export const displayAllTeacher = async (req: Request, res: Response) => {
+    const displayAllTeachers = await db.teacher.findMany();
+    return displayAllTeachers;
+}
+
+
 export const saveTeacher = async (req: Request, res: Response) => {
     const newTeacher = await db.teacher.create({
         data: {
