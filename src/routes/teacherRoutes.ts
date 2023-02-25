@@ -8,4 +8,4 @@ router.post("/teacher", saveTeacher);
 router.get("/teacher/:email", teacherInfo);
 router.delete("/teacher/delete/:email", removeTeacher);
 
-export default router
+export default router;

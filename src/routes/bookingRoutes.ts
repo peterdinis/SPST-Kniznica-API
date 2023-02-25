@@ -3,7 +3,7 @@ import { createNewBooking, displayAllBookings, getMyBorrowedBooks, getMyTeacherB
 
 const router = express.Router();
 
-router.get("/booking", displayAllBookings)
+router.get("/bookings", displayAllBookings)
 router.get("/student/borrowed/:email", getMyBorrowedBooks);
 router.get("/teacher/borrowed/:email", getMyTeacherBorrowedBooks);
 router.post("/booking", createNewBooking);
