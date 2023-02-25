@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
 
+export const displayAllTeacher = async (req: Request, res: Response) => {
+    const displayAllTeachers = await db.teacher.findMany();
+    return displayAllTeachers;
+}
+
+
 export const saveTeacher = async (req: Request, res: Response) => {
     const newTeacher = await db.teacher.create({
         data: {
@@ -9,23 +15,6 @@ export const saveTeacher = async (req: Request, res: Response) => {
     })
 
     return newTeacher
-}
-
-export const teacherInfo = async (req: Request, res: Response) => {
-    const {email} = req.params;
-
-    const findTeacher = await db.teacher.findFirst({
-        where: {
-            email
-        }
-    })
-
-    if(!findTeacher) {
-        res.status(404);
-        throw new Error(`Teacher not found`);
-    }
-
-    return findTeacher;
 }
 
 export const removeTeacher = async (req: Request, res: Response) => {
