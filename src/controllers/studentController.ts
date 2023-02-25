@@ -3,7 +3,7 @@ import db from "../helpers/db";
 
 export const displayAllStudent = async (req: Request, res: Response) => {
     const displayAllStudents = await db.student.findMany();
-    return displayAllStudents;
+    return res.json(displayAllStudents);
 }
 
 export const saveStudent = async (req: Request, res: Response) => {
@@ -12,15 +12,13 @@ export const saveStudent = async (req: Request, res: Response) => {
            ...req.body
         }
     })
-    return newStudent
+    return res.json(newStudent);
 }
 
 export const removeStudent = async (req: Request, res: Response) => {
-    const {email} = req.params;
-
     const findStudent = await db.student.findFirst({
         where: {
-            email
+            email: String(req.query.email)
         }
     })
 
@@ -35,5 +33,5 @@ export const removeStudent = async (req: Request, res: Response) => {
         }
     })
 
-    return removeStudent;
+    return res.json(removeStudent);
 }

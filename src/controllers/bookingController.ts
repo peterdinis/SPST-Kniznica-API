@@ -5,15 +5,18 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBookings = async (req: Request, res: Response) => {
   const allBookings = await db.booking.findMany();
-  return allBookings;
-}
+  return res.json(allBookings);
+};
+
+export const bookingInfo = async (req: Request, res: Response) => {
+  return;
+};
 
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
-  const { email } = req.params;
   const findStudent = await db.student.findFirst({
     where: {
-      email,
-      role: STUDENT,
+      email: String(req.query.email),
+      role: STUDENT
     },
   });
 
@@ -24,18 +27,18 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
 
   const allMyBorrowedBooks = await db.booking.findFirst({
     where: {
-      email,
+      email: String(req.query.email),
     },
   });
 
-  return allMyBorrowedBooks;
+  return res.json(allMyBorrowedBooks);
 };
 
 export const getMyTeacherBorrowedBooks = async (
   req: Request,
   res: Response
 ) => {
-  const { email } = req.params;
+  const email = String(req.query.email);
   const findTeacher = await db.teacher.findFirst({
     where: {
       email,
@@ -50,11 +53,11 @@ export const getMyTeacherBorrowedBooks = async (
 
   const allMyBorrowedBooks = await db.booking.findFirst({
     where: {
-      email,
+      email: String(req.query.email),
     },
   });
 
-  return allMyBorrowedBooks;
+  return res.json(allMyBorrowedBooks);
 };
 
 export const createNewBooking = async (req: Request, res: Response) => {
@@ -92,7 +95,7 @@ export const createNewBooking = async (req: Request, res: Response) => {
     },
   });
 
-  return createNewBooking;
+  return res.json(createNewBooking);
 };
 
 export const extendedExistingBooking = async (req: Request, res: Response) => {
@@ -100,5 +103,9 @@ export const extendedExistingBooking = async (req: Request, res: Response) => {
 };
 
 export const returnMyBorrowedBook = async (req: Request, res: Response) => {
+  return;
+};
+
+export const deleteAllBooking = async (req: Request, res: Response) => {
   return;
 };
