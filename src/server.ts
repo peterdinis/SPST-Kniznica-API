@@ -8,6 +8,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import teacherRoutes from "./routes/teacherRoutes";
 import studentRoutes from "./routes/studentRoutes";
+import bookingRoutes from "./routes/bookingRoutes";
 
 export const app: Application = express();
 
@@ -31,6 +32,7 @@ app.use(bookRoutes);
 app.use(categoryRoutes);
 app.use(teacherRoutes);
 app.use(studentRoutes);
+app.use(bookingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
