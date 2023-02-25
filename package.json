@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "mocha --recursive --reporter mocha-junit-reporter --timeout 60000 --exit"
+    "test": "mocha -r ts-node/register ./src/tests/**/*.spec.ts"
   },
   "keywords": [],
   "author": "",
