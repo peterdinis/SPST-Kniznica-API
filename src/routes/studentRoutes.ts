@@ -5,7 +5,7 @@ import { getMyBorrowedBooks } from "../controllers/bookingController";
 const router = express.Router();
 
 router.get("/students", displayAllStudent);
-router.get("/student/borrowed/:email", getMyBorrowedBooks);
+router.get("/foro", getMyBorrowedBooks);
 router.post("/student", saveStudent);
 router.delete("/student/delete/:email", removeStudent);
 

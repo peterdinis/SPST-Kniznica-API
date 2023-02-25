@@ -13,26 +13,28 @@ export const bookingInfo = async (req: Request, res: Response) => {
 }
 
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
-  const email = String(req.query);
   const findStudent = await db.student.findFirst({
     where: {
-      email,
-      role: STUDENT,
+      email: String(req.query.email),
     },
   });
 
-  if (!findStudent) {
+  console.log(findStudent);
+
+ /*  if (!findStudent) {
     res.status(404);
     throw new Error(`Student not found`);
-  }
+  } */
+  
+  return "OK";
 
-  const allMyBorrowedBooks = await db.booking.findFirst({
+  /* const allMyBorrowedBooks = await db.booking.findFirst({
     where: {
       email,
     },
   });
 
-  return res.json(allMyBorrowedBooks);
+  return res.json(allMyBorrowedBooks); */
 };
 
 export const getMyTeacherBorrowedBooks = async (
