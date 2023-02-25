@@ -12,7 +12,6 @@ export const saveStudent = async (req: Request, res: Response) => {
            ...req.body
         }
     })
-
     return newStudent
 }
 
