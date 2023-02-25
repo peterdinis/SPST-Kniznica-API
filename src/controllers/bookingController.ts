@@ -6,11 +6,11 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 export const displayAllBookings = async (req: Request, res: Response) => {
   const allBookings = await db.booking.findMany();
   return res.json(allBookings);
-}
+};
 
 export const bookingInfo = async (req: Request, res: Response) => {
   return;
-}
+};
 
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
   const findStudent = await db.student.findFirst({
@@ -19,29 +19,25 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
     },
   });
 
-  console.log(findStudent);
-
- /*  if (!findStudent) {
+  if (!findStudent) {
     res.status(404);
     throw new Error(`Student not found`);
-  } */
-  
-  return "OK";
+  }
 
-  /* const allMyBorrowedBooks = await db.booking.findFirst({
+  const allMyBorrowedBooks = await db.booking.findFirst({
     where: {
-      email,
+      email: String(req.query.email),
     },
   });
 
-  return res.json(allMyBorrowedBooks); */
+  return res.json(allMyBorrowedBooks);
 };
 
 export const getMyTeacherBorrowedBooks = async (
   req: Request,
   res: Response
 ) => {
-  const email = String(req.query);
+  const email = String(req.query.email);
   const findTeacher = await db.teacher.findFirst({
     where: {
       email,
@@ -56,7 +52,7 @@ export const getMyTeacherBorrowedBooks = async (
 
   const allMyBorrowedBooks = await db.booking.findFirst({
     where: {
-      email,
+      email: String(req.query.email),
     },
   });
 
@@ -111,4 +107,4 @@ export const returnMyBorrowedBook = async (req: Request, res: Response) => {
 
 export const deleteAllBooking = async (req: Request, res: Response) => {
   return;
-}
+};
