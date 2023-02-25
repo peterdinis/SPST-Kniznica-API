@@ -39,7 +39,6 @@ model Student {
   email     String
   password  String
   role      String   @default("STUDENT")
-  classRoom String   @default("1.A")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
