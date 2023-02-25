@@ -9,7 +9,7 @@ export const displayAllBookings = async (req: Request, res: Response) => {
 }
 
 export const getMyBorrowedBooks = async (req: Request, res: Response) => {
-  const { email } = req.params;
+  const email = String(req.query);
   const findStudent = await db.student.findFirst({
     where: {
       email,
@@ -35,7 +35,7 @@ export const getMyTeacherBorrowedBooks = async (
   req: Request,
   res: Response
 ) => {
-  const { email } = req.params;
+  const email = String(req.query);
   const findTeacher = await db.teacher.findFirst({
     where: {
       email,
