@@ -18,11 +18,9 @@ export const saveTeacher = async (req: Request, res: Response) => {
 }
 
 export const removeTeacher = async (req: Request, res: Response) => {
-    const {email} = req.params;
-
     const findTeacher = await db.teacher.findFirst({
         where: {
-            email
+            email: String(req.query.email)
         }
     })
 

@@ -16,11 +16,9 @@ export const saveStudent = async (req: Request, res: Response) => {
 }
 
 export const removeStudent = async (req: Request, res: Response) => {
-    const {email} = req.params;
-
     const findStudent = await db.student.findFirst({
         where: {
-            email
+            email: String(req.query.email)
         }
     })
 
