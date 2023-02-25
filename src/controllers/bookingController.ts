@@ -16,6 +16,7 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
   const findStudent = await db.student.findFirst({
     where: {
       email: String(req.query.email),
+      role: STUDENT
     },
   });
 
