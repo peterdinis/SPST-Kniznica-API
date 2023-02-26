@@ -118,6 +118,21 @@ export const updateProfile = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteProfile = (req: Request, res: Response) => {
-  return;
+export const deleteProfile = async (req: Request, res: Response) => {
+   try {
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    const deleteUser = await db.student.delete({
+      where: {
+        id: user!.id
+      }
+    })
+
+    return res.status(200).json(deleteUser);
+   } catch (err) {
+    getErrorMessage(err);
+   }
 }
