@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
 import { STUDENT, TEACHER } from "../constants/roles";
-import {format} from "date-fns";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 
 export const displayAllBookings = async (req: Request, res: Response) => {
