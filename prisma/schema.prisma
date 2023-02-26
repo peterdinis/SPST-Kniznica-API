@@ -36,6 +36,9 @@ model Category {
 
 model Student {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
   role      String   @default("STUDENT")
@@ -45,8 +48,14 @@ model Student {
 
 model Teacher {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
+  isTeacher Boolean
+  canCreate Boolean  @default(true)
+  canUpdate Boolean  @default(true)
   role      String   @default("TEACHER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,8 +63,14 @@ model Teacher {
 
 model Admin {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
+  isTeacher Boolean
+  canCreate Boolean  @default(true)
+  canUpdate Boolean  @default(true)
   role      String   @default("ADMIN")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
