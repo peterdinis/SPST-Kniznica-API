@@ -1,12 +1,19 @@
 import express from "express";
-import { saveTeacher, removeTeacher, displayAllTeacher } from "../controllers/teacherController";
-import { getMyTeacherBorrowedBooks } from "../controllers/bookingController";
+import { verifyToken } from "../middleware/auth";
+import {
+  getAllTeachers,
+  getTeacherInfo,
+  teacherLogin,
+  teacherProfile,
+  teacherRegister,
+} from "../controllers/teacherController";
 
 const router = express.Router();
 
-router.get("/teachers", displayAllTeacher);
-router.get("/foro/teacher", getMyTeacherBorrowedBooks);
-router.post("/teacher", saveTeacher);
-router.delete("/teacher/delete", removeTeacher);
+router.get("/teachers", getAllTeachers);
+router.get("/teacher/info/:id", getTeacherInfo);
+router.post("/teacher/register", teacherRegister);
+router.post("/teacher/login", teacherLogin);
+router.get("/teacher/profile", verifyToken, teacherProfile);
 
 export default router;

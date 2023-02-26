@@ -1,37 +1,138 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
+import {
+  createStudentLoginType,
+  createStudentRegisterType,
+} from "../schemas/studentSchema";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
 
-export const displayAllStudent = async (req: Request, res: Response) => {
-    const displayAllStudents = await db.student.findMany();
-    return res.json(displayAllStudents);
-}
+export const getAllStudents = async (req: Request, res: Response) => {
+  const displayAllStudents = await db.student.findMany();
+  return res.json(displayAllStudents);
+};
 
-export const saveStudent = async (req: Request, res: Response) => {
-    const newStudent = await db.student.create({
-        data: {
-           ...req.body
-        }
-    })
-    return res.json(newStudent);
-}
+export const getStudentInfo = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const findOneStudent = await db.student.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
 
-export const removeStudent = async (req: Request, res: Response) => {
-    const findStudent = await db.student.findFirst({
-        where: {
-            email: String(req.query.email)
-        }
-    })
+  if (!findOneStudent) {
+    return res.status(404).json("Student not found");
+  }
 
-    if(!findStudent) {
-        res.status(404);
-        throw new Error(`Student not found`);
+  return res.json(findOneStudent);
+};
+
+export const studentRegister = async (
+  req: Request<{}, {}, createStudentRegisterType>,
+  res: Response
+) => {
+  try {
+    const { password } = req.body;
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    const createNewStudent = await db.student.create({
+      data: {
+        ...req.body,
+        password: passwordHash,
+      },
+    });
+
+    return res.status(201).json(createNewStudent);
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
+
+export const studentLogin = async (
+  req: Request<{}, {}, createStudentLoginType>,
+  res: Response
+) => {
+  try {
+    const { email, password } = req.body;
+    const user = await db.student.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
     }
 
-    const removeStudent = await db.student.delete({
-        where: {
-            id: findStudent.id
-        }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+      },
+      process.env.JWT_SECRET as unknown as string
+    );
+
+    return res.status(201).json({
+      user,
+      token,
+    });
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
+
+export const studentProfile = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    return res.status(200).json(user);
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
+
+export const updateProfile = async (req: Request, res: Response) => {
+  try { 
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    const updateUser = await db.student.update({
+      where: { id: user!.id },
+      data: {
+          ...req.body
+      }
     })
 
-    return res.json(removeStudent);
+    return updateUser;
+  } catch (err) {
+    getErrorMessage(err);
+  }
+}
+
+export const deleteProfile = async (req: Request, res: Response) => {
+   try {
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    const deleteUser = await db.student.delete({
+      where: {
+        id: user!.id
+      }
+    })
+
+    return res.status(200).json(deleteUser);
+   } catch (err) {
+    getErrorMessage(err);
+   }
 }

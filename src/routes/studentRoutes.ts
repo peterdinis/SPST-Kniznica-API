@@ -1,12 +1,23 @@
 import express from "express";
-import { saveStudent, removeStudent, displayAllStudent } from "../controllers/studentController";
-import { getMyBorrowedBooks } from "../controllers/bookingController";
+import {
+  deleteProfile,
+  getAllStudents,
+  getStudentInfo,
+  studentLogin,
+  studentProfile,
+  studentRegister,
+  updateProfile,
+} from "../controllers/studentController";
+import { verifyToken } from "../middleware/auth";
 
 const router = express.Router();
 
-router.get("/students", displayAllStudent);
-router.get("/foro", getMyBorrowedBooks);
-router.post("/student", saveStudent);
-router.delete("/student/delete", removeStudent);
+router.get("/students", getAllStudents);
+router.get("/student/info/:id", getStudentInfo);
+router.post("/student/register", studentRegister);
+router.post("/student/login", studentLogin);
+router.get("/student/profile", verifyToken, studentProfile);
+router.patch("/student/profile/update/:id", updateProfile);
+router.delete("/student/delete/:id", deleteProfile);
 
-export default router
+export default router;

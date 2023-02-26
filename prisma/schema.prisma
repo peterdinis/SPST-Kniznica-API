@@ -36,17 +36,27 @@ model Category {
 
 model Student {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
   role      String   @default("STUDENT")
+  classRoom String   @default("1.A")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Teacher {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
+  isTeacher Boolean
+  canCreate Boolean  @default(true)
+  canUpdate Boolean  @default(true)
   role      String   @default("TEACHER")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -54,18 +64,24 @@ model Teacher {
 
 model Admin {
   id        Int      @id @default(autoincrement())
+  name      String   @default("FOO")
+  lastName  String   @default("FOO")
+  username  String   @default("FOO")
   email     String
   password  String
+  isTeacher Boolean
+  canCreate Boolean  @default(true)
+  canUpdate Boolean  @default(true)
   role      String   @default("ADMIN")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Booking {
-  id     Int    @id @default(autoincrement())
-  from   String
-  to     String
-  email  String
-  bookId Int
-  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id       Int    @id @default(autoincrement())
+  from     String
+  to       String
+  username String @default("FOO")
+  bookId   Int
+  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
