@@ -77,10 +77,10 @@ model Admin {
 }
 
 model Booking {
-  id     Int    @id @default(autoincrement())
-  from   String
-  to     String
-  email  String
-  bookId Int
-  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id       Int    @id @default(autoincrement())
+  from     String
+  to       String
+  username String @default("FOO")
+  bookId   Int
+  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
