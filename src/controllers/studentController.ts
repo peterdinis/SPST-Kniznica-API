@@ -3,7 +3,6 @@ import db from "../helpers/db";
 import {
   createStudentLoginType,
   createStudentRegisterType,
-  updateStudentType,
 } from "../schemas/studentSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
