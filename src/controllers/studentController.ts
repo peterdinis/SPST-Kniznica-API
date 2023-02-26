@@ -97,3 +97,27 @@ export const studentProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const updateProfile = async (req: Request, res: Response) => {
+  try { 
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    const updateUser = await db.student.update({
+      where: { id: user!.id },
+      data: {
+          ...req.body
+      }
+    })
+
+    return updateUser;
+  } catch (err) {
+    getErrorMessage(err);
+  }
+}
+
+export const deleteProfile = (req: Request, res: Response) => {
+  return;
+}
