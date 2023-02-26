@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import db from "../helpers/db";
-import { createStudentRegisterType } from "../schemas/studentSchema";
+import {
+  createStudentLoginType,
+  createStudentRegisterType,
+  updateStudentType,
+} from "../schemas/studentSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
@@ -47,10 +51,50 @@ export const studentRegister = async (
   }
 };
 
-export const studentLogin = async (req: Request, res: Response) => {
-  return;
+export const studentLogin = async (
+  req: Request<{}, {}, createStudentLoginType>,
+  res: Response
+) => {
+  try {
+    const { email, password } = req.body;
+    const user = await db.student.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+      },
+      process.env.JWT_SECRET as unknown as string
+    );
+
+    return res.status(201).json({
+      user,
+      token,
+    });
+  } catch (err) {
+    getErrorMessage(err);
+  }
 };
 
 export const studentProfile = async (req: Request, res: Response) => {
-  return;
+  try {
+    const { id } = req.params;
+    const user = await db.student.findFirst({
+      where: { id: Number(id) },
+    });
+
+    return res.status(200).json(user);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 };

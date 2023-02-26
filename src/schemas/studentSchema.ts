@@ -1,6 +1,7 @@
 import {z} from "zod";
 
 export const registerStudentSchema = z.object({
+    id: z.number().optional(),
     name: z.string({
         required_error: "Name is required"
     }),
@@ -37,3 +38,4 @@ export const loginStudentSchema = z.object({
 
 export type createStudentRegisterType = z.infer<typeof registerStudentSchema>;
 export type createStudentLoginType = z.infer<typeof loginStudentSchema>;
+export type updateStudentType = Partial<z.infer<typeof registerStudentSchema>>;
