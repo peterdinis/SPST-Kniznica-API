@@ -23,6 +23,10 @@ export const registerStudentSchema = z.object({
 
     role: z.string({
         required_error: "Role is required"
+    }),
+
+    classRoom: z.string({
+        required_error: "Classroom is required"
     })
 });
 

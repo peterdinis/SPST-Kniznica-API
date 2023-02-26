@@ -44,7 +44,7 @@ export const studentRegister = async (
       },
     });
 
-    return res.json(createNewStudent);
+    return res.status(201).json(createNewStudent);
   } catch (err) {
     getErrorMessage(err);
   }
