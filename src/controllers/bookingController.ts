@@ -21,8 +21,15 @@ export const bookingInfo = async (req: Request, res: Response) => {
     return res.json(bookInfo);
 }
 
-export const getMyBooking = (req: Request, res: Response) => {
-    return;
+export const getMyBooking = async (req: Request, res: Response) => {
+    const {username} = req.params;
+    const myBooking = await db.booking.findMany({
+        where: {
+            username
+        }
+    })
+
+    return res.json(myBooking);
 }
 
 export const createBooking = (req: Request, res: Response) => {
