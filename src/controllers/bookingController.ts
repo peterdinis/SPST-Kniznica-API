@@ -62,6 +62,7 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
         }
     })
 
+    // TODO: Add books names to return later not bookIds
     return res.json(createNewBooking);
 }
 
