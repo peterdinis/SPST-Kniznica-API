@@ -1,8 +1,8 @@
 import express from "express";
-import { adminExampleRoute } from "../controllers/adminController";
+import { adminExample } from "../controllers/adminController";
 
 const router = express.Router();
 
-router.get("/admin/example", adminExampleRoute)
+router.get("/admin/example", adminExample)
 
 export default router;
