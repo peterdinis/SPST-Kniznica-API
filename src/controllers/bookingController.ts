@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import db from "../helpers/db";
-import { createBookingType } from "../schemas/bookingSchema";
+import { createBookingType, returnBookingType } from "../schemas/bookingSchema";
 import { NONAVAIABLE } from "../constants/bookStatus";
 
 export const getAllBooking = async (req: Request, res: Response) => {
@@ -66,6 +66,6 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
     return res.json(createNewBooking);
 }
 
-export const returnBooking = (req: Request, res: Response) => {
-    return
+export const returnBooking = (req: Request<{}, {}, returnBookingType>, res: Response) => {
+    return;
 }
