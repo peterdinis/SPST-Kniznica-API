@@ -18,6 +18,15 @@ export const createBookingSchema = z.object({
     })
 });
 
-export const returnBookingSchema = z.object({});
+export const returnBookingSchema = z.object({
+    username: z.string({
+        required_error: "Username is required"
+    }),
+
+    bookId: z.number({
+        required_error: "Must be integer"
+    })
+});
 
 export type createBookingType = z.infer<typeof createBookingSchema>;
+export type returnBookingType = z.infer<typeof returnBookingSchema>;
