@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import db from "../helpers/db";
+import { createBookingType } from "../schemas/bookingSchema";
 
 export const getAllBooking = async (req: Request, res: Response) => {
    const allBookings = await db.booking.findMany();
@@ -32,7 +33,7 @@ export const getMyBooking = async (req: Request, res: Response) => {
     return res.json(myBooking);
 }
 
-export const createBooking = (req: Request, res: Response) => {
+export const createBooking = (req: Request<{}, {}, createBookingType>, res: Response) => {
     return;
 }
 
