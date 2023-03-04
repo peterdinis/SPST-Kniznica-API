@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import db from "../helpers/db";
 import { createBookingType } from "../schemas/bookingSchema";
+import { NONAVAIABLE } from "../constants/bookStatus";
 
 export const getAllBooking = async (req: Request, res: Response) => {
    const allBookings = await db.booking.findMany();
@@ -51,6 +52,16 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
             to,
             username,
             bookId
+        }
+    })
+
+    await db.book.update({
+        where: {
+            id: bookId
+        },
+
+        data: {
+            status: NONAVAIABLE
         }
     })
 
