@@ -38,7 +38,7 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
     const {from, to, username, bookId} = req.body;
     const findBookForBorrow = await db.booking.findUnique({
         where: {
-            id: bookId
+            id: Number(bookId)
         }
     })
 
@@ -57,7 +57,7 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
 
     await db.book.update({
         where: {
-            id: bookId
+            id: Number(bookId)
         },
 
         data: {
