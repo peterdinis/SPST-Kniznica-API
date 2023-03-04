@@ -42,16 +42,13 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
         }
     })
 
-    if(!findBookForBorrow) {
-        throw new Error("Book not found")
-    }
-
+    console.log(findBookForBorrow);
     const createNewBooking = await db.booking.create({
         data: {
             from,
             to,
             username,
-            bookId
+            bookId: Number(bookId)
         }
     })
 
