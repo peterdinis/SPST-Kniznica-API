@@ -41,8 +41,6 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
             id: Number(bookId)
         }
     })
-
-    console.log(findBookForBorrow);
     const createNewBooking = await db.booking.create({
         data: {
             from,
