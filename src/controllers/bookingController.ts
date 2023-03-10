@@ -64,6 +64,35 @@ export const createBooking = async (req: Request<{}, {}, createBookingType>, res
     return res.json(createNewBooking);
 }
 
-export const returnBooking = (req: Request<{}, {}, returnBookingType>, res: Response) => {
-    return;
+/* TODO: Update this fn */
+export const returnBooking = async (req: Request<{}, {}, returnBookingType>, res: Response) => {
+    const {username, bookId} = req.body;
+
+    const findExistingUser = await db.student.findFirst({
+        where: {
+            username
+        }
+    })
+
+    if(!findExistingUser) {
+        return res.status(404).json("Student not found");
+    }
+
+    const findBorrowedBook = await db.booking.findFirst({
+        where: {
+            bookId
+        }
+    });
+
+    if(!findBorrowedBook) {
+        res.status(404).json("Borrowed Book not found");
+    }
+
+    const returnBorrowedBook = await db.booking.delete({
+        where: {
+            id: findBorrowedBook!.bookId
+        }
+    })
+
+    return res.status(200).json(returnBorrowedBook);
 }
