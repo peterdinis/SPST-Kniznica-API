@@ -44,6 +44,7 @@ model Student {
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
+  canAdmin  Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
@@ -59,6 +60,7 @@ model Teacher {
   canUpdate Boolean  @default(true)
   role      String   @default("TEACHER")
   createdAt DateTime @default(now())
+  canAdmin  Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
