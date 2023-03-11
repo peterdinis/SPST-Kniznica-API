@@ -33,8 +33,23 @@ export const studentRegister = async (
   res: Response
 ) => {
   try {
-    const { password } = req.body;
+    const { email, password } = req.body;
     const salt = await bcrypt.genSalt();
+
+    const existingUser = await db.student.findFirst({
+      where: {
+        email
+      }
+    })
+
+    if(existingUser) {
+      return res.status(409).send("User already exists");
+    }
+
+    if(password.length < 4) {
+      return res.status(400).send("Password must be at least 4 characters");
+    }
+
     const passwordHash = await bcrypt.hash(password, salt);
 
     const createNewStudent = await db.student.create({
@@ -67,13 +82,13 @@ export const studentLogin = async (
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
+    if (!isMatch) return res.status(400).json({ msg: "Password does not match. " });
 
     const token = jwt.sign(
       {
         id: user.id,
       },
-      process.env.JWT_SECRET as unknown as string
+      process.env.JWT_SECRET as unknown as string,
     );
 
     return res.status(201).json({
