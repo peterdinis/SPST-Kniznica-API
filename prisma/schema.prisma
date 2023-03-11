@@ -75,6 +75,7 @@ model Admin {
   canCreate Boolean  @default(true)
   canUpdate Boolean  @default(true)
   role      String   @default("ADMIN")
+  canAdmin  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
