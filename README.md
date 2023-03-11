@@ -1,6 +1,6 @@
-## SPŠT API
+## SPST API
 
-- api for spšt library project
+- api for spst library project
 - important .env variables are in .env.local
 
 ## Technologies
