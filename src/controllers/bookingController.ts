@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import db from "../helpers/db";
+import db from "../db";
 import { createBookingType, returnBookingType } from "../schemas/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 

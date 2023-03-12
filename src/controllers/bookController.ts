@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import db from "../helpers/db";
+import db from "../db";
 import { createBookType } from "../schemas/bookSchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import db from "../helpers/db";
+import db from "../db";
 import {
   createStudentLoginType,
   createStudentRegisterType,

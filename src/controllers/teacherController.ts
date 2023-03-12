@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import db from "../helpers/db";
+import db from "../db";
 import { createTeacherRegisterType, createTeacherLoginType } from "../schemas/teacherSchema";
 import bcrypt from "bcrypt";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
