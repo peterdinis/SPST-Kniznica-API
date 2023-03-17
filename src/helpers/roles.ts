@@ -1,5 +1,5 @@
 import { AccessControl } from "accesscontrol";
-import { STUDENT, TEACHER } from "../constants/roleConstants";
+import { ADMIN, STUDENT, TEACHER } from "../constants/roleConstants";
 
 const ac = new AccessControl();
 
@@ -22,13 +22,13 @@ ac.grant(TEACHER)
     .delete("booking")
     .read("booking")
 
-    ac.grant(TEACHER)
+ac.grant(ADMIN)
     .readAny("book")
     .readAny("category")
+    .readAny("booking")
     .create("book")
     .create("category")
     .create("booking")
     .delete("book")
     .delete("category")
     .delete("booking")
-    .read("booking")
