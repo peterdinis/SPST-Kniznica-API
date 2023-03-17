@@ -44,10 +44,6 @@ model Student {
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
-  canCreate Boolean  @default(false)
-  canUpdate Boolean  @default(false)
-  canDelete Boolean @default(false)
-  canAdmin  Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
@@ -58,13 +54,8 @@ model Teacher {
   username  String   @default("FOO")
   email     String
   password  String
-  isTeacher Boolean
-  canCreate Boolean  @default(true)
-  canUpdate Boolean  @default(true)
-  canDelete Boolean @default(true)
   role      String   @default("TEACHER")
   createdAt DateTime @default(now())
-  canAdmin  Boolean  @default(false)
   updatedAt DateTime @updatedAt
 }
 
@@ -75,12 +66,7 @@ model Admin {
   username  String   @default("FOO")
   email     String
   password  String
-  isTeacher Boolean
-  canCreate Boolean  @default(true)
-  canUpdate Boolean  @default(true)
-  canDelete Boolean @default(true)
   role      String   @default("ADMIN")
-  canAdmin  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
