@@ -103,7 +103,7 @@ export const createBookFn = async (
       publisher,
       categoryId: newCategoryForBook.id,
       authorId: authorForBook.id
-    } as any, // TODO: Fix this later
+    }
   });
 
   return res.json(newBook);
