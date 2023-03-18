@@ -10,8 +10,15 @@ import teacherRoutes from "./routes/teacherRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import adminRoutes from "./routes/adminRoutes";
+import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
+import errorHandler from "errorhandler";
+
 export const app: Application = express();
+
+if (process.env.NODE_ENV === "development") {
+  app.use(errorHandler());
+}
 
 app.use(
   cors({
@@ -20,7 +27,7 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(compression());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(helmet());
