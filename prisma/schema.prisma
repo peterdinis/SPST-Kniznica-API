@@ -24,6 +24,8 @@ model Book {
   quantity    Int       @default(0)
   categoryId  Int       @default(1)
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  authorId    Int       
+  Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Borrowed    Booking[]
 }
 
@@ -81,7 +83,7 @@ model Booking {
 }
 
 model Author {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
   lastName    String
   picture     String?
@@ -90,4 +92,5 @@ model Author {
   country     String
   description String
   litPeriod   String
+  books       Book[]
 }
