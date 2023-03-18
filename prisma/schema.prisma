@@ -16,7 +16,6 @@ model Book {
   name        String
   description String
   image       String
-  author      String
   status      String
   publisher   String    @default("Mlade Léta")
   pages       Int

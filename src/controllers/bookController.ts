@@ -60,13 +60,13 @@ export const createBookFn = async (
     name,
     description,
     image,
-    author,
     status,
     pages,
     year,
     quantity,
     publisher,
     categoryId,
+    authorId
   } = req.body;
 
   const newCategoryForBook = await db.category.findUnique({
@@ -75,9 +75,20 @@ export const createBookFn = async (
     },
   });
 
+  const authorForBook = await db.book.findUnique({
+    where: {
+      id: authorId as unknown as number,
+    }
+  })
+
   if (!newCategoryForBook) {
     res.status(404);
     throw new Error("Category not found");
+  }
+
+  if(!authorForBook) {
+    res.status(404);
+    throw new Error("Author not found");
   }
 
   const newBook = await db.book.create({
@@ -85,14 +96,14 @@ export const createBookFn = async (
       name,
       description,
       image,
-      author,
       status,
       pages,
       year,
       quantity,
       publisher,
       categoryId: newCategoryForBook.id,
-    },
+      authorId: authorForBook.id
+    } as any, // TODO: Fix this later
   });
 
   return res.json(newBook);

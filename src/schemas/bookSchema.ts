@@ -13,10 +13,6 @@ export const createBookSchema = z.object({
         required_error: "Image is required"
     }),
 
-    author: z.string({
-        required_error: "Author is required"
-    }),
-
     publisher: z.string({
         required_error: "Publisher is required"
     }),
@@ -41,6 +37,10 @@ export const createBookSchema = z.object({
 
     categoryId: z.number({
         description: "Category ID must be defined"
+    }),
+
+    authorId: z.number({
+        description: "Author ID must be defined"
     })
 })
 
