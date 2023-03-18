@@ -10,7 +10,7 @@ import teacherRoutes from "./routes/teacherRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import adminRoutes from "./routes/adminRoutes";
-
+import authorRoutes from "./routes/authorRoutes";
 export const app: Application = express();
 
 app.use(
@@ -35,6 +35,7 @@ app.use(teacherRoutes);
 app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
+app.use(authorRoutes);
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
