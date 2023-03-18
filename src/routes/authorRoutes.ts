@@ -4,6 +4,6 @@ import { findAllPaginatedAuthors, getAllAuthors } from "../controllers/authorCon
 const router = express.Router();
 
 router.get("/authors", getAllAuthors)
-router.get("/author/search", findAllPaginatedAuthors);
+router.get("/authors/search", findAllPaginatedAuthors);
 
 export default router;
