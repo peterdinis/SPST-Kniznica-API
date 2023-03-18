@@ -79,3 +79,14 @@ model Booking {
   bookId   Int
   Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
+
+model Author {
+  id          Int    @id @default(autoincrement())
+  name        String
+  lastName    String
+  birthYear   Int
+  deathYear   Int?
+  country     String
+  description String
+  litPeriod   String
+}
