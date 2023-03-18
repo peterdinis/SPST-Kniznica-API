@@ -1,5 +1,5 @@
 import { AccessControl } from "accesscontrol";
-import { ADMIN, STUDENT, TEACHER } from "../constants/roleConstants";
+import { ADMIN, STUDENT, TEACHER } from "./roleConstants";
 
 const ac = new AccessControl();
 

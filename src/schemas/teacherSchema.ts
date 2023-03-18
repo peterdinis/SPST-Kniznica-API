@@ -37,3 +37,4 @@ export const loginTeacherSchema = z.object({
 
 export type createTeacherRegisterType = z.infer<typeof registerTeacherSchema>;
 export type createTeacherLoginType = z.infer<typeof loginTeacherSchema>;
+export type updateStudentType = Partial<z.infer<typeof registerTeacherSchema>>;
