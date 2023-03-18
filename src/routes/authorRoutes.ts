@@ -1,8 +1,9 @@
 import express from "express";
-import { getAllAuthors } from "../controllers/authorController";
+import { findAllPaginatedAuthors, getAllAuthors } from "../controllers/authorController";
 
 const router = express.Router();
 
 router.get("/authors", getAllAuthors)
+router.get("/author/search", findAllPaginatedAuthors);
 
 export default router;
