@@ -84,6 +84,7 @@ model Author {
   id          Int    @id @default(autoincrement())
   name        String
   lastName    String
+  picture     String?
   birthYear   Int
   deathYear   Int?
   country     String
