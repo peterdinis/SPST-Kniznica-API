@@ -1,3 +1,5 @@
 import {z} from "zod";
 
-export const createAdminAuthor = z.object({});
+export const createAuthor = z.object({});
+
+export type createAuthorType = z.infer<typeof createAuthor>;
