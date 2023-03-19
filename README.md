@@ -10,3 +10,4 @@
 - Express
 - Postgresql
 - Prisma
+- Docker(later)
