@@ -102,7 +102,7 @@ export const createBookFn = async (
       quantity,
       publisher,
       categoryId: newCategoryForBook.id,
-      authorId: authorForBook.id
+      authorId: authorForBook.id,
     }
   });
 

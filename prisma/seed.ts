@@ -4,4 +4,4 @@ const prisma = new PrismaClient()
 
 const bookData: Prisma.BookCreateInput[] = [];
 const categoryData: Prisma.CategoryCreateInput[] = [];
-const exampleAdminUser = [];
+const authorData: Prisma.AuthorCreateInput[] = [];
