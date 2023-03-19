@@ -2,6 +2,7 @@ import db from "../db";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
+import { createAuthorType } from "../schemas/authorSchema";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -18,3 +19,13 @@ export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
   });
   return res.json(allPaginatedAuthors);
 };
+
+export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: Response) => {
+  const createNewAuthor = await db.author.create({
+    data: {
+      ...req.body
+    }
+  })
+
+  return res.json(createNewAuthor);
+}
