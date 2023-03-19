@@ -7,6 +7,20 @@ export const getAllImages = async (req: Request, res: Response) => {
     return res.json(allImages);
 }
 
+export const getOneImage = async (req: Request, res: Response) => {
+    const oneImage = await db.image.findFirst({
+        where: {
+            id: req.params.id as unknown as number,
+        }
+    })
+
+    if(!oneImage) {
+        return res.status(404).json("Image not found");
+    }
+
+    return res.json(oneImage);
+}
+
 export const uploadImage = async (req: any, res: Response) => {
     const imageName = req.file.filename;
     const description = req.body.description;
