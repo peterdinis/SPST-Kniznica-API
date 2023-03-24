@@ -7,7 +7,7 @@ RUN npm cache clean --force
 RUN npm install
 COPY . .
 
-EXPOSE 3000
+EXPOSE 8111
 
 # CMD npm start
 CMD [ "node", "server.js" ]
