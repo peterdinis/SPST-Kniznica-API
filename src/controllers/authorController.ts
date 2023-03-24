@@ -12,6 +12,21 @@ export const getAllAuthors = async (req: Request, res: Response) => {
   return res.json(allAuthors);
 };
 
+export const getOneAuthor = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const oneAuthor = await db.author.findFirst({
+    where: {
+      id: Number(id)
+    },
+  })
+
+  if(!oneAuthor) {
+    throw new Error("No author found");
+  }
+
+  return res.json(oneAuthor);
+}
+
 export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
   const allPaginatedAuthors = await paginate.book.paginate({
     page: Number(req.query.page) as unknown as number,

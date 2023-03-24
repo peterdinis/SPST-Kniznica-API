@@ -1,9 +1,10 @@
 import express from "express";
-import { createAuthor, findAllPaginatedAuthors, getAllAuthors } from "../controllers/authorController";
+import { createAuthor, findAllPaginatedAuthors, getAllAuthors, getOneAuthor } from "../controllers/authorController";
 
 const router = express.Router();
 
-router.get("/authors", getAllAuthors)
+router.get("/authors", getAllAuthors);
+router.get("/author/:id", getOneAuthor);
 router.get("/authors/search", findAllPaginatedAuthors);
 router.post("/authors", createAuthor);
 
