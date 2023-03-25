@@ -3,14 +3,14 @@ const prisma = new PrismaClient()
 async function main() {
   const newCategory = await prisma.category.create({
     data: {
-        name: "Name",
+        name: "Name1",
         description: "Description"
     }
   })
 
   const newAuthor = await prisma.author.create({
     data: {
-        name: "Name",
+        name: "Name1",
         birthYear: 2001,
         country: "Slovakia",
         description: "ROROROROR",
@@ -23,11 +23,16 @@ async function main() {
     data: {
         name: "Name",
         description: "Description",
-        image: "https://picsum.photos/200/300"
+        image: "https://picsum.photos/200/300",
+        pages: 20202,
+        status: "Dostupná",
+        authorId: 1,
+        categoryId: 3,
+        year: 2020
     }
   })
 
-  console.log(newCategory, newAuthor);
+  console.log(newCategory, newAuthor, newBook);
 }
 main()
   .then(async () => {
