@@ -4,7 +4,7 @@ import { createAuthor, findAllPaginatedAuthors, getAllAuthors, getOneAuthor } fr
 const router = express.Router();
 
 router.get("/authors", getAllAuthors);
-router.get("/author/:id", getOneAuthor);
+router.get("/authors/:id", getOneAuthor);
 router.get("/authors/search", findAllPaginatedAuthors);
 router.post("/authors", createAuthor);
 
