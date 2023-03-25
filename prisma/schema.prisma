@@ -42,6 +42,7 @@ model Student {
   username  String   @default("FOO")
   email     String
   password  String
+  picture   String?
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
