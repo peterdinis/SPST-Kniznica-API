@@ -7,6 +7,8 @@ import {
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import * as nodemailer from "nodemailer";
+import * as Mailgen from "mailgen";
 
 export const getAllStudents = async (req: Request, res: Response) => {
   const displayAllStudents = await db.student.findMany();
@@ -58,6 +60,8 @@ export const studentRegister = async (
         password: passwordHash,
       },
     });
+
+    /* TODO: Send confirm email abou registration  */
 
     return res.status(201).json(createNewStudent);
   } catch (err) {
