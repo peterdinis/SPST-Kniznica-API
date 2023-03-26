@@ -13,10 +13,9 @@ export const getAllAuthors = async (req: Request, res: Response) => {
 };
 
 export const getOneAuthor = async (req: Request, res: Response) => {
-  const {id} = req.params;
   const oneAuthor = await db.author.findFirst({
     where: {
-      id: Number(id)
+      id: req.params.id as unknown as number,
     },
   })
 
@@ -28,7 +27,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
 }
 
 export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
-  const allPaginatedAuthors = await paginate.book.paginate({
+  const allPaginatedAuthors = await paginate.author.paginate({
     page: Number(req.query.page) as unknown as number,
     limit: Number(req.query.limit) as unknown as number,
   });
