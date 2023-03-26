@@ -13,7 +13,6 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
-import imageRoutes from "./routes/imageRoutes";
 import multer from "multer";
 
 export const upload = multer({
@@ -49,7 +48,6 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
-app.use(imageRoutes);
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
