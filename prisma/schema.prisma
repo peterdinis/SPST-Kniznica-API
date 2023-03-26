@@ -94,9 +94,3 @@ model Author {
   litPeriod   String
   books       Book[]
 }
-
-model Image {
-  id          Int     @id @default(autoincrement())
-  filename String
-  description String
-}
