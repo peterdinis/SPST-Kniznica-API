@@ -7,7 +7,7 @@ services:
     restart: always
     build: .
     ports:
-      - ${PORT}:${PORT}
+      - 5432:5432
     depends_on:
       - db
     volumes:
@@ -17,7 +17,7 @@ services:
     container_name: postgres
     image: postgres
     ports:
-      - '5432:${DB_PORT}'
+      - '5432:5432'
     volumes:
       - data:/data/db
     environment:
