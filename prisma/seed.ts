@@ -31,8 +31,12 @@ async function main() {
         year: 2020
     }
   })
+  
+  const newStudent = await prisma.student.create({});
 
-  console.log(newCategory, newAuthor, newBook);
+  const newTeacher = await prisma.teacher.create({});
+
+  const newAdmin = await prisma.admin.create({});
 }
 main()
   .then(async () => {
