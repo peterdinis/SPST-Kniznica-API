@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
 import { createAuthorType } from "../schemas/authorSchema";
+import { number, unknown } from "zod";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -13,9 +14,10 @@ export const getAllAuthors = async (req: Request, res: Response) => {
 };
 
 export const getOneAuthor = async (req: Request, res: Response) => {
+  const {id} = req.params;
   const oneAuthor = await db.author.findFirst({
     where: {
-      id: req.params.id as unknown as number,
+      id: Number(id),
     },
   })
 
