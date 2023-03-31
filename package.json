@@ -9,8 +9,8 @@
     "dev": "nodemon --config nodemon.json ./src/server.ts",
     "test": "mocha --timeout 10000 -r ts-node/register ./src/tests/**/*.spec.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["API", "NodeJs", "Typescript", "Prisma", "PostgreSQL"],
+  "author": "Peter Dinis",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.11.0",

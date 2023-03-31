@@ -32,11 +32,23 @@ async function main() {
     }
   })
   
-  const newStudent = await prisma.student.create({});
+  const newStudent = await prisma.student.create({
+    data: {
 
-  const newTeacher = await prisma.teacher.create({});
+    }
+  });
 
-  const newAdmin = await prisma.admin.create({});
+  const newTeacher = await prisma.teacher.create({
+    data: {
+
+    }
+  });
+
+  const newAdmin = await prisma.admin.create({
+    data: {
+      
+    }
+  });
 }
 main()
   .then(async () => {
