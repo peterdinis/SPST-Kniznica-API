@@ -13,9 +13,17 @@ export const getAllAuthors = async (req: Request, res: Response) => {
   return res.json(allAuthors);
 };
 
+export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
+  const allPaginatedAuthors = await paginate.author.paginate({
+    page: Number(req.query.page) as unknown as number,
+    limit: Number(req.query.limit) as unknown as number,
+  });
+  return res.json(allPaginatedAuthors);
+};
+
 export const getOneAuthor = async (req: Request, res: Response) => {
   const {id} = req.params;
-  const oneAuthor = await db.author.findFirst({
+  const oneAuthor = await db.author.findUnique({
     where: {
       id: Number(id),
     },
@@ -28,13 +36,6 @@ export const getOneAuthor = async (req: Request, res: Response) => {
   return res.json(oneAuthor);
 }
 
-export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
-  const allPaginatedAuthors = await paginate.author.paginate({
-    page: Number(req.query.page) as unknown as number,
-    limit: Number(req.query.limit) as unknown as number,
-  });
-  return res.json(allPaginatedAuthors);
-};
 
 export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: Response) => {
   const createNewAuthor = await db.author.create({
