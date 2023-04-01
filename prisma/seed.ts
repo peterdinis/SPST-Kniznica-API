@@ -1,5 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
+
 const prisma = new PrismaClient()
+
 async function main() {
   const newCategory = await prisma.category.create({
     data: {
@@ -66,6 +68,8 @@ async function main() {
       username: "testAdmin"
     }
   });
+
+  console.log(newBook, newCategory, newAuthor, newAdmin, newTeacher, newStudent)
 }
 main()
   .then(async () => {
