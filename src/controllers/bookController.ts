@@ -31,8 +31,25 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   if (!oneBook) {
     throw new Error("Book not found");
   }
+ 
+  console.log(oneBook);
 
-  return res.json(oneBook);
+  const findAuthor = await db.author.findUnique({
+    where: {
+      id: oneBook.authorId
+    }
+  })
+
+  const findCategory = await db.category.findUnique({
+    where: {
+      id: oneBook.categoryId
+    }
+  })
+  return res.json({
+    book: oneBook,
+    author: findAuthor,
+    category: findCategory
+  });
 };
 
 export const searchBook = async (req: Request, res: Response) => {
