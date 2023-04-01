@@ -1,26 +1,18 @@
-version: '3.8'
+
+version: "3.9"
+
 services:
-  api:
-    container_name: spst_container
-    restart: always
+  db:
+    image: "spst_api_container"
+    ports:
+      - "2345:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD:  ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+  server:
     build: .
     ports:
-      - 5432:5432
-    depends_on:
-      - db
-    volumes:
-    - .:/usr/src/app
-
-  db:
-    container_name: postgres
-    image: postgres
-    ports:
-      - '5432:5432'
-    volumes:
-      - data:/data/db
+      - "8111:8111"
     environment:
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-
-volumes: 
- data: {}
+      DATABASE_URL: ${DATABASE_URL}
