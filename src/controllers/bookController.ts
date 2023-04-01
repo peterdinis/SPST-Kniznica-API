@@ -31,8 +31,6 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   if (!oneBook) {
     throw new Error("Book not found");
   }
- 
-  console.log(oneBook);
 
   const findAuthor = await db.author.findUnique({
     where: {
