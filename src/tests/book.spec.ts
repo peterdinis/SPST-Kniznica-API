@@ -19,12 +19,13 @@ describe("Get all books", () => {
 
 describe("Get book info", () => {
     it("GET /book/:id", (done) => {
-        const getAllBooksRequest = chai.request(app)
-        .get("/books")
+        chai.request(app)
+        .get("/books/1")
         .end((err, response) => {
             expect(response).to.have.status(200);
             expect(response).to.have.property("body")
             done();
         })
+
     })
 })
