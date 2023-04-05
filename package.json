@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node ./dist/server.js",
     "seeder": "ts-node prisma/seed.ts",
-    "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "mocha --timeout 10000 -r ts-node/register ./src/tests/**/*.spec.ts"
+    "dev": "nodemon --config nodemon.json ./src/server.ts"
   },
   "keywords": ["API", "NodeJs", "Typescript", "Prisma", "PostgreSQL"],
   "author": "Peter Dinis",
