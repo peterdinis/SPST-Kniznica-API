@@ -15,6 +15,6 @@ router.get("/booking/paginate", findAllPaginatedBooking);
 router.get("/booking/:id", bookingInfo);
 router.get("/me/booking/:username", getMyBooking);
 router.post("/booking", createBooking);
-router.delete("/me/booking", returnBooking);
+router.delete("/me/booking/:bookId", returnBooking);
 
 export default router;

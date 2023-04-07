@@ -46,3 +46,11 @@ export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: 
 
   return res.json(createNewAuthor);
 }
+
+export const updateAuthor = async (req: Request, res: Response) => {
+  return;
+}
+
+export const deleteAuthor = async (req: Request, res: Response) => {
+  return;
+}

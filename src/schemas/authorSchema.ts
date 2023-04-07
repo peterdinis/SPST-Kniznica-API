@@ -35,3 +35,5 @@ export const createAuthor = z.object({
 });
 
 export type createAuthorType = z.infer<typeof createAuthor>;
+
+export type updateBookType = Partial<createAuthorType>;
