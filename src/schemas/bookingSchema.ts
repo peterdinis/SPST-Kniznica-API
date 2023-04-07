@@ -13,8 +13,8 @@ export const createBookingSchema = z.object({
         required_error: "Username is required"
     }),
 
-    bookName: z.string({
-        required_error: "BookName must be provided"
+    bookId: z.number({
+        required_error: "Book Id must be defined"
     })
 });
 
@@ -23,9 +23,9 @@ export const returnBookingSchema = z.object({
         required_error: "Username is required"
     }),
 
-    bookName: z.string({
-        required_error: "BookName must be provided"
-    })
+    bookId: z.number({
+        required_error: "Book Id must be defined"
+    }).optional() // TODO: Remove later optional
 });
 
 export type createBookingType = z.infer<typeof createBookingSchema>;

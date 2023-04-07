@@ -53,20 +53,20 @@ export const createBooking = async (
   req: Request<{}, {}, createBookingType>,
   res: Response
 ) => {
-  const { from, to, username, bookName } = req.body;
+  const { from, to, username, bookId } = req.body;
 
   const createNewBooking = await db.booking.create({
     data: {
       from,
       to,
       username,
-      bookName
+      bookId: Number(bookId)
     },
   });
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      name: bookName,
+      id: Number(bookId),
     }
   })
 
@@ -79,7 +79,7 @@ export const createBooking = async (
       status: NONAVAIABLE
     }
   })
-
+// TODO: Fix this later
 /*   try {
     const sent = await sendMail();
 
@@ -99,5 +99,15 @@ export const returnBooking = async (
   res: Response
 ) => {
 
-  return;
+  const {username} = req.body;
+
+  const myBooking = await db.booking.findMany({
+    where: {
+      username,
+    },
+  });
+
+  console.log(myBooking);
+
+  return res.json(myBooking);
 };
