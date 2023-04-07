@@ -29,8 +29,8 @@ const email = {
 const emailTemplate = mailGenerator.generate(email);
 
 const msg = {
-  to: "your-email@example.com",
-  from: "test@example.com",
+  to: "pdinis1@gmail.com",
+  from: "spst-kniznica@gmail.com",
   subject: "Test verification email",
   html: emailTemplate,
 };

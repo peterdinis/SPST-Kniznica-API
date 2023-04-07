@@ -4,6 +4,7 @@ import { createBookingType, returnBookingType } from "../schemas/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
+import { sendMail } from "../helpers/mailTemplate";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -80,6 +81,7 @@ export const createBooking = async (
     }
   })
 
+  await sendMail();
 
   return res.json({
     book: newBorrowedBook,
