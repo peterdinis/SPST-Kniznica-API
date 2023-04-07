@@ -8,11 +8,18 @@
     "seeder": "ts-node prisma/seed.ts",
     "dev": "nodemon --config nodemon.json ./src/server.ts"
   },
-  "keywords": ["API", "NodeJs", "Typescript", "Prisma", "PostgreSQL"],
+  "keywords": [
+    "API",
+    "NodeJs",
+    "Typescript",
+    "Prisma",
+    "PostgreSQL"
+  ],
   "author": "Peter Dinis",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.11.0",
+    "@sendgrid/mail": "^7.7.0",
     "accesscontrol": "^2.2.1",
     "bcrypt": "^5.1.0",
     "chai": "^4.3.7",

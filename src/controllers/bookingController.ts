@@ -52,11 +52,7 @@ export const createBooking = async (
   res: Response
 ) => {
   const { from, to, username, bookId } = req.body;
-  const findBookForBorrow = await db.booking.findUnique({
-    where: {
-      id: Number(bookId),
-    },
-  });
+
   const createNewBooking = await db.booking.create({
     data: {
       from,
@@ -77,7 +73,18 @@ export const createBooking = async (
   });
 
   // TODO: Add books names to return later not bookIds
-  return res.json(createNewBooking);
+
+  const newBorrowedBook = await db.book.findUnique({
+    where: {
+      id: Number(bookId),
+    }
+  })
+
+
+  return res.json({
+    book: newBorrowedBook,
+    booking: createNewBooking
+  });
 };
 
 /* TODO: Update this fn */
