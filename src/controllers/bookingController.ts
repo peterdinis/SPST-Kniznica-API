@@ -5,6 +5,7 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { sendMail } from "../helpers/mailTemplate";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -73,15 +74,21 @@ export const createBooking = async (
     },
   });
 
-  // TODO: Add books names to return later not bookIds
-
   const newBorrowedBook = await db.book.findUnique({
     where: {
       id: Number(bookId),
     }
   })
 
-  await sendMail();
+  try {
+    const sent = await sendMail();
+
+    if(sent) {
+      console.log("Emaail was send")
+    }
+  } catch(err) {
+    getErrorMessage(err);
+  }
 
   return res.json({
     book: newBorrowedBook,
