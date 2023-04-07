@@ -13,8 +13,8 @@ export const createBookingSchema = z.object({
         required_error: "Username is required"
     }),
 
-    bookId: z.number({
-        required_error: "Must be integer"
+    bookName: z.string({
+        required_error: "BookName must be provided"
     })
 });
 
@@ -23,8 +23,8 @@ export const returnBookingSchema = z.object({
         required_error: "Username is required"
     }),
 
-    bookId: z.number({
-        required_error: "Must be integer"
+    bookName: z.string({
+        required_error: "BookName must be provided"
     })
 });
 

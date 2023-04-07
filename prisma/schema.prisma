@@ -11,10 +11,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// TODO: Update this later 
 model Book {
   id          Int       @id @default(autoincrement())
-  name        String
+  name        String    @unique
   description String
   image       String
   status      String
@@ -79,8 +78,8 @@ model Booking {
   from     String
   to       String
   username String @default("FOO")
-  bookId   Int
-  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  bookName String
+  Book     Book   @relation(fields: [bookName], references: [name], onDelete: Cascade)
 }
 
 model Author {

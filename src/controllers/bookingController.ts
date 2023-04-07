@@ -53,33 +53,16 @@ export const createBooking = async (
   req: Request<{}, {}, createBookingType>,
   res: Response
 ) => {
-  const { from, to, username, bookId } = req.body;
+  const { from, to, username, bookName } = req.body;
 
   const createNewBooking = await db.booking.create({
     data: {
       from,
       to,
       username,
-      bookId: Number(bookId),
+      bookName
     },
   });
-
-  await db.book.update({
-    where: {
-      id: Number(bookId),
-    },
-
-    data: {
-      status: NONAVAIABLE,
-    },
-  });
-
-  const newBorrowedBook = await db.book.findUnique({
-    where: {
-      id: Number(bookId),
-    }
-  })
-
   try {
     const sent = await sendMail();
 
@@ -91,7 +74,6 @@ export const createBooking = async (
   }
 
   return res.json({
-    book: newBorrowedBook,
     booking: createNewBooking
   });
 };
@@ -101,43 +83,7 @@ export const returnBooking = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
-  const { username, bookId } = req.body;
+  const { username, bookName } = req.body;
 
-  const findExistingUser = await db.student.findFirst({
-    where: {
-      username,
-    },
-  });
-
-  if (!findExistingUser) {
-    return res.status(404).json("Student not found");
-  }
-
-  const findBorrowedBook = await db.booking.findFirst({
-    where: {
-      bookId,
-    },
-  });
-
-  if (!findBorrowedBook) {
-    res.status(404).json("Borrowed Book not found");
-  }
-
-  const returnBorrowedBook = await db.booking.delete({
-    where: {
-      id: findBorrowedBook!.bookId,
-    },
-  });
-
-  await db.book.update({
-    where: {
-      id: findBorrowedBook!.bookId,
-    },
-
-    data: {
-      status: AVAIABLE,
-    },
-  });
-
-  return res.status(200).json(returnBorrowedBook);
+  return;
 };
