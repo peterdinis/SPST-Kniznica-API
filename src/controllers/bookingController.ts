@@ -101,7 +101,7 @@ export const returnBooking = async (
 
   const {username} = req.body;
 
-  const myBooking = await db.booking.findMany({
+  const myBooking = await db.booking.findFirst({
     where: {
       username,
     },
