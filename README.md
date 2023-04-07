@@ -11,3 +11,4 @@
 - Postgresql
 - Prisma
 - Docker(later)
+- Sengrid/Mailgen for sending emails
