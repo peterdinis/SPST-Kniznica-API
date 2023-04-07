@@ -63,7 +63,24 @@ export const createBooking = async (
       bookName
     },
   });
-  try {
+
+  const findExistingBook = await db.book.findFirst({
+    where: {
+      name: bookName,
+    }
+  })
+
+  await db.book.update({
+    where: {
+      id: findExistingBook!.id
+    },
+
+    data: {
+      status: NONAVAIABLE
+    }
+  })
+
+/*   try {
     const sent = await sendMail();
 
     if(sent) {
@@ -71,11 +88,9 @@ export const createBooking = async (
     }
   } catch(err) {
     getErrorMessage(err);
-  }
+  } */
 
-  return res.json({
-    booking: createNewBooking
-  });
+  return res.json(createNewBooking);
 };
 
 /* TODO: Update this fn */
@@ -83,7 +98,6 @@ export const returnBooking = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
-  const { username, bookName } = req.body;
 
   return;
 };

@@ -29,7 +29,7 @@ async function main() {
         pages: 20202,
         status: "Dostupná",
         authorId: 1,
-        categoryId: 3,
+        categoryId: 1,
         year: 2020
     }
   })
