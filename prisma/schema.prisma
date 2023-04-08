@@ -13,8 +13,8 @@ datasource db {
 
 model Book {
   id          Int       @id @default(autoincrement())
-  externalId  String?    @default(uuid())
-  name        String    
+  externalId  String?   @default(uuid())
+  name        String
   description String
   image       String
   status      String
@@ -24,13 +24,13 @@ model Book {
   quantity    Int       @default(1)
   categoryId  Int       @default(1)
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  authorId    Int       
+  authorId    Int
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Borrowed    Booking[]
 }
 
 model Category {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   externalId  String? @default(uuid())
   name        String
   description String
@@ -52,42 +52,48 @@ model Student {
 }
 
 model Teacher {
-  id        Int      @id @default(autoincrement())
-  name      String   @default("FOO")
-  lastName  String   @default("FOO")
-  username  String   @default("FOO")
-  email     String
-  password  String
-  role      String   @default("TEACHER")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  name            String   @default("FOO")
+  lastName        String   @default("FOO")
+  username        String   @default("FOO")
+  email           String
+  password        String
+  role            String   @default("TEACHER")
+  hasPermToCreate Boolean  @default(true)
+  hasPermToDelete Boolean  @default(true)
+  hasPermToUpdate Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Admin {
-  id        Int      @id @default(autoincrement())
-  name      String   @default("FOO")
-  lastName  String   @default("FOO")
-  username  String   @default("FOO")
-  email     String
-  password  String
-  role      String   @default("ADMIN")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  name            String   @default("FOO")
+  lastName        String   @default("FOO")
+  username        String   @default("FOO")
+  email           String
+  password        String
+  hasPermToCreate Boolean  @default(true)
+  hasPermToDelete Boolean  @default(true)
+  hasPermToUpdate Boolean  @default(true)
+  role            String   @default("ADMIN")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Booking {
-  id       Int    @id @default(autoincrement())
-  externalId  String?    @default(uuid())
-  from     String
-  to       String
-  username String @default("FOO")
-  bookId   Int
-  Book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id         Int     @id @default(autoincrement())
+  externalId String? @default(uuid())
+  from       String
+  to         String
+  username   String  @default("FOO")
+  bookId     Int
+  Book       Book    @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
 
 model Author {
   id          Int     @id @default(autoincrement())
-  externalId  String?    @default(uuid())
+  externalId  String? @default(uuid())
   name        String
   lastName    String
   picture     String?
@@ -100,7 +106,7 @@ model Author {
 }
 
 model Image {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   filename  String
   path      String
   createdAt DateTime @default(now())
