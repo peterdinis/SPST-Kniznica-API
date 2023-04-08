@@ -99,15 +99,24 @@ export const returnBooking = async (
   res: Response
 ) => {
 
-  const {username} = req.body;
+  const {username, bookId} = req.body;
 
   const myBooking = await db.booking.findFirst({
     where: {
-      username,
+      bookId,
+      username
     },
   });
 
-  console.log(myBooking);
+  if(!myBooking) {
+    return res.status(404).json("Not found update later")
+  }
 
-  return res.json(myBooking);
+  const removeBookFromBooking = await db.booking.delete({
+    where: {
+      id: myBooking.id
+    }
+  })
+
+  return res.json(removeBookFromBooking);
 };
