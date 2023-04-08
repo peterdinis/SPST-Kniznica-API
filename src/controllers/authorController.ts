@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
 import { createAuthorType } from "../schemas/authorSchema";
-import { number, unknown } from "zod";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);

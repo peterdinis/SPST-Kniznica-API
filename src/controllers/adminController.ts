@@ -21,11 +21,3 @@ export const loginAdmin = (req: Request, res: Response) => {
 export const adminProfile = (req: Request, res: Response) => {
     return;
 }
-
-export const changePermissionToTeacher = (req: Request, res: Response) => {
-    return;
-}
-
-export const removeTeacherPermission = (req: Request, res: Response) => {
-    return;
-}

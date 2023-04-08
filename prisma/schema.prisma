@@ -62,6 +62,7 @@ model Teacher {
   hasPermToCreate Boolean  @default(true)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
+  canSeeBooking   Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
@@ -76,6 +77,7 @@ model Admin {
   hasPermToCreate Boolean  @default(true)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
+  canSeeBookings  Boolean @default(true)
   role            String   @default("ADMIN")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
