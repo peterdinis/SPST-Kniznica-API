@@ -98,3 +98,10 @@ model Author {
   litPeriod   String
   books       Book[]
 }
+
+model Image {
+  id          Int     @id @default(autoincrement())
+  originalname String
+  mimetype     String
+  filename    String
+}
