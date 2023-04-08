@@ -118,5 +118,15 @@ export const returnBooking = async (
     }
   })
 
+  await db.book.update({
+    where: {
+      id: myBooking.bookId
+    },
+
+    data: {
+      status: AVAIABLE
+    }
+  })
+
   return res.json(removeBookFromBooking);
 };
