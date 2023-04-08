@@ -5,9 +5,9 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { sendMail } from "../helpers/mailTemplate";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
+
 const paginate = paginator(prisma);
 
 export const getAllBooking = async (req: Request, res: Response) => {
@@ -60,35 +60,31 @@ export const createBooking = async (
       from,
       to,
       username,
-      bookId: Number(bookId)
+      bookId: Number(bookId),
     },
   });
 
   const findExistingBook = await db.book.findFirst({
     where: {
       id: Number(bookId),
-    }
-  })
+    },
+  });
 
   await db.book.update({
     where: {
-      id: findExistingBook!.id
+      id: findExistingBook!.id,
     },
 
     data: {
-      status: NONAVAIABLE
-    }
-  })
-// TODO: Fix this later
-/*   try {
-    const sent = await sendMail();
+      status: NONAVAIABLE,
+    },
+  });
+  // TODO: Fix this later
+  const sent = await sendMail();
 
-    if(sent) {
-      console.log("Emaail was send")
-    }
-  } catch(err) {
-    getErrorMessage(err);
-  } */
+  if (sent) {
+    console.log("Emaail was send");
+  }
 
   return res.json(createNewBooking);
 };
@@ -98,35 +94,41 @@ export const returnBooking = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
-
-  const {username, bookId} = req.body;
+  const { username, bookId } = req.body;
 
   const myBooking = await db.booking.findFirst({
     where: {
       bookId,
-      username
+      username,
     },
   });
 
-  if(!myBooking) {
-    return res.status(404).json("Not found update later")
+  if (!myBooking) {
+    return res.status(404).json("Not found update later");
   }
 
   const removeBookFromBooking = await db.booking.delete({
     where: {
-      id: myBooking.id
-    }
-  })
+      id: myBooking.id,
+    },
+  });
 
-  await db.book.update({
+  const updateBookAfterBooking = await db.book.update({
     where: {
-      id: myBooking.bookId
+      id: myBooking.bookId,
     },
 
     data: {
-      status: AVAIABLE
-    }
-  })
+      status: AVAIABLE,
+    },
+  });
+
+  await db.message.create({
+    data: {
+      name: "Vrátenie knihy",
+      description: `User ${username} vrátil knihu ${updateBookAfterBooking.name}`,
+    },
+  });
 
   return res.json(removeBookFromBooking);
 };
