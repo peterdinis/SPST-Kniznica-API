@@ -9,9 +9,6 @@ import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import * as nodemailer from "nodemailer";
 import * as Mailgen from "mailgen";
-import multer from 'multer';
-
-const upload = multer({ dest: 'uploads/' });
 
 export const getAllStudents = async (req: Request, res: Response) => {
   const displayAllStudents = await db.student.findMany();
