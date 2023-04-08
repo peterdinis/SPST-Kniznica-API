@@ -13,10 +13,9 @@ const storage = multer.diskStorage({
 
 export const upload = multer({ storage });
 
-interface UploadedFile {
+interface IFile {
   originalname: string;
-  mimetype: string;
-  filename: string;
+  path: string;
 }
 
 export const uploadImageForStudent = async (req: Request, res: Response) => {
@@ -32,16 +31,17 @@ export const uploadImageForStudent = async (req: Request, res: Response) => {
     return res.status(404).json("Student not found");
   }
 
-  const file = req.file as UploadedFile;
-  const { originalname, mimetype, filename } = file;
+  const file = req.file as IFile;
 
-  const image = await db.image.create({
+  // Save the file to the database using Prisma
+  const savedFile = await db.image.create({
     data: {
-      originalname,
-      filename: `/uploads/${filename}`,
-      mimetype,
+      filename: file.originalname,
+      path: file.path,
     },
   });
+
+  console.log(savedFile);
 
   const addNewImage = await db.student.update({
     where: {
@@ -49,12 +49,12 @@ export const uploadImageForStudent = async (req: Request, res: Response) => {
     },
 
     data: {
-      picture: image.filename
+      picture: file.originalname
     }
   })
 
   return res.json({
-    image,
+    file,
     addNewImage
   })
 };
