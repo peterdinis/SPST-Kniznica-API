@@ -38,7 +38,7 @@ export const bookingInfo = async (req: Request, res: Response) => {
   return res.json(bookInfo);
 };
 
-export const getMyBooking = async (req: Request, res: Response) => {
+export const getStudentBooking = async (req: Request, res: Response) => {
   const { username } = req.params;
   const myBooking = await db.booking.findMany({
     where: {
@@ -89,8 +89,7 @@ export const createBooking = async (
   return res.json(createNewBooking);
 };
 
-/* TODO: Update this fn */
-export const returnBooking = async (
+export const studentReturnBook = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
@@ -132,3 +131,11 @@ export const returnBooking = async (
 
   return res.json(removeBookFromBooking);
 };
+
+export const getTeacherBorrowedBooks = (req: Request, res: Response) => {
+  return;
+}
+
+export const teacherReturnBook = (req: Request, res: Response) => {
+  return;
+}
