@@ -102,3 +102,8 @@ export const adminProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+
+export const changeTeacherRole = async (req: Request, res: Response) => {
+    return;
+}

@@ -1,4 +1,4 @@
-import express, { Application} from "express";
+import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import exampleRoute from "./routes/exampleRoute";
@@ -14,11 +14,8 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import imageRoutes from "./routes/imageRoutes";
-import multer from "multer";
-
-export const upload = multer({
-  dest: "images/"
-})
+import {createServer} from "http";
+import {Server, Socket} from "socket.io";
 
 export const app: Application = express();
 
@@ -50,6 +47,20 @@ app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
 app.use(imageRoutes);
+
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket: Socket) => {
+  console.log("We are live and connected");
+  console.log(socket.id);
+});
+
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
