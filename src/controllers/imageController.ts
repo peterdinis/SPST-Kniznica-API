@@ -1,17 +1,5 @@
 import { Request, Response } from "express";
-import multer from "multer";
 import db from "../db";
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-export const upload = multer({ storage });
 
 interface IFile {
   originalname: string;

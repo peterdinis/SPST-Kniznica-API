@@ -17,6 +17,22 @@ export const getAllAdminMessages = async (req: Request, res: Response) => {
   return res.json(allAdminMesages);
 };
 
+export const getOneMessage = async (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  const findOneMessageById = await db.message.findFirst({
+    where: {
+      id: Number(id),
+    }
+  })
+
+  if(!findOneMessageById) {
+    return res.status(404).json("Message does not exists with this id");
+  }
+
+  return findOneMessageById;
+}
+
 export const registerAdmin = async (
   req: Request<{}, {}, createAdminRegisterType>,
   res: Response
