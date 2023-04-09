@@ -21,7 +21,6 @@ export const uploadImageForStudent = async (req: Request, res: Response) => {
 
   const file = req.file as IFile;
 
-  // Save the file to the database using Prisma
   const savedFile = await db.image.create({
     data: {
       filename: file.originalname,

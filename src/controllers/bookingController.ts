@@ -4,7 +4,6 @@ import { createBookingType, returnBookingType } from "../validators/bookingSchem
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
-import { sendMail } from "../helpers/mailTemplate";
 
 const prisma = new PrismaClient();
 
@@ -79,12 +78,6 @@ export const createBooking = async (
       status: NONAVAIABLE,
     },
   });
-  // TODO: Fix this later
-  const sent = await sendMail();
-
-  if (sent) {
-    console.log("Emaail was send");
-  }
 
   return res.json(createNewBooking);
 };
