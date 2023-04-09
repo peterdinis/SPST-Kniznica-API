@@ -1,5 +1,6 @@
 import express from "express";
-import { upload, uploadImageForStudent } from "../controllers/imageController";
+import { uploadImageForStudent } from "../controllers/imageController";
+import { upload } from "../helpers/multer";
 
 const router = express.Router();
 
