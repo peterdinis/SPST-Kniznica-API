@@ -2,7 +2,7 @@ import db from "../db";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
-import { createAuthorType } from "../schemas/authorSchema";
+import { createAuthorType } from "../validators/authorSchema";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);

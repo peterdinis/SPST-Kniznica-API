@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { createCategoryType } from "../schemas/categorySchema";
+import { createCategoryType } from "../validators/categorySchema";
 
 export const displayAllCategoriesFn = async (req: Request, res: Response) => {
   const allCategories = await db.category.findMany({

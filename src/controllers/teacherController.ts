@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { createTeacherRegisterType, createTeacherLoginType } from "../schemas/teacherSchema";
+import { createTeacherRegisterType, createTeacherLoginType } from "../validators/teacherSchema";
 import bcrypt from "bcrypt";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import jwt from "jsonwebtoken";

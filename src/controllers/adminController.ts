@@ -6,7 +6,7 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import {
   createAdminRegisterType,
   createAdminLoginType,
-} from "../schemas/adminSchema";
+} from "../validators/adminSchema";
 
 export const adminExample = (req: Request, res: Response) => {
   return res.send("Admin example route");

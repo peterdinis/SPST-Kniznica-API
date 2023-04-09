@@ -3,7 +3,7 @@ import db from "../db";
 import {
   createStudentLoginType,
   createStudentRegisterType,
-} from "../schemas/studentSchema";
+} from "../validators/studentSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";

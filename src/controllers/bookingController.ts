@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { createBookingType, returnBookingType } from "../schemas/bookingSchema";
+import { createBookingType, returnBookingType } from "../validators/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
