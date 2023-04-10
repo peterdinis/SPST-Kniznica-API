@@ -16,6 +16,7 @@ import errorHandler from "errorhandler";
 import imageRoutes from "./routes/imageRoutes";
 import {createServer} from "http";
 import {Server, Socket} from "socket.io";
+import { SocketServer } from "./SocketServer";
 
 export const app: Application = express();
 
@@ -57,8 +58,7 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket: Socket) => {
-  console.log("We are live and connected");
-  console.log(socket.id);
+  SocketServer(socket);
 });
 
 
