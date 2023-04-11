@@ -1,4 +1,4 @@
-## SPST API
+## SPST API - Application Status Development!!
 
 - api for spst library project
 
