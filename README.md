@@ -1,7 +1,7 @@
 ## SPST API
 
 - api for spst library project
-- important .env variables are in .env.local
+- create .env file and copy variables from .env.local
 
 ## Technologies
 
