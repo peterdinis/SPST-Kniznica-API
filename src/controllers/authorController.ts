@@ -55,5 +55,18 @@ export const deleteAuthor = async (req: Request, res: Response) => {
 }
 
 export const searchAuthor = async(req: Request, res: Response) => {
-  return;
+  const authors = await db.author.findMany({
+     where: {
+      name: {
+        contains: String(req.query.q),
+      }
+     }
+  });
+
+  if(!authors) {
+    res.status(404);
+    throw new Error("Authors not found");
+  }
+
+  return res.json(authors);
 }

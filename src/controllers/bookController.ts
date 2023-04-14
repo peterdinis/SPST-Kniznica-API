@@ -61,7 +61,7 @@ export const searchBook = async (req: Request, res: Response) => {
 
   if (!books) {
     res.status(404);
-    throw new Error("Book not found");
+    throw new Error("Books not found");
   }
 
   return res.json(books);
