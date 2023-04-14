@@ -53,3 +53,7 @@ export const updateAuthor = async (req: Request, res: Response) => {
 export const deleteAuthor = async (req: Request, res: Response) => {
   return;
 }
+
+export const searchAuthor = async(req: Request, res: Response) => {
+  return;
+}
