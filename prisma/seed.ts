@@ -69,7 +69,16 @@ async function main() {
     }
   });
 
-  console.log(newBook, newCategory, newAuthor, newAdmin, newTeacher, newStudent)
+
+  const newNotification = await prisma.notification.create({
+    data: {
+      content: "ororororororo",
+      email: "testStudent@gmail.com",
+      isRead: true,
+      text: "Create new booking"
+    }
+  })
+  console.log(newBook, newCategory, newAuthor, newAdmin, newTeacher, newStudent, newNotification);
 }
 main()
   .then(async () => {
