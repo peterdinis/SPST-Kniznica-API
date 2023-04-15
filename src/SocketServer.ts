@@ -8,8 +8,7 @@ type IUser = {
 };
 
 let users: Array<IUser>;
-let id = Math.random.toString();
-let socketId = Math.random().toString();
+let helperId = Math.random().toString();
 
 export const SocketServer = (socket: Socket) => {
   socket.on("connection", (socket: Socket) => {
@@ -17,10 +16,10 @@ export const SocketServer = (socket: Socket) => {
 
     socket.on("joinUser", (user: IUser) => {
       users.push({
-        id,
+        id: helperId,
         name: user.name,
         email: user.email,
-        socketId,
+        socketId: helperId,
       });
     });
 
