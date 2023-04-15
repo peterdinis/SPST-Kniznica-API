@@ -118,5 +118,5 @@ model Notification {
   text    String
   content String
   isRead  Boolean
-  email String
+  email   String
 }
