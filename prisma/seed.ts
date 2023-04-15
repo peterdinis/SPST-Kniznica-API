@@ -77,7 +77,8 @@ async function main() {
       isRead: true,
       text: "Create new booking"
     }
-  })
+  });
+
   console.log(newBook, newCategory, newAuthor, newAdmin, newTeacher, newStudent, newNotification);
 }
 main()
