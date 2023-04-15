@@ -97,3 +97,15 @@ export const teacherProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const getMyNotifications = async (req: Request, res: Response) => {
+  return;
+}
+
+export const readNotification = async (req: Request, res: Response) => {
+  return;
+}
+
+export const removeNotification = async (req: Request, res: Response) => {
+  return;
+}
