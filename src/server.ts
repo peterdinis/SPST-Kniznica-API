@@ -13,6 +13,7 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
+import notificationRoutes from "./routes/notificationRoutes";
 import {createServer} from "http";
 import {Server, Socket} from "socket.io";
 import { SocketServer } from "./SocketServer";
@@ -46,6 +47,7 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
+app.use(notificationRoutes);
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
