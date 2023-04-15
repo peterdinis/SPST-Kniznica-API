@@ -117,6 +117,6 @@ model Notification {
   id      Int     @id @default(autoincrement())
   text    String
   content String
-  isRead  Boolean
+  isRead  Boolean @default(false)
   username String
 }
