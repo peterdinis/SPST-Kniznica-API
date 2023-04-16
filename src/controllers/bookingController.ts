@@ -96,7 +96,7 @@ export const studentReturnBook = async (
   });
 
   if (!myBooking) {
-    return res.status(404).json("Not found update later");
+    return res.status(404).json("User not found");
   }
 
   const removeBookFromBooking = await db.booking.delete({
@@ -118,15 +118,22 @@ export const studentReturnBook = async (
   await db.message.create({
     data: {
       name: "Vrátenie knihy",
-      description: `User ${username} vrátil knihu ${updateBookAfterBooking.name}`,
+      description: `Študent ${username} vrátil knihu ${updateBookAfterBooking.name}`,
     },
   });
 
   return res.json(removeBookFromBooking);
 };
 
-export const getTeacherBorrowedBooks = (req: Request, res: Response) => {
-  return;
+export const getTeacherBorrowedBooks = async (req: Request, res: Response) => {
+  const { username } = req.params;
+  const myBooking = await db.booking.findMany({
+    where: {
+      username,
+    },
+  });
+
+  return res.json(myBooking);
 }
 
 export const teacherReturnBook = (req: Request, res: Response) => {

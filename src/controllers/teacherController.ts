@@ -99,13 +99,77 @@ export const teacherProfile = async (req: Request, res: Response) => {
 };
 
 export const getMyNotifications = async (req: Request, res: Response) => {
-  return;
+  const {username} = req.params;
+  const findMyNotifications = await db.notification.findMany({
+    where: {
+      username
+    }
+  })
+
+  return res.json(findMyNotifications);
 }
 
 export const readNotification = async (req: Request, res: Response) => {
-  return;
+  const {id, username} = req.params;
+
+  const findNotification = await db.notification.findFirst({
+    where: {
+      id:  Number(id),
+      username
+    }
+  })
+
+  if(!findNotification) {
+    res.status(404);
+    throw new Error(`Notification not found`);
+  }
+
+  const readNotification = await db.notification.update({
+    where: {
+      id: Number(id)
+    },
+
+    data: {
+      isRead: true
+    }
+  })
+
+  return readNotification;
 }
 
 export const removeNotification = async (req: Request, res: Response) => {
-  return;
+  const {id, username} = req.params;
+
+  const findNotification = await db.notification.findFirst({
+    where: {
+      id:  Number(id),
+      username
+    }
+  })
+
+  if(!findNotification) {
+    res.status(404);
+    throw new Error(`Notification not found`);
+  }
+ 
+
+  const removeNotification = await db.notification.delete({
+    where: {
+      id: findNotification.id
+    }
+  });
+
+  return res.json(removeNotification);
+}
+
+export const removeAllNotifications = async(req: Request, res: Response) => {
+  const {username} = req.params;
+
+  const removeNotifications = await db.notification.deleteMany({
+    where: {
+      username
+    }
+  });
+
+  return res.json(removeNotifications);
 }
