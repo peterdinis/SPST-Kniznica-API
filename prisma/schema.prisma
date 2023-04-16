@@ -119,5 +119,4 @@ model Notification {
   content String
   isRead  Boolean @default(false)
   username String
-  count    Int @default(0)
 }
