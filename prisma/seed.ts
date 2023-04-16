@@ -1,6 +1,15 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt, { hash } from "bcrypt";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
+
+const studentPassword = "testPassword";
+const teacherPassword = "testTeacherPassword";
+const adminPassword = "testAdminPassword"
+
+const hashedStudentPassword = bcrypt.hash(studentPassword, 12);
+const hashedTeacherPassword = bcrypt.hash(teacherPassword, 12);
+const hashedAdminPassword = bcrypt.hash(adminPassword, 12);
 
 async function main() {
   const newCategory = await prisma.category.create({
@@ -37,7 +46,7 @@ async function main() {
   const newStudent = await prisma.student.create({
     data: {
       email: "testStudent@gmail.com",
-      password: "testPassword",
+      password: hashedStudentPassword as unknown as string,
       classRoom: "1.A",
       lastName: "RRRR",
       username: "TestStudent",
@@ -50,7 +59,7 @@ async function main() {
   const newTeacher = await prisma.teacher.create({
     data: {
       email: "testTeacher@gmail.com",
-      password: "testPassword",
+      password: hashedTeacherPassword as unknown as string,
       lastName: "Test",
       name: "Tester",
       username: "TestTeacher",
@@ -61,7 +70,7 @@ async function main() {
   const newAdmin = await prisma.admin.create({
     data: {
       email: "testAdmin@gmail.com",
-      password: "testPassword",
+      password: hashedAdminPassword as unknown as string,
       name: "Admin",
       lastName: "TestAdmin",
       role: "ADMIN",
@@ -73,7 +82,7 @@ async function main() {
   const newNotification = await prisma.notification.create({
     data: {
       content: "ororororororo",
-      email: "testStudent@gmail.com",
+      username: "TestStudent",
       isRead: true,
       text: "Create new booking"
     }
