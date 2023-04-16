@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import { ADMIN, STUDENT, TEACHER } from '../src/constants/roleConstants';
 
 const prisma = new PrismaClient();
