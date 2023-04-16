@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt, { hash } from "bcrypt";
+import { ADMIN, STUDENT, TEACHER } from '../src/constants/roleConstants';
 
 const prisma = new PrismaClient();
 
@@ -51,7 +52,7 @@ async function main() {
       lastName: "RRRR",
       username: "TestStudent",
       name: "RIRIRIR",
-      role: "STUDENT",
+      role: STUDENT,
       picture: null
     }
   });
@@ -63,7 +64,7 @@ async function main() {
       lastName: "Test",
       name: "Tester",
       username: "TestTeacher",
-      role: "TEACHER"
+      role: TEACHER,
     }
   });
 
@@ -73,7 +74,7 @@ async function main() {
       password: hashedAdminPassword as unknown as string,
       name: "Admin",
       lastName: "TestAdmin",
-      role: "ADMIN",
+      role: ADMIN,
       username: "testAdmin"
     }
   });
@@ -88,7 +89,14 @@ async function main() {
     }
   });
 
-  console.log(newBook, newCategory, newAuthor, newAdmin, newTeacher, newStudent, newNotification);
+  const newMessage = await prisma.message.create({
+    data: {
+      description: "Custom description",
+      name: "Custom Name"
+    }
+  })
+
+  console.log(newBook, newCategory, newAuthor, newAdmin, newMessage, newTeacher, newStudent, newNotification);
 }
 main()
   .then(async () => {
