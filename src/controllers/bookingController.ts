@@ -37,7 +37,7 @@ export const bookingInfo = async (req: Request, res: Response) => {
   return res.json(bookInfo);
 };
 
-export const getStudentBooking = async (req: Request, res: Response) => {
+export const getMyBorrowedBooks= async (req: Request, res: Response) => {
   const { username } = req.params;
   const myBooking = await db.booking.findMany({
     where: {
@@ -82,7 +82,7 @@ export const createBooking = async (
   return res.json(createNewBooking);
 };
 
-export const studentReturnBook = async (
+export const returnBook = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
@@ -124,18 +124,3 @@ export const studentReturnBook = async (
 
   return res.json(removeBookFromBooking);
 };
-
-export const getTeacherBorrowedBooks = async (req: Request, res: Response) => {
-  const { username } = req.params;
-  const myBooking = await db.booking.findMany({
-    where: {
-      username,
-    },
-  });
-
-  return res.json(myBooking);
-}
-
-export const teacherReturnBook = (req: Request, res: Response) => {
-  return;
-}

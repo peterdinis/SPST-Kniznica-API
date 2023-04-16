@@ -4,10 +4,8 @@ import {
   createBooking,
   findAllPaginatedBooking,
   getAllBooking,
-  getStudentBooking,
-  getTeacherBorrowedBooks,
-  studentReturnBook,
-  teacherReturnBook,
+  getMyBorrowedBooks,
+  returnBook,
 } from "../controllers/bookingController";
 
 const router = express.Router();
@@ -15,10 +13,8 @@ const router = express.Router();
 router.get("/bookings", getAllBooking);
 router.get("/booking/paginate", findAllPaginatedBooking);
 router.get("/booking/:id", bookingInfo);
-router.get("/student/booking/:username", getStudentBooking);
-router.get("/teacher/booking/:username", getTeacherBorrowedBooks);
+router.get("/student/booking/:username", getMyBorrowedBooks);
 router.post("/booking", createBooking);
-router.delete("/student/booking/return", studentReturnBook);
-router.delete("/teacher/booking/return", teacherReturnBook);
+router.delete("/student/booking/return", returnBook);
 
 export default router;
