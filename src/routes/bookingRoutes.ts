@@ -13,8 +13,8 @@ const router = express.Router();
 router.get("/bookings", getAllBooking);
 router.get("/booking/paginate", findAllPaginatedBooking);
 router.get("/booking/:id", bookingInfo);
-router.get("/student/booking/:username", getMyBorrowedBooks);
+router.get("/booking/:username", getMyBorrowedBooks);
 router.post("/booking", createBooking);
-router.delete("/student/booking/return", returnBook);
+router.delete("/booking/return", returnBook);
 
 export default router;
