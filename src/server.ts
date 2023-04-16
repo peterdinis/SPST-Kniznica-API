@@ -14,6 +14,7 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import notificationRoutes from "./routes/notificationRoutes";
+import messageRoutes from "./routes/messageRoutes";
 import {createServer} from "http";
 import {Server, Socket} from "socket.io";
 import { SocketServer } from "./SocketServer";
@@ -48,6 +49,7 @@ app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
 app.use(notificationRoutes);
+app.use(messageRoutes);
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {

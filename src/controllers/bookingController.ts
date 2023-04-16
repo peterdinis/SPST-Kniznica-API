@@ -118,7 +118,7 @@ export const returnBook = async (
   await db.message.create({
     data: {
       name: "Vrátenie knihy",
-      description: `Študent ${username} vrátil knihu ${updateBookAfterBooking.name}`,
+      description: `Používateľ ${username} vrátil knihu ${updateBookAfterBooking.name}`,
     },
   });
 
