@@ -1,4 +1,4 @@
-export type IUser = {
+export interface IUser {
     id: string;
     socketId: string;
     name: string;
