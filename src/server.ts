@@ -40,6 +40,8 @@ dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
 
+// TODO: Fix me!!!
+/* 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
@@ -52,7 +54,7 @@ const io = new Server(httpServer, {
 io.on("connection", (socket: Socket) => {
   SocketServer(socket);
 });
-
+ */
 
 app.use(exampleRoute);
 app.use(bookRoutes);
