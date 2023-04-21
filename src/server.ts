@@ -40,6 +40,20 @@ dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
 
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: "*",
+    allowedHeaders: "*"
+  },
+});
+
+io.on("connection", (socket: Socket) => {
+  SocketServer(socket);
+});
+
+
 app.use(exampleRoute);
 app.use(bookRoutes);
 app.use(categoryRoutes);
@@ -50,19 +64,6 @@ app.use(adminRoutes);
 app.use(authorRoutes);
 app.use(notificationRoutes);
 app.use(messageRoutes);
-
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-});
-
-io.on("connection", (socket: Socket) => {
-  SocketServer(socket);
-});
-
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
