@@ -1,11 +1,7 @@
 import { Socket } from "socket.io";
+import { IUser } from "./interfaces/IUser";
 
-type IUser = {
-  id: string;
-  socketId: string;
-  name: string;
-  email: string;
-};
+
 
 let users: Array<IUser>;
 let helperId = Math.random().toString();
