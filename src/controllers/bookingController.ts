@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { createBookingType, returnBookingType } from "../validators/bookingSchema";
+import {
+  createBookingType,
+  returnBookingType,
+} from "../validators/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
@@ -37,7 +40,7 @@ export const bookingInfo = async (req: Request, res: Response) => {
   return res.json(bookInfo);
 };
 
-export const getMyBorrowedBooks= async (req: Request, res: Response) => {
+export const getMyBorrowedBooks = async (req: Request, res: Response) => {
   const { username } = req.params;
   const myBooking = await db.booking.findMany({
     where: {
@@ -59,13 +62,13 @@ export const createBooking = async (
       from,
       to,
       username,
-      bookExternalId
+      bookExternalId,
     },
   });
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      externalId: bookExternalId
+      externalId: bookExternalId,
     },
   });
 
@@ -96,7 +99,7 @@ export const returnBook = async (
   });
 
   if (!myBooking) {
-    return res.status(404).json("User not found");
+    return res.status(404).json("Booking not found");
   }
 
   const removeBookFromBooking = await db.booking.delete({
@@ -105,9 +108,15 @@ export const returnBook = async (
     },
   });
 
+  const findExistingBook = await db.book.findFirst({
+    where: {
+      externalId: bookExternalId,
+    },
+  });
+
   const updateBookAfterBooking = await db.book.update({
     where: {
-      id: myBooking.id,
+      id: findExistingBook!.id,
     },
 
     data: {
