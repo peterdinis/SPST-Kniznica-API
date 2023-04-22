@@ -13,8 +13,8 @@ export const createBookingSchema = z.object({
         required_error: "Username is required"
     }),
 
-    bookId: z.number({
-        required_error: "Book Id must be defined"
+    bookExternalId: z.number({
+        required_error: "BookExternalId must be defined"
     })
 });
 
@@ -24,7 +24,7 @@ export const returnBookingSchema = z.object({
     }),
 
     bookId: z.number({
-        required_error: "Book Id must be defined"
+        required_error: "BookExternalId must be defined"
     }).optional() // TODO: Remove later optional
 });
 
