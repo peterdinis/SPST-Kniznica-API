@@ -47,11 +47,38 @@ export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: 
 }
 
 export const updateAuthor = async (req: Request, res: Response) => {
-  return;
+  const {id} = req.params;
+  const authorForUpdate = await db.author.update({
+    where: {
+      id: Number(id)
+    },
+
+    data: {
+      ...req.body
+    }
+  })
+
+  if(!authorForUpdate) {
+    throw new Error("No author found");
+  }
+
+  return res.json(authorForUpdate);
 }
 
 export const deleteAuthor = async (req: Request, res: Response) => {
-  return;
+  const {id} = req.params;
+
+  const authorForDelete = await db.author.delete({
+    where: {
+      id: Number(id)
+    }
+  })
+
+  if(!authorForDelete) {
+    throw new Error("Author not found")
+  }
+
+  return res.json(authorForDelete);
 }
 
 export const searchAuthor = async(req: Request, res: Response) => {

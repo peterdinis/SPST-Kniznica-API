@@ -22,6 +22,10 @@ export const getMessageInfo = async (req: Request, res: Response) => {
   return res.json(findMessage);
 };
 
+export const updateMessage = async (req: Request, res: Response) => {
+  return;
+}
+
 export const deleteMessage = async (req: Request, res: Response) => {
   const { id } = req.params;
 

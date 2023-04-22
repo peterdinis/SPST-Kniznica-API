@@ -82,15 +82,15 @@ export const updateCategory = async (req: Request, res: Response) => {
 
 export const deleteCategory = async (req: Request, res: Response) => {
   const {id} = req.params;
-  const category = await db.category.delete({
+  const categoryForDelete = await db.category.delete({
     where: {
       id: Number(id),
     }
   })
 
-  if(!category) {
+  if(!categoryForDelete) {
     throw new Error("Category not found");
   }
 
-  return res.json(category);
+  return res.json(categoryForDelete);
 }
