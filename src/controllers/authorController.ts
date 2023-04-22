@@ -21,10 +21,10 @@ export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
 };
 
 export const getOneAuthor = async (req: Request, res: Response) => {
-  const {id} = req.params;
-  const oneAuthor = await db.author.findUnique({
+  const {externalId} = req.params;
+  const oneAuthor = await db.author.findFirst({
     where: {
-      id: Number(id),
+      externalId
     },
   })
 

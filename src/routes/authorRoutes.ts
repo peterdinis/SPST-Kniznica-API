@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/authors", getAllAuthors);
 router.get("/authors/paginate", findAllPaginatedAuthors);
-router.get("/authors/:id", getOneAuthor);
+router.get("/authors/:externalId", getOneAuthor);
 router.get("/authors/search", searchAuthor);
 router.post("/authors", createAuthor);
 
