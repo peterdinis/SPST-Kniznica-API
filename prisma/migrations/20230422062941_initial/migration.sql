@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "Book" (
     "id" SERIAL NOT NULL,
+    "externalId" TEXT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE "Book" (
 -- CreateTable
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
+    "externalId" TEXT,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
 
@@ -50,6 +52,10 @@ CREATE TABLE "Teacher" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" TEXT NOT NULL DEFAULT 'TEACHER',
+    "hasPermToCreate" BOOLEAN NOT NULL DEFAULT true,
+    "hasPermToDelete" BOOLEAN NOT NULL DEFAULT true,
+    "hasPermToUpdate" BOOLEAN NOT NULL DEFAULT true,
+    "canSeeBooking" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -64,6 +70,10 @@ CREATE TABLE "Admin" (
     "username" TEXT NOT NULL DEFAULT 'FOO',
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
+    "hasPermToCreate" BOOLEAN NOT NULL DEFAULT true,
+    "hasPermToDelete" BOOLEAN NOT NULL DEFAULT true,
+    "hasPermToUpdate" BOOLEAN NOT NULL DEFAULT true,
+    "canSeeBookings" BOOLEAN NOT NULL DEFAULT true,
     "role" TEXT NOT NULL DEFAULT 'ADMIN',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -74,10 +84,11 @@ CREATE TABLE "Admin" (
 -- CreateTable
 CREATE TABLE "Booking" (
     "id" SERIAL NOT NULL,
+    "externalId" TEXT,
     "from" TEXT NOT NULL,
     "to" TEXT NOT NULL,
     "username" TEXT NOT NULL DEFAULT 'FOO',
-    "bookName" TEXT NOT NULL,
+    "bookId" INTEGER NOT NULL,
 
     CONSTRAINT "Booking_pkey" PRIMARY KEY ("id")
 );
@@ -85,6 +96,7 @@ CREATE TABLE "Booking" (
 -- CreateTable
 CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
+    "externalId" TEXT,
     "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "picture" TEXT,
@@ -97,8 +109,25 @@ CREATE TABLE "Author" (
     CONSTRAINT "Author_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
-CREATE UNIQUE INDEX "Book_name_key" ON "Book"("name");
+-- CreateTable
+CREATE TABLE "Message" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Notification" (
+    "id" SERIAL NOT NULL,
+    "text" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "isRead" BOOLEAN NOT NULL DEFAULT false,
+    "username" TEXT NOT NULL,
+
+    CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
+);
 
 -- AddForeignKey
 ALTER TABLE "Book" ADD CONSTRAINT "Book_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -107,4 +136,4 @@ ALTER TABLE "Book" ADD CONSTRAINT "Book_categoryId_fkey" FOREIGN KEY ("categoryI
 ALTER TABLE "Book" ADD CONSTRAINT "Book_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "Author"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Booking" ADD CONSTRAINT "Booking_bookName_fkey" FOREIGN KEY ("bookName") REFERENCES "Book"("name") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Booking" ADD CONSTRAINT "Booking_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE CASCADE ON UPDATE CASCADE;

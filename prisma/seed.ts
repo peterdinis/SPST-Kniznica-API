@@ -1,16 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
 import { ADMIN, STUDENT, TEACHER } from "../src/constants/roleConstants";
 
 const prisma = new PrismaClient();
-
-const studentPassword = "testPassword";
-const teacherPassword = "testTeacherPassword";
-const adminPassword = "testAdminPassword";
-
-const hashedStudentPassword = bcrypt.hash(studentPassword, 12);
-const hashedTeacherPassword = bcrypt.hash(teacherPassword, 12);
-const hashedAdminPassword = bcrypt.hash(adminPassword, 12);
 
 async function main() {
   const newCategory = await prisma.category.create({
@@ -78,7 +69,7 @@ async function main() {
   const newStudent = await prisma.student.create({
     data: {
       email: "testStudent@gmail.com",
-      password: hashedStudentPassword as unknown as string,
+      password: "password",
       classRoom: "1.A",
       lastName: "RRRR",
       username: "TestStudent",
@@ -91,7 +82,7 @@ async function main() {
   const newTeacher = await prisma.teacher.create({
     data: {
       email: "testTeacher@gmail.com",
-      password: hashedTeacherPassword as unknown as string,
+      password: "password",
       lastName: "Test",
       name: "Tester",
       username: "TestTeacher",
@@ -102,7 +93,7 @@ async function main() {
   const newAdmin = await prisma.admin.create({
     data: {
       email: "testAdmin@gmail.com",
-      password: hashedAdminPassword as unknown as string,
+      password: "password",
       name: "Admin",
       lastName: "TestAdmin",
       role: ADMIN,
