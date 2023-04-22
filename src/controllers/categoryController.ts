@@ -16,7 +16,7 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
 
   const oneCategoy = await db.category.findFirst({
   where: {
-      externalId
+      externalId: Number(externalId)
     },
     include: {
       Books: true,

@@ -24,7 +24,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
   const {externalId} = req.params;
   const oneAuthor = await db.author.findFirst({
     where: {
-      externalId
+      externalId: Number(externalId)
     },
   })
 

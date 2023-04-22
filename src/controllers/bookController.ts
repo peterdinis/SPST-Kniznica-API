@@ -24,7 +24,7 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   const { externalId } = req.params;
   const oneBook = await db.book.findFirst({
     where: {
-      externalId
+      externalId: Number(externalId)
     },
   });
 
