@@ -12,11 +12,11 @@ export const displayAllCategoriesFn = async (req: Request, res: Response) => {
 };
 
 export const categoryDetailsFn = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { externalId } = req.params;
 
   const oneCategoy = await db.category.findFirst({
-    where: {
-      id: Number(id),
+  where: {
+      externalId
     },
     include: {
       Books: true,

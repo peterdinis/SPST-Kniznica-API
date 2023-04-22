@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.get("/categories", displayAllCategoriesFn);
-router.get("/category/:id", categoryDetailsFn);
+router.get("/category/:externalId", categoryDetailsFn);
 router.post("/category", createCategoryFn);
 router.get("/category/search", searchCategory);
 

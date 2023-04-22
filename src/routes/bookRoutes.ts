@@ -16,7 +16,7 @@ router.get("/books/paginate", findAllPaginatedBooks);
 router.get("/book/:externalId", displayOneBookFn);
 router.get("/books/search", searchBook);
 router.post("/books", createBookFn);
-router.patch("/book/:externalIdd", updateBookFn);
-router.delete("/book/:externalId", deleteBookFn);
+router.patch("/book/:id", updateBookFn);
+router.delete("/book/:id", deleteBookFn);
 
 export default router;
