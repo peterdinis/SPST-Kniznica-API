@@ -21,10 +21,10 @@ export const findAllPaginatedBooks = async (req: Request, res: Response) => {
 };
 
 export const displayOneBookFn = async (req: Request, res: Response) => {
-  const { id } = req.params;
+  const { externalId } = req.params;
   const oneBook = await db.book.findFirst({
     where: {
-      id: Number(id),
+      externalId
     },
   });
 

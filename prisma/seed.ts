@@ -1,13 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import { ADMIN, STUDENT, TEACHER } from "../src/constants/roleConstants";
+import uuid = require('uuid');
 
 const prisma = new PrismaClient();
+let uuidv4: string = uuid.v4();
 
 async function main() {
   const newCategory = await prisma.category.create({
     data: {
       name: "Name1",
-      externalId: Math.random().toString(),
+      externalId: uuidv4,
       description: "Description",
     },
   });
@@ -15,7 +17,7 @@ async function main() {
   const newAuthor = await prisma.author.create({
     data: {
       name: "Name1",
-      externalId: Math.random().toString(),
+      externalId: uuidv4,
       birthYear: 2001,
       country: "Slovakia",
       description: "ROROROROR",
@@ -27,7 +29,7 @@ async function main() {
   const newBook = await prisma.book.create({
     data: {
       name: "Name",
-      externalId: Math.random().toString(),
+      externalId: uuidv4,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -41,7 +43,7 @@ async function main() {
   const secondBook = await prisma.book.create({
     data: {
       name: "Name1",
-      externalId: Math.random().toString(),
+      externalId: uuidv4,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -55,7 +57,7 @@ async function main() {
   const thirdBook = await prisma.book.create({
     data: {
       name: "Name2",
-      externalId: Math.random().toString(),
+      externalId: uuidv4,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
