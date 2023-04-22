@@ -26,7 +26,7 @@ model Book {
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   authorId    Int
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  // Borrowed    Booking[]
+  Borrowed    Booking[]
 }
 
 model Category {
@@ -88,6 +88,8 @@ model Booking {
   from       String
   to         String
   username   String  @default("FOO")
+  bookExternalId Int
+  book       Book @relation(fields: [bookExternalId], references: [id], onDelete: Cascade)
 }
 
 model Author {
