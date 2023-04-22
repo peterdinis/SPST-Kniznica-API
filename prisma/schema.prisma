@@ -13,7 +13,7 @@ datasource db {
 
 model Book {
   id          Int       @id @default(autoincrement())
-  externalId  String    @default(uuid())
+  externalId  String    @default("1010")
   name        String
   description String
   image       String
@@ -31,7 +31,7 @@ model Book {
 
 model Category {
   id          Int     @id @default(autoincrement())
-  externalId  String  @default(uuid())
+  externalId  String  @default("10202")
   name        String
   description String
   Books       Book[]
@@ -95,7 +95,7 @@ model Booking {
 
 model Author {
   id          Int     @id @default(autoincrement())
-  externalId  String  @default(uuid())
+  externalId  String  @default("102038494")
   name        String
   lastName    String
   picture     String?
