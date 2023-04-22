@@ -22,8 +22,23 @@ export const getMessageInfo = async (req: Request, res: Response) => {
   return res.json(findMessage);
 };
 
-export const updateMessage = async (req: Request, res: Response) => {
-  return;
+export const updateMessageFn = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updateMessage = await db.message.update({
+    where: {
+      id: Number(id),
+    },
+
+    data: {
+      ...req.body
+    }
+  })
+
+  if(!updateMessage) {
+    throw new Error(`Message not found`);
+  }
+
+  return res.json(updateMessage);
 }
 
 export const deleteMessage = async (req: Request, res: Response) => {
