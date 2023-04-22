@@ -16,6 +16,7 @@ async function main() {
   const newCategory = await prisma.category.create({
     data: {
       name: "Name1",
+      externalId: Math.random().toString(),
       description: "Description",
     },
   });
@@ -23,6 +24,7 @@ async function main() {
   const newAuthor = await prisma.author.create({
     data: {
       name: "Name1",
+      externalId: Math.random().toString(),
       birthYear: 2001,
       country: "Slovakia",
       description: "ROROROROR",
@@ -34,6 +36,7 @@ async function main() {
   const newBook = await prisma.book.create({
     data: {
       name: "Name",
+      externalId: Math.random().toString(),
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -47,6 +50,7 @@ async function main() {
   const secondBook = await prisma.book.create({
     data: {
       name: "Name1",
+      externalId: Math.random().toString(),
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -60,6 +64,7 @@ async function main() {
   const thirdBook = await prisma.book.create({
     data: {
       name: "Name2",
+      externalId: Math.random().toString(),
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
