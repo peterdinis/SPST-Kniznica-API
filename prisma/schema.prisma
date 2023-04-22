@@ -13,7 +13,7 @@ datasource db {
 
 model Book {
   id          Int       @id @default(autoincrement())
-  externalId  String    @default("1010")
+  externalId  Int       @default(1000)
   name        String
   description String
   image       String
@@ -26,12 +26,12 @@ model Book {
   Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   authorId    Int
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  Borrowed    Booking[]
+  // Borrowed    Booking[]
 }
 
 model Category {
   id          Int     @id @default(autoincrement())
-  externalId  String  @default("10202")
+  externalId  Int     @default(2000)
   name        String
   description String
   Books       Book[]
@@ -85,17 +85,14 @@ model Admin {
 
 model Booking {
   id         Int     @id @default(autoincrement())
-  externalId String? @default(uuid())
   from       String
   to         String
   username   String  @default("FOO")
-  bookId     Int
-  Book       Book    @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
 
 model Author {
   id          Int     @id @default(autoincrement())
-  externalId  String  @default("102038494")
+  externalId  Int     @default(2020202)
   name        String
   lastName    String
   picture     String?
