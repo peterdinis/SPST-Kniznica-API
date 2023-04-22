@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Book" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL,
+    "externalId" TEXT NOT NULL DEFAULT '1010',
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE "Book" (
 -- CreateTable
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL,
+    "externalId" TEXT NOT NULL DEFAULT '10202',
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
 
@@ -96,7 +96,7 @@ CREATE TABLE "Booking" (
 -- CreateTable
 CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL,
+    "externalId" TEXT NOT NULL DEFAULT '102038494',
     "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "picture" TEXT,

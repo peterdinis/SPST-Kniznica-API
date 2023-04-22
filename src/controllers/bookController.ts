@@ -126,7 +126,7 @@ export const createBookFn = async (
 
 export const updateBookFn = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const oneBook = await db.book.update({
+  const  bookForUpdate = await db.book.update({
     where: {
       id: Number(id),
     },
@@ -136,11 +136,11 @@ export const updateBookFn = async (req: Request, res: Response) => {
     },
   });
 
-  if (!oneBook) {
+  if (! bookForUpdate) {
     throw new Error("Book not found");
   }
 
-  return res.json(oneBook);
+  return res.json( bookForUpdate);
 };
 
 export const deleteBookFn = async (req: Request, res: Response) => {

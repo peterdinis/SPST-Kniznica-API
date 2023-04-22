@@ -59,3 +59,38 @@ export const searchCategory = async (req: Request, res: Response) => {
 
   return res.json(categories);
 };
+
+
+export const updateCategory = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const categoryForUpdate = await db.category.update({
+    where: {
+      id: Number(id),
+    },
+
+    data: {
+      ...req.body
+    }
+  });
+
+  if(!categoryForUpdate) {
+    throw new Error("Category not found");
+  }
+
+  return res.json(categoryForUpdate);
+}
+
+export const deleteCategory = async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const category = await db.category.delete({
+    where: {
+      id: Number(id),
+    }
+  })
+
+  if(!category) {
+    throw new Error("Category not found");
+  }
+
+  return res.json(category);
+}
