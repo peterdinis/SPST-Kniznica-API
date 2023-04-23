@@ -1,5 +1,9 @@
-describe("Sample Test", () => {
-  it("should test that true === true", () => {
-    expect(true).toBe(true);
-  });
+import { app } from "../server";
+import request from "supertest";
+
+describe("Testing example endpoint", async () => {
+  const exampleRequest = await request(app).get("/example").expect(200);
+
+  const exampleResponse = exampleRequest.body;
+  expect(exampleResponse).toBe("OK");
 });
