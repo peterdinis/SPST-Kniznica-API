@@ -7,7 +7,7 @@
     "start": "node ./dist/server.js",
     "seeder": "ts-node prisma/seed.ts",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": ""
+    "test": "jest"
   },
   "keywords": [
     "API",
