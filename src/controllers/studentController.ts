@@ -33,7 +33,7 @@ export const studentRegister = async (
   res: Response
 ) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
     const salt = await bcrypt.genSalt();
 
     const existingUser = await db.student.findFirst({
@@ -58,6 +58,13 @@ export const studentRegister = async (
         password: passwordHash,
       },
     });
+
+    await db.message.create({
+      data: {
+        username,
+        description: "Registrácia prebehla úspešne"
+      }
+    })
 
     return res.status(201).json(createNewStudent);
   } catch (err) {

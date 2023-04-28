@@ -32,7 +32,7 @@ export const teacherRegister = async (
   res: Response
 ) => {
   try {
-    const { password } = req.body;
+    const { password, username } = req.body;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
@@ -42,6 +42,13 @@ export const teacherRegister = async (
         password: passwordHash
       } as any
     });
+
+    await db.message.create({
+      data: {
+        username,
+        description: "Registrácia prebehla úspešne"
+      }
+    })
 
     return res.json(createNewTeacher);
   } catch (err) {

@@ -22,8 +22,20 @@ export const getMessageInfo = async (req: Request, res: Response) => {
   return res.json(findMessage);
 };
 
-export const getAllMyMessages = (req: Request, res: Response) =>{
-  return;
+export const getAllMyMessages = async (req: Request, res: Response) =>{
+  const {username} = req.params;
+
+  const findAllMyMessages = await db.message.findMany({
+    where: {
+      username
+    }
+  });
+
+  if(!findAllMyMessages) {
+    return res.status(404).json("No messages found");
+  }
+
+  return findAllMyMessages;
 }
 
 export const updateMessageFn = async (req: Request, res: Response) => {
