@@ -6,12 +6,14 @@ import {
   getMessageInfo,
   updateMessageFn,
   deleteAllMyMessages,
+  getAllMyMessages,
 } from "../controllers/messageController";
 
 const router = express.Router();
 
 router.get("/messages", getAllMessages);
 router.get("/message/:id", getMessageInfo);
+router.get("/messages/me/:username", getAllMyMessages);
 router.patch("/update/message/:id", updateMessageFn);
 router.delete("/message/:id", deleteMessage);
 router.delete("/messages", deleteAllMessages);
