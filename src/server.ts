@@ -13,12 +13,7 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
-import notificationRoutes from "./routes/notificationRoutes";
 import messageRoutes from "./routes/messageRoutes";
-import {createServer} from "http";
-import {Server, Socket} from "socket.io";
-import { SocketServer } from "./SocketServer";
-
 export const app: Application = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -40,22 +35,6 @@ dotenv.config();
 
 const PORT = process.env.PORT as unknown as number;
 
-// TODO: Fix me!!!
-/* 
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "*",
-    methods: "*",
-    allowedHeaders: "*"
-  },
-});
-
-io.on("connection", (socket: Socket) => {
-  SocketServer(socket);
-});
- */
-
 app.use(exampleRoute);
 app.use(bookRoutes);
 app.use(categoryRoutes);
@@ -64,7 +43,6 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
-app.use(notificationRoutes);
 app.use(messageRoutes);
 
 app.listen(PORT, () => {
