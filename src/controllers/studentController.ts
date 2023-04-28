@@ -59,8 +59,6 @@ export const studentRegister = async (
       },
     });
 
-    /* TODO: Send confirm email abou registration  */
-
     return res.status(201).json(createNewStudent);
   } catch (err) {
     getErrorMessage(err);

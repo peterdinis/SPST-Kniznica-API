@@ -22,6 +22,10 @@ export const getMessageInfo = async (req: Request, res: Response) => {
   return res.json(findMessage);
 };
 
+export const getAllMyMessages = (req: Request, res: Response) =>{
+  return;
+}
+
 export const updateMessageFn = async (req: Request, res: Response) => {
   const { id } = req.params;
   const updateMessage = await db.message.update({
