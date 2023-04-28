@@ -64,5 +64,22 @@ export const deleteAllMessages = async (req: Request, res: Response) => {
 
 
 export const deleteAllMyMessages = async (req: Request, res: Response) => {
-  return;
+  const {username} = req.params;
+  const findAllMyMessages = await db.message.findMany({
+    where: {
+      username
+    }
+  })
+
+  if(!findAllMyMessages) {
+    return res.status(404).json("No messages found");
+  }
+
+  const deleteAllMessages = await db.message.deleteMany({
+    where: {
+      username
+    }
+  })
+
+  return res.json(deleteAllMessages);
 }
