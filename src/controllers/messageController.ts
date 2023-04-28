@@ -61,3 +61,8 @@ export const deleteAllMessages = async (req: Request, res: Response) => {
   const removeAllMessages = await db.message.deleteMany();
   return res.json(removeAllMessages);
 };
+
+
+export const deleteAllMyMessages = async (req: Request, res: Response) => {
+  return;
+}

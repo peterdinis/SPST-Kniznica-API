@@ -108,14 +108,6 @@ model Author {
 
 model Message {
   id          Int    @id @default(autoincrement())
-  name        String
   description String
-}
-
-model Notification {
-  id      Int     @id @default(autoincrement())
-  text    String
-  content String
-  isRead  Boolean @default(false)
-  username String
+  username    String @default("PING PONG")
 }
