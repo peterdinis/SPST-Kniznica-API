@@ -7,11 +7,13 @@ import {
   updateMessageFn,
   deleteAllMyMessages,
   getAllMyMessages,
+  allPaginatedMessagesFn,
 } from "../controllers/messageController";
 
 const router = express.Router();
 
 router.get("/messages", getAllMessages);
+router.get("/messages/paginate", allPaginatedMessagesFn)
 router.get("/message/:id", getMessageInfo);
 router.get("/messages/me/:username", getAllMyMessages);
 router.patch("/update/message/:id", updateMessageFn);

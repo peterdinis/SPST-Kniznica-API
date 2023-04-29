@@ -14,7 +14,7 @@ export const createBookingSchema = z.object({
     }),
 
     bookExternalId: z.number({
-        required_error: "BookExternalId must be defined"
+        required_error: "Book External Id must be defined"
     })
 });
 
@@ -24,8 +24,8 @@ export const returnBookingSchema = z.object({
     }),
 
     bookExternalId: z.number({
-        required_error: "BookExternalId must be defined"
-    }).optional() // TODO: Remove later optional
+        required_error: "Book External Id must be defined"
+    })
 });
 
 export type createBookingType = z.infer<typeof createBookingSchema>;

@@ -1,9 +1,23 @@
 import { Request, Response } from "express";
 import db from "../db";
+import paginator from "prisma-paginate";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+const paginate = paginator(prisma);
 
 export const getAllMessages = async (req: Request, res: Response) => {
   const allMessages = await db.message.findMany();
   return res.json(allMessages);
+};
+
+export const allPaginatedMessagesFn = async (req: Request, res: Response) => {
+  const allPaginatedMessages = await paginate.message.paginate({
+    page: Number(req.query.page) as unknown as number,
+    limit: Number(req.query.limit) as unknown as number,
+  });
+
+  return res.json(allPaginatedMessages);
 };
 
 export const getMessageInfo = async (req: Request, res: Response) => {
@@ -22,21 +36,21 @@ export const getMessageInfo = async (req: Request, res: Response) => {
   return res.json(findMessage);
 };
 
-export const getAllMyMessages = async (req: Request, res: Response) =>{
-  const {username} = req.params;
+export const getAllMyMessages = async (req: Request, res: Response) => {
+  const { username } = req.params;
 
   const findAllMyMessages = await db.message.findMany({
     where: {
-      username
-    }
+      username,
+    },
   });
 
-  if(!findAllMyMessages) {
+  if (!findAllMyMessages) {
     return res.status(404).json("No messages found");
   }
 
   return findAllMyMessages;
-}
+};
 
 export const updateMessageFn = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -46,16 +60,16 @@ export const updateMessageFn = async (req: Request, res: Response) => {
     },
 
     data: {
-      ...req.body
-    }
-  })
+      ...req.body,
+    },
+  });
 
-  if(!updateMessage) {
+  if (!updateMessage) {
     throw new Error(`Message not found`);
   }
 
   return res.json(updateMessage);
-}
+};
 
 export const deleteMessage = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -78,24 +92,23 @@ export const deleteAllMessages = async (req: Request, res: Response) => {
   return res.json(removeAllMessages);
 };
 
-
 export const deleteAllMyMessages = async (req: Request, res: Response) => {
-  const {username} = req.params;
+  const { username } = req.params;
   const findAllMyMessages = await db.message.findMany({
     where: {
-      username
-    }
-  })
+      username,
+    },
+  });
 
-  if(!findAllMyMessages) {
+  if (!findAllMyMessages) {
     return res.status(404).json("No messages found");
   }
 
   const deleteAllMessages = await db.message.deleteMany({
     where: {
-      username
-    }
-  })
+      username,
+    },
+  });
 
   return res.json(deleteAllMessages);
-}
+};
