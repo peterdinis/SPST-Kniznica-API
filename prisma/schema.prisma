@@ -106,3 +106,9 @@ model Author {
   litPeriod   String
   books       Book[]
 }
+
+model File {
+  id        Int      @id @default(autoincrement())
+  name      String
+  path      String
+}
