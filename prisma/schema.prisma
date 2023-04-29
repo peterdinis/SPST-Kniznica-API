@@ -75,6 +75,7 @@ model Admin {
   email           String
   password        String
   hasPermToCreate Boolean  @default(true)
+  specialCode     Int       @default(1000)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
   canSeeBookings  Boolean  @default(true)

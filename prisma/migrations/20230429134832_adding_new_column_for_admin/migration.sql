@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Admin" ADD COLUMN     "specialCode" INTEGER NOT NULL DEFAULT 1000;
