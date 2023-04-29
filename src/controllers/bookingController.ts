@@ -82,13 +82,6 @@ export const createBooking = async (
     },
   });
 
-  await db.message.create({
-    data: {
-      username,
-      description: "Kniha bola úspešne vypožičaná"
-    }
-  })
-
   return res.json(createNewBooking);
 };
 
@@ -128,13 +121,6 @@ export const returnBook = async (
 
     data: {
       status: AVAIABLE,
-    },
-  });
-
-  await db.message.create({
-    data: {
-      username,
-      description: `Používateľ ${username} vrátil knihu ${updateBookAfterBooking.name}`,
     },
   });
 

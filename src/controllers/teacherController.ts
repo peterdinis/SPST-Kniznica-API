@@ -43,13 +43,6 @@ export const teacherRegister = async (
       } as any
     });
 
-    await db.message.create({
-      data: {
-        username,
-        description: "Registrácia prebehla úspešne"
-      }
-    })
-
     return res.json(createNewTeacher);
   } catch (err) {
     getErrorMessage(err);

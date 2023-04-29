@@ -59,13 +59,6 @@ export const studentRegister = async (
       },
     });
 
-    await db.message.create({
-      data: {
-        username,
-        description: "Registrácia prebehla úspešne"
-      }
-    })
-
     return res.status(201).json(createNewStudent);
   } catch (err) {
     getErrorMessage(err);

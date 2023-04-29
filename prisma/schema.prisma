@@ -105,9 +105,3 @@ model Author {
   litPeriod   String
   books       Book[]
 }
-
-model Message {
-  id          Int    @id @default(autoincrement())
-  description String
-  username    String @default("PING PONG")
-}
