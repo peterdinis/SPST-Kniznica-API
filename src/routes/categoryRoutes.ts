@@ -14,7 +14,7 @@ router.get("/categories", displayAllCategoriesFn);
 router.get("/category/:externalId", categoryDetailsFn);
 router.post("/category", createCategoryFn);
 router.get("/category/search", searchCategory);
-router.patch("/book/:id",  updateCategory);
-router.delete("/book/:id", deleteCategory);
+router.patch("/category/:id",  updateCategory);
+router.delete("/category/:id", deleteCategory);
 
 export default router;
