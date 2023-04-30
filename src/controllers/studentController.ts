@@ -115,13 +115,17 @@ export const studentProfile = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: Request, res: Response) => {
   try { 
-    const { id } = req.params;
+    const { username } = req.params;
     const user = await db.student.findFirst({
-      where: { id: Number(id) },
+      where: {
+        username
+      }
     });
 
     const updateUser = await db.student.update({
-      where: { id: user!.id },
+      where:{
+        id: user!.id
+      },
       data: {
           ...req.body
       }
