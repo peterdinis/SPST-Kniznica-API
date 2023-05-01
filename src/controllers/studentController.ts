@@ -7,6 +7,7 @@ import {
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import axios from "axios";
 
 export const getAllStudents = async (req: Request, res: Response) => {
   const displayAllStudents = await db.student.findMany();
@@ -154,4 +155,9 @@ export const deleteProfile = async (req: Request, res: Response) => {
    } catch (err) {
     getErrorMessage(err);
    }
+}
+
+export const uploadProfile = async (req: Request, res: Response) => {
+   const {username} = req.params;
+
 }

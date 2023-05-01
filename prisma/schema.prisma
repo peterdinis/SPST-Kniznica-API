@@ -107,8 +107,9 @@ model Author {
   books       Book[]
 }
 
-model UploadedFile {
-  id  Int @id @default(autoincrement())
-  imageId Int
-  
+model File {
+  id        Int      @id @default(autoincrement())
+  externalId String  @default("1000")
+  name      String
+  path      String
 }
