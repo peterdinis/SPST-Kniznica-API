@@ -89,8 +89,8 @@ model Booking {
   from       String
   to         String
   username   String  @default("FOO")
-  bookExternalId Int
-  book       Book @relation(fields: [bookExternalId], references: [id], onDelete: Cascade)
+  bookId     Int
+  book       Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
 
 model Author {

@@ -55,20 +55,20 @@ export const createBooking = async (
   req: Request<{}, {}, createBookingType>,
   res: Response
 ) => {
-  const { from, to, username, bookExternalId } = req.body;
+  const { from, to, username, bookId } = req.body;
 
   const createNewBooking = await db.booking.create({
     data: {
       from,
       to,
       username,
-      bookExternalId,
+      bookId,
     },
   });
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      externalId: bookExternalId,
+      id: Number(bookId)
     },
   });
 
@@ -89,11 +89,11 @@ export const returnBook = async (
   req: Request<{}, {}, returnBookingType>,
   res: Response
 ) => {
-  const { username, bookExternalId } = req.body;
+  const { username, bookId } = req.body;
 
   const myBooking = await db.booking.findFirst({
     where: {
-      bookExternalId,
+      id: Number(bookId),
       username,
     },
   });
@@ -110,11 +110,11 @@ export const returnBook = async (
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      externalId: bookExternalId,
+      id: Number(bookId)
     },
   });
 
-  const updateBookAfterBooking = await db.book.update({
+  await db.book.update({
     where: {
       id: findExistingBook!.id,
     },
