@@ -109,4 +109,6 @@ model Author {
 
 model UploadedFile {
   id  Int @id @default(autoincrement())
+  imageId Int
+  
 }
