@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "Book" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL DEFAULT '1010',
+    "externalId" INTEGER NOT NULL DEFAULT 1000,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "image" TEXT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE "Book" (
 -- CreateTable
 CREATE TABLE "Category" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL DEFAULT '10202',
+    "externalId" INTEGER NOT NULL DEFAULT 2000,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
 
@@ -71,6 +71,7 @@ CREATE TABLE "Admin" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "hasPermToCreate" BOOLEAN NOT NULL DEFAULT true,
+    "specialCode" INTEGER NOT NULL DEFAULT 1000,
     "hasPermToDelete" BOOLEAN NOT NULL DEFAULT true,
     "hasPermToUpdate" BOOLEAN NOT NULL DEFAULT true,
     "canSeeBookings" BOOLEAN NOT NULL DEFAULT true,
@@ -84,11 +85,10 @@ CREATE TABLE "Admin" (
 -- CreateTable
 CREATE TABLE "Booking" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT,
     "from" TEXT NOT NULL,
     "to" TEXT NOT NULL,
     "username" TEXT NOT NULL DEFAULT 'FOO',
-    "bookId" INTEGER NOT NULL,
+    "bookExternalId" INTEGER NOT NULL,
 
     CONSTRAINT "Booking_pkey" PRIMARY KEY ("id")
 );
@@ -96,7 +96,7 @@ CREATE TABLE "Booking" (
 -- CreateTable
 CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
-    "externalId" TEXT NOT NULL DEFAULT '102038494',
+    "externalId" INTEGER NOT NULL DEFAULT 2020202,
     "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "picture" TEXT,
@@ -110,23 +110,13 @@ CREATE TABLE "Author" (
 );
 
 -- CreateTable
-CREATE TABLE "Message" (
+CREATE TABLE "File" (
     "id" SERIAL NOT NULL,
+    "externalId" TEXT NOT NULL DEFAULT '1000',
     "name" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "path" TEXT NOT NULL,
 
-    CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Notification" (
-    "id" SERIAL NOT NULL,
-    "text" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "isRead" BOOLEAN NOT NULL DEFAULT false,
-    "username" TEXT NOT NULL,
-
-    CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "File_pkey" PRIMARY KEY ("id")
 );
 
 -- AddForeignKey
@@ -136,4 +126,4 @@ ALTER TABLE "Book" ADD CONSTRAINT "Book_categoryId_fkey" FOREIGN KEY ("categoryI
 ALTER TABLE "Book" ADD CONSTRAINT "Book_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "Author"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Booking" ADD CONSTRAINT "Booking_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Booking" ADD CONSTRAINT "Booking_bookExternalId_fkey" FOREIGN KEY ("bookExternalId") REFERENCES "Book"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -8,7 +8,7 @@ async function main() {
   const newCategory = await prisma.category.create({
     data: {
       name: "Name1",
-      externalId: String(Math.floor(100000 + Math.random() * 900000)) as unknown as number,
+      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
       description: "Description",
     },
   });
@@ -16,7 +16,7 @@ async function main() {
   const newAuthor = await prisma.author.create({
     data: {
       name: "Name1",
-      externalId: String(Math.floor(100000 + Math.random() * 900000)) as unknown as number,
+      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
       birthYear: 2001,
       country: "Slovakia",
       description: "ROROROROR",
@@ -28,7 +28,7 @@ async function main() {
   const newBook = await prisma.book.create({
     data: {
       name: "Name",
-      externalId: String(Math.floor(100000 + Math.random() * 900000)) as unknown as number,
+      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -42,7 +42,7 @@ async function main() {
   const secondBook = await prisma.book.create({
     data: {
       name: "Name1",
-      externalId: String(Math.floor(100000 + Math.random() * 900000)) as unknown as number,
+      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -56,7 +56,7 @@ async function main() {
   const thirdBook = await prisma.book.create({
     data: {
       name: "Name2",
-      externalId: String(Math.floor(100000 + Math.random() * 900000)) as unknown as number,
+      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
