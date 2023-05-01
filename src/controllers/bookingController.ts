@@ -17,6 +17,17 @@ export const getAllBooking = async (req: Request, res: Response) => {
   return res.json(allBookings);
 };
 
+export const getMyBorrowedBooks = async (req: Request, res: Response) => {
+  const { username } = req.params;
+  const myBooking = await db.booking.findMany({
+    where: {
+      username,
+    },
+  });
+
+  return res.json(myBooking);
+};
+
 export const findAllPaginatedBooking = async (req: Request, res: Response) => {
   const allPaginatedBooks = await paginate.booking.paginate({
     page: Number(req.query.page) as unknown as number,
@@ -38,17 +49,6 @@ export const bookingInfo = async (req: Request, res: Response) => {
   }
 
   return res.json(bookInfo);
-};
-
-export const getMyBorrowedBooks = async (req: Request, res: Response) => {
-  const { username } = req.params;
-  const myBooking = await db.booking.findMany({
-    where: {
-      username,
-    },
-  });
-
-  return res.json(myBooking);
 };
 
 export const createBooking = async (
