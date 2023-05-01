@@ -13,6 +13,8 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
+import uploadRoutes from "./routes/uploadRoutes";
+
 export const app: Application = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -42,6 +44,7 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
+app.use(uploadRoutes);
 
 app.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
