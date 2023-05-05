@@ -27,7 +27,7 @@ export const uploadNewPhoto = async (req: any, res: Response) => {
     },
 
     data: {
-      picture: savedFile.path,
+      picture: savedFile.name,
     },
   });
 
