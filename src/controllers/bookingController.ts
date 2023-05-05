@@ -68,7 +68,7 @@ export const createBooking = async (
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      id: Number(bookId)
+      id: Number(bookId),
     },
   });
 
@@ -110,7 +110,7 @@ export const returnBook = async (
 
   const findExistingBook = await db.book.findFirst({
     where: {
-      id: Number(bookId)
+      id: Number(bookId),
     },
   });
 

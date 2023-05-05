@@ -34,7 +34,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 dotenv.config();
 
-const PORT = process.env.PORT as unknown as number;
+const PORT = process.env.PORT as unknown as number || 8111;
 
 app.use(exampleRoute);
 app.use(bookRoutes);
