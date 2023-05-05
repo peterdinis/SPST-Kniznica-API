@@ -118,20 +118,6 @@ export const getPhotoDetail = async (req: Request, res: Response) => {
   return res.json(imageInfo);
 };
 
-export const uploadNewPhoto = async (req: any, res: Response) => {
-  const { filename, path } = req.file;
-
-  const savedFile = await db.file.create({
-    data: {
-      name: filename,
-      path,
-      externalId: String(Math.floor(100000 + Math.random() * 900000)),
-    },
-  });
-
-  return res.json(savedFile);
-};
-
 export const deleteAllImages = async (req: Request, res: Response) => {
   const removeAllImages = await db.file.deleteMany({});
   return res.json(removeAllImages);
