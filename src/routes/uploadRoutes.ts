@@ -7,7 +7,7 @@ import { upload } from "../middleware/multer"
 
 const router = express.Router();
 
-router.post("/api/upload/:username", upload.single("filepond"), uploadNewPhoto);
-router.delete("/api/upload/image/:id/delete", removeOneImage);
+router.post("/api/upload/student/:username", upload.single("filepond"), uploadNewPhoto);
+router.delete("/api/upload/student/image/:id/:username/delete", removeOneImage);
 
 export default router;
