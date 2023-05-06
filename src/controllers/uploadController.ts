@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import db from "../db";
 
-export const uploadNewPhoto = async (req: any, res: Response) => {
+export const uploadNewPhotoForStudent = async (req: any, res: Response) => {
   const { filename, path } = req.file;
   const { username } = req.params;
 
@@ -37,7 +37,7 @@ export const uploadNewPhoto = async (req: any, res: Response) => {
   });
 };
 
-export const removeOneImage = async (req: Request, res: Response) => {
+export const removeOneImageForStudent = async (req: Request, res: Response) => {
   const { id, username } = req.params;
 
   const findStudentByUsername = await db.student.findFirst({
