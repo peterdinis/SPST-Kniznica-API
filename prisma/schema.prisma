@@ -18,7 +18,7 @@ model Book {
   description String
   image       String
   status      String
-  publisher   String    @default("Mlade Léta")
+  publisher   String    @default("Mladé Léta")
   pages       Int
   year        Int
   quantity    Int       @default(1)
@@ -88,7 +88,7 @@ model Booking {
   id         Int     @id @default(autoincrement())
   from       String
   to         String
-  username   String  @default("FOO")
+  username   String  @default("Custom user")
   bookId     Int
   book       Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
