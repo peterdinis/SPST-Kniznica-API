@@ -109,6 +109,7 @@ export const createBookFn = async (
   const newBook = await db.book.create({
     data: {
       name,
+      externalId: Math.floor(100000 + Math.random() * 900000),
       description,
       image,
       status,

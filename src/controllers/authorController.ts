@@ -24,7 +24,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
   const {externalId} = req.params;
   const oneAuthor = await db.author.findFirst({
     where: {
-      externalId: Number(externalId)
+      externalId: Number(externalId),
     },
   })
 
@@ -36,9 +36,31 @@ export const getOneAuthor = async (req: Request, res: Response) => {
 }
 
 
+
+export const searchAuthor = async(req: Request, res: Response) => {
+  const authors = await db.author.findMany({
+     where: {
+      name: {
+        contains: String(req.query.q),
+      }
+     }
+  });
+
+  console.log(authors);
+
+  if(!authors) {
+    res.status(404);
+    throw new Error("Authors not found");
+  }
+
+  return res.json(authors);
+}
+
+
 export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: Response) => {
   const createNewAuthor = await db.author.create({
     data: {
+      externalId: Math.floor(100000 + Math.random() * 900000),
       ...req.body
     }
   })
@@ -79,21 +101,4 @@ export const deleteAuthor = async (req: Request, res: Response) => {
   }
 
   return res.json(authorForDelete);
-}
-
-export const searchAuthor = async(req: Request, res: Response) => {
-  const authors = await db.author.findMany({
-     where: {
-      name: {
-        contains: String(req.query.q),
-      }
-     }
-  });
-
-  if(!authors) {
-    res.status(404);
-    throw new Error("Authors not found");
-  }
-
-  return res.json(authors);
 }
