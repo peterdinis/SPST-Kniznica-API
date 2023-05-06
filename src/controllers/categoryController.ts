@@ -43,24 +43,6 @@ export const createCategoryFn = async (
   return res.json(newCategory);
 };
 
-export const searchCategory = async (req: Request, res: Response) => {
-  const categories = await db.category.findMany({
-    where: {
-      name: {
-        contains: String(req.query.q),
-      },
-    },
-  });
-
-  if (!categories) {
-    res.status(404);
-    throw new Error("Category not found");
-  }
-
-  return res.json(categories);
-};
-
-
 export const updateCategory = async (req: Request, res: Response) => {
   const {id} = req.params;
   const categoryForUpdate = await db.category.update({
