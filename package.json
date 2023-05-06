@@ -14,7 +14,8 @@
     "NodeJs",
     "Typescript",
     "Prisma",
-    "PostgreSQL"
+    "PostgreSQL",
+    "Jest"
   ],
   "author": "Peter Dinis",
   "license": "ISC",
