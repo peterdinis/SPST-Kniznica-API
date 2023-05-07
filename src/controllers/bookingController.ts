@@ -56,6 +56,8 @@ export const createBooking = async (
   res: Response
 ) => {
   const { from, to, username, bookId } = req.body;
+  console.log(from);
+  console.log(to);
 
   if(from < to) {
     return res.status(409).json("Date from must be bigger than date to");
