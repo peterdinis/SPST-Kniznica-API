@@ -5,7 +5,7 @@ describe("Testing Example endpoint", () => {
     it("Test Example Endpoint", async () => {
         const exampleRequest = await request(app).get("/example");
         const exampleResponse = exampleRequest.body;
-        const expectedResponse = {}
+        const expectedResponse: Record<string, never> = {};
         expect(exampleResponse).toEqual(expectedResponse);
     })
 })
