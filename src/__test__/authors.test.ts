@@ -1,8 +1,9 @@
 import { app } from "../server";
 import request from "supertest";
+import { IAuthor } from "./interfaces/IAuthor";
 
 describe("Testing Authors Endpoints", () => {
-    it.only("Get All Authors", async () => {
+    it("Get All Authors", async () => {
         const allAuthorsRequest = await request(app).get("/authors");
         const allAuthorsResponse = allAuthorsRequest.body;
         const expectedResponse = [
@@ -18,6 +19,8 @@ describe("Testing Authors Endpoints", () => {
                 description: expect.any(String),
                 litPeriod: expect.any(String),
             }
-        ] 
+        ] as IAuthor[];
+
+        expect(allAuthorsResponse).toEqual(expectedResponse);
     })
 })

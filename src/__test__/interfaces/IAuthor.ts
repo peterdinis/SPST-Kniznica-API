@@ -5,7 +5,8 @@ export interface IAuthor {
     lastName: string;
     picture: null;
     birthYear: number;
-    deathhYear: null,
+    deathYear: null,
     country: string;
-    d
+    description: string;
+    litPeriod: string;
 }
