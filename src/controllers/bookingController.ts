@@ -57,6 +57,14 @@ export const createBooking = async (
 ) => {
   const { from, to, username, bookId } = req.body;
 
+  if(from < to) {
+    return res.status(409).json("Date from must be bigger than date to");
+  }
+
+  if(from === to) {
+    return res.status(409).json("Date from and date to they cannot be the same");
+  }
+
   const createNewBooking = await db.booking.create({
     data: {
       from,
