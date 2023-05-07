@@ -1,6 +1,6 @@
-import { app } from "../server";
+import { app } from "../../server";
 import request from "supertest";
-import { IAuthor } from "./interfaces/IAuthor";
+import { IAuthor } from "../interfaces/IAuthor";
 
 describe("Testing Authors Endpoints", () => {
     it("Get All Authors", async () => {
