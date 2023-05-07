@@ -7,7 +7,6 @@ import {
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
-import axios from "axios";
 
 export const getAllStudents = async (req: Request, res: Response) => {
   const displayAllStudents = await db.student.findMany();
