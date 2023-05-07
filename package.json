@@ -7,7 +7,7 @@
     "start": "node ./dist/server.js",
     "seeder": "ts-node prisma/seed.ts",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "jest --forceExit --detectOpenHandles  --watchAll --maxWorkers=1"
+    "test": "set PORT=8111 && jest --watchAll --verbose"
   },
   "keywords": [
     "API",

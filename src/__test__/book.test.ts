@@ -5,6 +5,6 @@ describe("Testing Books Endpoints", () => {
     it.only("Get All Books", async () => {
         const allBooksRequest = await request(app).get("/books");
         const allBooksResponse = allBooksRequest.body;
-        
+        console.log(allBooksResponse)
     })
 })

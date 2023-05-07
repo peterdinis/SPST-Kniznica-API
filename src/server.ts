@@ -46,6 +46,9 @@ app.use(adminRoutes);
 app.use(authorRoutes);
 app.use(uploadRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Applikácia beží na porte ${PORT}`);
-});
+if(process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`Applikácia beží na porte ${PORT}`);
+  });
+  
+}
