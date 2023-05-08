@@ -4,12 +4,28 @@ import { createTeacherRegisterType, createTeacherLoginType } from "../validators
 import bcrypt from "bcrypt";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import jwt from "jsonwebtoken";
+import paginator from "prisma-paginate";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+const paginate = paginator(prisma);
 
 export const getAllTeachers = async (req: Request, res: Response) => {
   const displayAllTeachers = await db.teacher.findMany();
   return res.json(displayAllTeachers);
 };
 
+export const findAllPaginatedTeacher = async (req: Request, res: Response) => {
+  try {
+    const allPaginatedTeachers = await paginate.teacher.paginate({
+      page: Number(req.query.page) as unknown as number,
+      limit: Number(req.query.limit) as unknown as number,
+    });
+    return res.json(allPaginatedTeachers);
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
 
 export const getTeacherInfo = async (req: Request, res: Response) => {
   const { id } = req.params;
