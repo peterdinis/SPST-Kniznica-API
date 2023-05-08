@@ -21,84 +21,84 @@ export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
 };
 
 export const getOneAuthor = async (req: Request, res: Response) => {
-  const {externalId} = req.params;
+  const { externalId } = req.params;
   const oneAuthor = await db.author.findFirst({
     where: {
       externalId: Number(externalId),
     },
-  })
+  });
 
-  if(!oneAuthor) {
+  if (!oneAuthor) {
     throw new Error("No author found");
   }
 
   return res.json(oneAuthor);
-}
+};
 
-
-
-export const searchAuthor = async(req: Request, res: Response) => {
+export const searchAuthor = async (req: Request, res: Response) => {
   const authors = await db.author.findMany({
-     where: {
+    where: {
       name: {
         contains: String(req.query.q),
-      }
-     }
+      },
+    },
   });
 
   console.log(authors);
 
-  if(!authors) {
+  if (!authors) {
     res.status(404);
     throw new Error("Authors not found");
   }
 
   return res.json(authors);
-}
+};
 
-
-export const createAuthor = async (req: Request<{}, {}, createAuthorType>, res: Response) => {
+export const createAuthor = async (
+  req: Request<{}, {}, createAuthorType>,
+  res: Response
+) => {
   const createNewAuthor = await db.author.create({
     data: {
       externalId: Math.floor(100000 + Math.random() * 900000),
-      ...req.body
-    }
-  })
+      ...req.body,
+    },
+  });
 
   return res.json(createNewAuthor);
-}
+};
 
 export const updateAuthor = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const authorForUpdate = await db.author.update({
     where: {
-      id: Number(id)
+      id: Number(id),
     },
 
     data: {
-      ...req.body
-    }
-  })
+      ...req.body,
+    },
+  });
 
-  if(!authorForUpdate) {
+  if (!authorForUpdate) {
     throw new Error("No author found");
   }
 
   return res.json(authorForUpdate);
-}
+};
 
 export const deleteAuthor = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
   const authorForDelete = await db.author.delete({
     where: {
-      id: Number(id)
-    }
-  })
+      id: Number(id),
+    },
+  });
 
-  if(!authorForDelete) {
-    throw new Error("Author not found")
+  if (!authorForDelete) {
+    throw new Error("Author not found");
   }
 
   return res.json(authorForDelete);
-}
+};

@@ -29,7 +29,7 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   });
 
   if (!oneBook) {
-    throw new Error("Book not found");
+    return res.status(404).json("Book not found");
   }
 
   const findAuthor = await db.author.findUnique({
@@ -60,8 +60,7 @@ export const searchBook = async (req: Request, res: Response) => {
   });
 
   if (!books) {
-    res.status(404);
-    throw new Error("Books not found");
+    return res.status(404).json("Books not found");
   }
 
   return res.json(books);
@@ -97,13 +96,11 @@ export const createBookFn = async (
   })
 
   if (!newCategoryForBook) {
-    res.status(404);
-    throw new Error("Category not found");
+    return res.status(404).json("Category not found");
   }
 
   if(!authorForBook) {
-    res.status(404);
-    throw new Error("Author not found");
+    return res.status(404).json("Author not found");
   }
 
   const newBook = await db.book.create({

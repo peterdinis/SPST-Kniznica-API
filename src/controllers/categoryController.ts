@@ -16,20 +16,23 @@ export const displayAllCategoriesFn = async (req: Request, res: Response) => {
   return res.json(allCategories);
 };
 
-export const findAllPaginatedCategoriesFn = async (req: Request, res: Response) => {
+export const findAllPaginatedCategoriesFn = async (
+  req: Request,
+  res: Response
+) => {
   const allPaginatedCategories = await paginate.category.paginate({
     page: Number(req.query.page) as unknown as number,
     limit: Number(req.query.limit) as unknown as number,
   });
   return res.json(allPaginatedCategories);
-}
+};
 
 export const categoryDetailsFn = async (req: Request, res: Response) => {
   const { externalId } = req.params;
 
   const oneCategoy = await db.category.findFirst({
-  where: {
-      externalId: Number(externalId)
+    where: {
+      externalId: Number(externalId),
     },
     include: {
       Books: true,
@@ -47,6 +50,10 @@ export const createCategoryFn = async (
   req: Request<{}, {}, createCategoryType>,
   res: Response
 ) => {
+  if (!req.body.name || !req.body.description) {
+    return res.status(400).json("All fields must be defined");
+  }
+
   const newCategory = await db.category.create({
     data: {
       ...req.body,
@@ -57,35 +64,35 @@ export const createCategoryFn = async (
 };
 
 export const updateCategory = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const categoryForUpdate = await db.category.update({
     where: {
       id: Number(id),
     },
 
     data: {
-      ...req.body
-    }
+      ...req.body,
+    },
   });
 
-  if(!categoryForUpdate) {
+  if (!categoryForUpdate) {
     throw new Error("Category not found");
   }
 
   return res.json(categoryForUpdate);
-}
+};
 
 export const deleteCategory = async (req: Request, res: Response) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const categoryForDelete = await db.category.delete({
     where: {
       id: Number(id),
-    }
-  })
+    },
+  });
 
-  if(!categoryForDelete) {
+  if (!categoryForDelete) {
     throw new Error("Category not found");
   }
 
   return res.json(categoryForDelete);
-}
+};
