@@ -30,92 +30,66 @@ export const findAllPaginatedBooks = async (req: Request, res: Response) => {
 };
 
 export const displayOneBookFn = async (req: Request, res: Response) => {
-  const { externalId } = req.params;
-  const oneBook = await db.book.findFirst({
-    where: {
-      externalId: Number(externalId),
-    },
-  });
+  try {
+    const { externalId } = req.params;
+    const oneBook = await db.book.findFirst({
+      where: {
+        externalId: Number(externalId),
+      },
+    });
 
-  if (!oneBook) {
-    return res.status(404).json("Book not found");
+    if (!oneBook) {
+      return res.status(404).json("Book not found");
+    }
+
+    const findAuthor = await db.author.findUnique({
+      where: {
+        id: oneBook.authorId,
+      },
+    });
+
+    const findCategory = await db.category.findUnique({
+      where: {
+        id: oneBook.categoryId,
+      },
+    });
+    return res.json({
+      book: oneBook,
+      author: findAuthor,
+      category: findCategory,
+    });
+  } catch (err) {
+    getErrorMessage(err);
   }
-
-  const findAuthor = await db.author.findUnique({
-    where: {
-      id: oneBook.authorId,
-    },
-  });
-
-  const findCategory = await db.category.findUnique({
-    where: {
-      id: oneBook.categoryId,
-    },
-  });
-  return res.json({
-    book: oneBook,
-    author: findAuthor,
-    category: findCategory,
-  });
 };
 
 export const searchBook = async (req: Request, res: Response) => {
-  const books = await db.book.findMany({
-    where: {
-      name: {
-        contains: String(req.query.q),
+  try {
+    const books = await db.book.findMany({
+      where: {
+        name: {
+          contains: String(req.query.q),
+        },
       },
-    },
-  });
+    });
 
-  if (!books) {
-    return res.status(404).json("Books not found");
+    if (!books) {
+      return res.status(404).json("Books not found");
+    }
+
+    return res.json(books);
+  } catch (err) {
+    getErrorMessage(err);
   }
-
-  return res.json(books);
 };
 
 export const createBookFn = async (
   req: Request<{}, {}, createBookType>,
   res: Response
 ) => {
-  const {
-    name,
-    description,
-    image,
-    status,
-    pages,
-    year,
-    quantity,
-    publisher,
-    categoryId,
-    authorId,
-  } = req.body;
-
-  const newCategoryForBook = await db.category.findUnique({
-    where: {
-      id: categoryId,
-    },
-  });
-
-  const authorForBook = await db.book.findUnique({
-    where: {
-      id: authorId as unknown as number,
-    },
-  });
-
-  if (!newCategoryForBook) {
-    return res.status(404).json("Category not found");
-  }
-
-  if (!authorForBook) {
-    return res.status(404).json("Author not found");
-  }
-
-  const newBook = await db.book.create({
-    data: {
+  try {
+    const {
       name,
-      externalId: Math.floor(100000 + Math.random() * 900000),
       description,
       image,
       status,
@@ -123,44 +97,90 @@ export const createBookFn = async (
       year,
       quantity,
       publisher,
-      categoryId: newCategoryForBook.id,
-      authorId: authorForBook.id,
-    },
-  });
+      categoryId,
+      authorId,
+    } = req.body;
 
-  return res.json(newBook);
+    const newCategoryForBook = await db.category.findUnique({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    const authorForBook = await db.book.findUnique({
+      where: {
+        id: authorId as unknown as number,
+      },
+    });
+
+    if (!newCategoryForBook) {
+      return res.status(404).json("Category not found");
+    }
+
+    if (!authorForBook) {
+      return res.status(404).json("Author not found");
+    }
+
+    const newBook = await db.book.create({
+      data: {
+        name,
+        externalId: Math.floor(100000 + Math.random() * 900000),
+        description,
+        image,
+        status,
+        pages,
+        year,
+        quantity,
+        publisher,
+        categoryId: newCategoryForBook.id,
+        authorId: authorForBook.id,
+      },
+    });
+
+    return res.json(newBook);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 };
 
 export const updateBookFn = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const bookForUpdate = await db.book.update({
-    where: {
-      id: Number(id),
-    },
+  try {
+    const { id } = req.params;
+    const bookForUpdate = await db.book.update({
+      where: {
+        id: Number(id),
+      },
 
-    data: {
-      ...req.body,
-    },
-  });
+      data: {
+        ...req.body,
+      },
+    });
 
-  if (!bookForUpdate) {
-    return res.status(404).json("Book not found");
+    if (!bookForUpdate) {
+      return res.status(404).json("Book not found");
+    }
+
+    return res.json(bookForUpdate);
+  } catch (err) {
+    getErrorMessage(err);
   }
-
-  return res.json(bookForUpdate);
 };
 
 export const deleteBookFn = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const book = await db.book.delete({
-    where: {
-      id: Number(id),
-    },
-  });
+  try {
+    const { id } = req.params;
+    const book = await db.book.delete({
+      where: {
+        id: Number(id),
+      },
+    });
 
-  if (!book) {
-    return res.status(404).json("Book not found");
+    if (!book) {
+      return res.status(404).json("Book not found");
+    }
+
+    return res.json(book);
+  } catch (err) {
+    getErrorMessage(err);
   }
-
-  return res.json(book);
 };
