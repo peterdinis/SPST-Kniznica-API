@@ -155,8 +155,3 @@ export const deleteProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
    }
 }
-
-export const uploadProfile = async (req: Request, res: Response) => {
-   const {username} = req.params;
-
-}

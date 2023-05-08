@@ -32,7 +32,7 @@ export const teacherRegister = async (
   res: Response
 ) => {
   try {
-    const { password, username} = req.body;
+    const { password} = req.body;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 

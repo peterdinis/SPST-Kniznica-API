@@ -24,7 +24,7 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
   const { externalId } = req.params;
   const oneBook = await db.book.findFirst({
     where: {
-      externalId: Number(externalId)
+      externalId: Number(externalId),
     },
   });
 
@@ -34,19 +34,19 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
 
   const findAuthor = await db.author.findUnique({
     where: {
-      id: oneBook.authorId
-    }
-  })
+      id: oneBook.authorId,
+    },
+  });
 
   const findCategory = await db.category.findUnique({
     where: {
-      id: oneBook.categoryId
-    }
-  })
+      id: oneBook.categoryId,
+    },
+  });
   return res.json({
     book: oneBook,
     author: findAuthor,
-    category: findCategory
+    category: findCategory,
   });
 };
 
@@ -80,7 +80,7 @@ export const createBookFn = async (
     quantity,
     publisher,
     categoryId,
-    authorId
+    authorId,
   } = req.body;
 
   const newCategoryForBook = await db.category.findUnique({
@@ -92,14 +92,14 @@ export const createBookFn = async (
   const authorForBook = await db.book.findUnique({
     where: {
       id: authorId as unknown as number,
-    }
-  })
+    },
+  });
 
   if (!newCategoryForBook) {
     return res.status(404).json("Category not found");
   }
 
-  if(!authorForBook) {
+  if (!authorForBook) {
     return res.status(404).json("Author not found");
   }
 
@@ -116,7 +116,7 @@ export const createBookFn = async (
       publisher,
       categoryId: newCategoryForBook.id,
       authorId: authorForBook.id,
-    }
+    },
   });
 
   return res.json(newBook);
@@ -124,7 +124,7 @@ export const createBookFn = async (
 
 export const updateBookFn = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const  bookForUpdate = await db.book.update({
+  const bookForUpdate = await db.book.update({
     where: {
       id: Number(id),
     },
@@ -134,11 +134,11 @@ export const updateBookFn = async (req: Request, res: Response) => {
     },
   });
 
-  if (! bookForUpdate) {
-    throw new Error("Book not found");
+  if (!bookForUpdate) {
+    return res.status(404).json("Book not found");
   }
 
-  return res.json( bookForUpdate);
+  return res.json(bookForUpdate);
 };
 
 export const deleteBookFn = async (req: Request, res: Response) => {
@@ -150,7 +150,7 @@ export const deleteBookFn = async (req: Request, res: Response) => {
   });
 
   if (!book) {
-    throw new Error("Book not found");
+    return res.status(404).json("Book not found");
   }
 
   return res.json(book);

@@ -40,7 +40,7 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
   });
 
   if (!oneCategoy) {
-    throw new Error("Category does not exists");
+    return res.status(404).json("Category not found");
   }
 
   return res.json(oneCategoy);
@@ -76,7 +76,7 @@ export const updateCategory = async (req: Request, res: Response) => {
   });
 
   if (!categoryForUpdate) {
-    throw new Error("Category not found");
+    return res.status(404).json("Category not found");
   }
 
   return res.json(categoryForUpdate);
@@ -91,7 +91,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
   });
 
   if (!categoryForDelete) {
-    throw new Error("Category not found");
+    return res.status(404).json("Category not found");
   }
 
   return res.json(categoryForDelete);

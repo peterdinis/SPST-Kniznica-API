@@ -9,7 +9,6 @@ import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 const paginate = paginator(prisma);
 
 export const getAllBooking = async (req: Request, res: Response) => {
@@ -45,7 +44,7 @@ export const bookingInfo = async (req: Request, res: Response) => {
   });
 
   if (!bookInfo) {
-    throw new Error("Booking not found");
+    return res.status(404).json("Book not found");
   }
 
   return res.json(bookInfo);
@@ -56,9 +55,7 @@ export const createBooking = async (
   res: Response
 ) => {
   const { from, to, username, bookId } = req.body;
-  console.log(from);
-  console.log(to);
-
+  
   if(from < to) {
     return res.status(409).json("Date from must be bigger than date to");
   }
