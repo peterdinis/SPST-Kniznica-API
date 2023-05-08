@@ -3,21 +3,30 @@ import db from "../db";
 import { createBookType } from "../validators/bookSchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
 
 export const displayAllBooksFn = async (req: Request, res: Response) => {
-  const allBooks = await db.book.findMany();
-  return res.json(allBooks);
+  try {
+    const allBooks = await db.book.findMany();
+    return res.json(allBooks);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 };
 
 export const findAllPaginatedBooks = async (req: Request, res: Response) => {
-  const allPaginatedBooks = await paginate.book.paginate({
-    page: Number(req.query.page) as unknown as number,
-    limit: Number(req.query.limit) as unknown as number,
-  });
-  return res.json(allPaginatedBooks);
+  try {
+    const allPaginatedBooks = await paginate.book.paginate({
+      page: Number(req.query.page) as unknown as number,
+      limit: Number(req.query.limit) as unknown as number,
+    });
+    return res.json(allPaginatedBooks);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 };
 
 export const displayOneBookFn = async (req: Request, res: Response) => {

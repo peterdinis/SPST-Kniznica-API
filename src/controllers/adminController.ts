@@ -97,28 +97,3 @@ export const adminProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-export const getAllPhotos = async (req: Request, res: Response) => {
-  const allPhotosInApp = await db.file.findMany({});
-  return res.json(allPhotosInApp);
-};
-
-export const getPhotoDetail = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const imageInfo = await db.file.findFirst({
-    where: {
-      id: Number(id),
-    },
-  });
-
-  if (!imageInfo) {
-    return res.status(404).json("No image found");
-  }
-
-  return res.json(imageInfo);
-};
-
-export const deleteAllImages = async (req: Request, res: Response) => {
-  const removeAllImages = await db.file.deleteMany({});
-  return res.json(removeAllImages);
-};
