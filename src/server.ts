@@ -33,7 +33,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 dotenv.config();
 
-const PORT = process.env.PORT as unknown as number || 8111;
+const PORT = (process.env.PORT as unknown as number) || 8111;
 
 app.use(exampleRoute);
 app.use(bookRoutes);
@@ -44,9 +44,8 @@ app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
 
-if(process.env.NODE_ENV !== "test") {
+if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`);
   });
-  
 }
