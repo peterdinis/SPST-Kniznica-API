@@ -2,7 +2,6 @@ import express from "express";
 import {
   bookingInfo,
   createBooking,
-  findAllPaginatedBooking,
   getAllBooking,
   getMyBorrowedBooks,
   returnBook,
@@ -12,7 +11,6 @@ const router = express.Router();
 
 router.get("/bookings", getAllBooking);
 router.get("/booking/:username", getMyBorrowedBooks);
-router.get("/booking/paginate", findAllPaginatedBooking);
 router.get("/booking/:id", bookingInfo);
 router.post("/booking", createBooking);
 router.delete("/booking/return", returnBook);

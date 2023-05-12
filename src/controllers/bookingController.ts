@@ -36,18 +36,6 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
   }
 };
 
-export const findAllPaginatedBooking = async (req: Request, res: Response) => {
-  try {
-    const allPaginatedBooks = await paginate.booking.paginate({
-      page: Number(req.query.page) as unknown as number,
-      limit: Number(req.query.limit) as unknown as number,
-    });
-    return res.json(allPaginatedBooks);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
 export const bookingInfo = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
