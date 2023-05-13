@@ -48,6 +48,26 @@ export const getOneAuthor = async (req: Request, res: Response) => {
   }
 };
 
+export const searchForAuthor = async (req: Request, res: Response) => {
+  try {
+    const authors = await db.author.findMany({
+      where: {
+        name: {
+          contains: String(req.query.q),
+        },
+      },
+    });
+
+    if (!authors) {
+      return res.status(404).json("Authors not found");
+    }
+
+    return res.json(authors);
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
+
 export const createAuthor = async (
   req: Request<{}, {}, createAuthorType>,
   res: Response
