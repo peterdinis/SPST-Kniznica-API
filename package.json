@@ -6,7 +6,8 @@
   "scripts": {
     "seeder": "ts-node prisma/seed.ts",
     "start": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "set PORT=8111 && jest --watchAll --verbose"
+    "test": "set PORT=8111 && jest --watchAll --verbose",
+    "vercel-build": "prisma generate && prisma migrate deploy"
   },
   "keywords": [
     "API",
