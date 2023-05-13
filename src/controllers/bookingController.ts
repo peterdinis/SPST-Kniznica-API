@@ -8,7 +8,6 @@ import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import dayjs from "dayjs";
 
-
 export const getAllBooking = async (req: Request, res: Response) => {
   try {
     const allBookings = await db.booking.findMany();
@@ -65,40 +64,50 @@ export const createBooking = async (
 
     const testStudentUsername = await db.student.findFirst({
       where: {
-        username
-      }
-    })
+        username,
+      },
+    });
 
     const testTeacherUsername = await db.teacher.findFirst({
       where: {
-        username
-      }
+        username,
+      },
     });
 
     const testAdminUsername = await db.admin.findFirst({
       where: {
-        username
-      }
-    })
+        username,
+      },
+    });
 
-    if(!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
-      return res.status(409).json("Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi")
+    if (!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
+      return res
+        .status(409)
+        .json(
+          "Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi"
+        );
     }
 
-    if(fromDay.isBefore(toDay)) {
+    if (fromDay.isBefore(toDay)) {
       return res.status(409).json("Dátum od musí byť väčší ako dátum do");
     }
 
-    if(fromDay.isSame(toDay)) {
-      return res.status(409).json("Musí byť rozdiel medzi dátumi minimálne 1 deň")
+    if (fromDay.isSame(toDay)) {
+      return res
+        .status(409)
+        .json("Musí byť rozdiel medzi dátumi minimálne 1 deň");
     }
 
-    if(fromDay.isBefore(actualDay)) {
-      return res.status(409).json("Zvolený dátum musí byť väčší ako aktuálny deň");
+    if (fromDay.isBefore(actualDay)) {
+      return res
+        .status(409)
+        .json("Zvolený dátum musí byť väčší ako aktuálny deň");
     }
 
-    if(toDay.isBefore(actualDay)) {
-      return res.status(409).json("Zvolený dátum musí byť väčší ako aktuálny deň");
+    if (toDay.isBefore(actualDay)) {
+      return res
+        .status(409)
+        .json("Zvolený dátum musí byť väčší ako aktuálny deň");
     }
 
     const createNewBooking = await db.booking.create({
@@ -138,6 +147,32 @@ export const returnBook = async (
 ) => {
   try {
     const { username, bookId } = req.body;
+
+    const testStudentUsername = await db.student.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    const testTeacherUsername = await db.teacher.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    const testAdminUsername = await db.admin.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    if (!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
+      return res
+        .status(409)
+        .json(
+          "Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi"
+        );
+    }
 
     const myBooking = await db.booking.findFirst({
       where: {
