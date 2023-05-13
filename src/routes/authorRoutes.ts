@@ -5,12 +5,14 @@ import {
   findAllPaginatedAuthors,
   getAllAuthors,
   getOneAuthor,
+  searchForAuthor,
   updateAuthor,
 } from "../controllers/authorController";
 
 const router = express.Router();
 
 router.get("/authors", getAllAuthors);
+router.get("/authors/search", searchForAuthor);
 router.get("/authors/paginate", findAllPaginatedAuthors);
 router.get("/authors/:externalId", getOneAuthor);
 router.post("/authors", createAuthor);
