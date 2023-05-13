@@ -62,14 +62,26 @@ export const createBooking = async (
   try {
     const { from, to, username, bookId } = req.body;
 
-    if (from < to) {
-      return res.status(409).json("Date from must be bigger than date to");
-    }
+    const testStudentUsername = await db.student.findFirst({
+      where: {
+        username
+      }
+    })
 
-    if (from === to) {
-      return res
-        .status(409)
-        .json("Date from and date to they cannot be the same");
+    const testTeacherUsername = await db.teacher.findFirst({
+      where: {
+        username
+      }
+    });
+
+    const testAdminUsername = await db.admin.findFirst({
+      where: {
+        username
+      }
+    })
+
+    if(!testStudentUsername || !testTeacherUsername) {
+      return res.status(409).json("Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch")
     }
 
     const createNewBooking = await db.booking.create({
