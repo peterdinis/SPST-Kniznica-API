@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "seeder": "ts-node prisma/seed.ts",
-    "start": "node ./src/server.ts",
+    "start": "nodemon --config nodemon.json ./src/server.ts",
     "test": "set PORT=8111 && jest --watchAll --verbose"
   },
   "keywords": [
