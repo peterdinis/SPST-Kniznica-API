@@ -5,12 +5,9 @@ import {
   returnBookingType,
 } from "../validators/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
-import paginator from "prisma-paginate";
-import { PrismaClient } from "@prisma/client";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import dayjs from "dayjs";
 
-const prisma = new PrismaClient();
-const paginate = paginator(prisma);
 
 export const getAllBooking = async (req: Request, res: Response) => {
   try {
@@ -62,6 +59,9 @@ export const createBooking = async (
   try {
     const { from, to, username, bookId } = req.body;
 
+    const fromDay = dayjs(from);
+    const toDay = dayjs(to);
+
     const testStudentUsername = await db.student.findFirst({
       where: {
         username
@@ -80,8 +80,16 @@ export const createBooking = async (
       }
     })
 
-    if(!testStudentUsername || !testTeacherUsername) {
-      return res.status(409).json("Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch")
+    if(!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
+      return res.status(409).json("Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi")
+    }
+
+    if(fromDay.isBefore(toDay)) {
+      return res.status(409).json("Dátum od musí byť väčší ako dátum do");
+    }
+
+    if(fromDay.isSame(toDay)) {
+      return res.status(409).json("Musí byť rozdiel medzi dátumi minimálne 1 deň")
     }
 
     const createNewBooking = await db.booking.create({
