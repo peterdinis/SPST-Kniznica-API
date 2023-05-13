@@ -61,6 +61,7 @@ export const createBooking = async (
 
     const fromDay = dayjs(from);
     const toDay = dayjs(to);
+    const actualDay = new Date().toISOString();
 
     const testStudentUsername = await db.student.findFirst({
       where: {
@@ -90,6 +91,14 @@ export const createBooking = async (
 
     if(fromDay.isSame(toDay)) {
       return res.status(409).json("Musí byť rozdiel medzi dátumi minimálne 1 deň")
+    }
+
+    if(fromDay.isBefore(actualDay)) {
+      return res.status(409).json("Zvolený dátum musí byť väčší ako aktuálny deň");
+    }
+
+    if(toDay.isBefore(actualDay)) {
+      return res.status(409).json("Zvolený dátum musí byť väčší ako aktuálny deň");
     }
 
     const createNewBooking = await db.booking.create({
