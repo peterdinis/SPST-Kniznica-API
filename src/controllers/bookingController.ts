@@ -148,32 +148,6 @@ export const returnBook = async (
   try {
     const { username, bookId } = req.body;
 
-    const testStudentUsername = await db.student.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const testTeacherUsername = await db.teacher.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const testAdminUsername = await db.admin.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    if (!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
-      return res
-        .status(409)
-        .json(
-          "Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi"
-        );
-    }
-
     const myBooking = await db.booking.findFirst({
       where: {
         bookId: Number(bookId),
