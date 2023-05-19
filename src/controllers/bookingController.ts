@@ -150,7 +150,6 @@ export const returnBook = async (
 
     const myBooking = await db.booking.findFirst({
       where: {
-        bookId: Number(bookId),
         username,
       },
     });

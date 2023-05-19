@@ -13,6 +13,6 @@ router.get("/bookings", getAllBooking);
 router.get("/booking/:username", getMyBorrowedBooks);
 router.get("/booking/:id", bookingInfo);
 router.post("/booking", createBooking);
-router.delete("/booking/return", returnBook);
+router.patch("/booking/return", returnBook);
 
 export default router;
