@@ -45,6 +45,7 @@ model Student {
   email     String
   password  String
   picture   String?
+  isLogged  Boolean  @default(false)
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
@@ -59,6 +60,7 @@ model Teacher {
   email           String
   password        String
   role            String   @default("TEACHER")
+  isLogged        Boolean  @default(false)
   hasPermToCreate Boolean  @default(true)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
@@ -75,6 +77,7 @@ model Admin {
   email           String
   password        String
   hasPermToCreate Boolean  @default(true)
+  isLogged        Boolean  @default(false)
   specialCode     Int      @default(1000)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
