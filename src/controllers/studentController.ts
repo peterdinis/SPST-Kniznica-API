@@ -173,3 +173,8 @@ export const deleteProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+
+export const newPassword =(req: Request, res: Response) => {
+  return;
+}
