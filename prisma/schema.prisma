@@ -30,8 +30,8 @@ model Book {
 }
 
 model Category {
-  id          Int     @id @default(autoincrement())
-  externalId  Int     @default(2000)
+  id          Int    @id @default(autoincrement())
+  externalId  Int    @default(2000)
   name        String
   description String
   Books       Book[]
@@ -75,7 +75,7 @@ model Admin {
   email           String
   password        String
   hasPermToCreate Boolean  @default(true)
-  specialCode     Int       @default(1000)
+  specialCode     Int      @default(1000)
   hasPermToDelete Boolean  @default(true)
   hasPermToUpdate Boolean  @default(true)
   canSeeBookings  Boolean  @default(true)
@@ -85,12 +85,12 @@ model Admin {
 }
 
 model Booking {
-  id         Int     @id @default(autoincrement())
-  from       String
-  to         String
-  username   String  @default("Custom user")
-  bookId     Int
-  book       Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id       Int    @id @default(autoincrement())
+  from     String
+  to       String
+  username String @default("Custom user")
+  bookId   Int
+  book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 }
 
 model Author {
