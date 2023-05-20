@@ -62,6 +62,16 @@ export const createBooking = async (
     const toDay = dayjs(to);
     const actualDay = new Date().toISOString();
 
+    const findBookForBorrow = await db.book.findFirst({
+      where: {
+        id: Number(bookId)
+      }
+    })
+
+    if(findBookForBorrow!.status === AVAIABLE) {
+      return res.status(409).json("Nemôžem vykonať operáciu lebo kniha je ")
+    }
+
     const testStudentUsername = await db.student.findFirst({
       where: {
         username,
@@ -84,11 +94,11 @@ export const createBooking = async (
         });
 
         if(!testAdminUsername) {
-          return res.json("Používateľ neexistuje");
+          return res.status(409).json("Používateľ neexistuje");
         }
       }
-    }
-    
+    } 
+
     if (fromDay.isSame(toDay)) {
       return res
         .status(409)
