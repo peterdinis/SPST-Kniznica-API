@@ -66,32 +66,29 @@ export const createBooking = async (
       where: {
         username,
       },
+    
     });
 
-    const testTeacherUsername = await db.teacher.findFirst({
-      where: {
-        username,
-      },
-    });
+    if(!testStudentUsername) {
+      const testTeacherUsername = await db.teacher.findFirst({
+        where: {
+          username,
+        },
+      });
 
-    const testAdminUsername = await db.admin.findFirst({
-      where: {
-        username,
-      },
-    });
+      if(!testTeacherUsername) {
+        const testAdminUsername = await db.admin.findFirst({
+          where: {
+            username,
+          },
+        });
 
-    if (!testStudentUsername || !testTeacherUsername || !testAdminUsername) {
-      return res
-        .status(409)
-        .json(
-          "Používateľské meno nebolo nájdené pri študentoch alebo pri učiteľoch ani pri adminovi"
-        );
+        if(!testAdminUsername) {
+          return res.json("Používateľ neexistuje");
+        }
+      }
     }
-
-    if (fromDay.isBefore(toDay)) {
-      return res.status(409).json("Dátum od musí byť väčší ako dátum do");
-    }
-
+    
     if (fromDay.isSame(toDay)) {
       return res
         .status(409)
