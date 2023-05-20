@@ -98,7 +98,7 @@ export const createBooking = async (
         }
 
         if(!testTeacherUsername && !testStudentUsername && !testAdminUsername) {
-          return "Použivateľ neeixstuje";
+          return res.status(409).json("Používateľ neexistuje");
         }
       }
     } 
