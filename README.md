@@ -18,3 +18,4 @@
 - Express
 - Postgresql
 - Prisma
+- Fly.io - Deploy(Future)
