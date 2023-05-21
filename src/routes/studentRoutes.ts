@@ -20,7 +20,7 @@ router.post("/student/register", studentRegister);
 router.post("/student/login", studentLogin);
 router.get("/student/profile", verifyToken, studentProfile);
 router.patch("/student/profile/update/:id", updateProfile);
-router.delete("/student/delete/:id", deleteProfile);
+router.delete("/student/profile/delete/:id", deleteProfile);
 
 
 export default router;
