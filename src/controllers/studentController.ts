@@ -157,9 +157,11 @@ export const updateProfile = async (req: Request, res: Response) => {
 
 export const deleteProfile = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const { username } = req.params;
     const user = await db.student.findFirst({
-      where: { id: Number(id) },
+      where: {
+        username,
+      },
     });
 
     const deleteUser = await db.student.delete({
@@ -173,6 +175,10 @@ export const deleteProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const deleteAllBorrowedBooks = async (req: Request, res: Response) => {
+  return;
+}
 
 
 export const newPassword =(req: Request, res: Response) => {
