@@ -1,14 +1,15 @@
 import { PrismaClient } from "@prisma/client";
 import { ADMIN, STUDENT, TEACHER } from "../src/constants/roleConstants";
 
-
 const prisma = new PrismaClient();
 
 async function main() {
   const newCategory = await prisma.category.create({
     data: {
       name: "Name1",
-      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
+      externalId: Math.floor(
+        100000 + Math.random() * 900000
+      ) as unknown as number,
       description: "Description",
     },
   });
@@ -16,7 +17,9 @@ async function main() {
   const newAuthor = await prisma.author.create({
     data: {
       name: "Name1",
-      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
+      externalId: Math.floor(
+        100000 + Math.random() * 900000
+      ) as unknown as number,
       birthYear: 2001,
       country: "Slovakia",
       description: "ROROROROR",
@@ -28,7 +31,9 @@ async function main() {
   const newBook = await prisma.book.create({
     data: {
       name: "Name",
-      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
+      externalId: Math.floor(
+        100000 + Math.random() * 900000
+      ) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -42,7 +47,9 @@ async function main() {
   const secondBook = await prisma.book.create({
     data: {
       name: "Name1",
-      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
+      externalId: Math.floor(
+        100000 + Math.random() * 900000
+      ) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
@@ -56,7 +63,9 @@ async function main() {
   const thirdBook = await prisma.book.create({
     data: {
       name: "Name2",
-      externalId: Math.floor(100000 + Math.random() * 900000) as unknown as number,
+      externalId: Math.floor(
+        100000 + Math.random() * 900000
+      ) as unknown as number,
       description: "Description",
       image: "https://picsum.photos/200/300",
       pages: 20202,
