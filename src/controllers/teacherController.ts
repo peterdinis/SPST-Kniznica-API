@@ -126,6 +126,25 @@ export const deleteProfile = async (req: Request, res: Response) => {
   return;
 }
 
-export const newPassword = (req: Request, res: Response) => {
-  return;
+export const newPassword = async (req: Request, res: Response) => {
+  const {username} = req.params;
+  const {newPassword} = req.body;
+
+  const findTeacher = await db.teacher.findFirst({
+    where: {
+      username
+    },
+  })
+
+  const setupNewPassword = await db.teacher.update({
+    where: {
+      id: findTeacher!.id
+    },
+
+    data: {
+      password: newPassword
+    }
+  });
+
+  return res.json(setupNewPassword);
 }

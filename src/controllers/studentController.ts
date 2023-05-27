@@ -196,7 +196,8 @@ export const deleteAllBorrowedBooks = async (req: Request, res: Response) => {
 
 
 export const newPassword = async (req: Request, res: Response) => {
-  const {newPassword, username} = req.body;
+  const {username} = req.params;
+  const {newPassword} = req.body;
 
   const findStudent = await db.student.findFirst({
     where: {
