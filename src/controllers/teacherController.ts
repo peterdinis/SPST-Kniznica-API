@@ -115,11 +115,48 @@ export const teacherProfile = async (req: Request, res: Response) => {
 };
 
 export const updateProfile = async (req: Request, res: Response) => {
-  return;
+  try {
+    const { username } = req.params;
+    const user = await db.teacher.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    const updateUser = await db.teacher.update({
+      where: {
+        id: user!.id,
+      },
+      data: {
+        ...req.body,
+      },
+    });
+
+    return res.json(updateUser);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 }
 
 export const deleteProfile = async (req: Request, res: Response) => {
-  return;
+  try {
+    const { username } = req.params;
+    const user = await db.teacher.findFirst({
+      where: {
+        username,
+      },
+    });
+
+    const deleteUser = await db.teacher.delete({
+      where: {
+        id: user!.id,
+      },
+    });
+
+    return res.status(200).json(deleteUser);
+  } catch (err) {
+    getErrorMessage(err);
+  }
 }
 
 export const newPassword = async (req: Request, res: Response) => {

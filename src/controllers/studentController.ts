@@ -149,7 +149,7 @@ export const updateProfile = async (req: Request, res: Response) => {
       },
     });
 
-    return updateUser;
+    return res.json(updateUser);
   } catch (err) {
     getErrorMessage(err);
   }
