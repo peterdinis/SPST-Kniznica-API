@@ -76,48 +76,10 @@ async function main() {
     },
   });
 
-  const newStudent = await prisma.student.create({
-    data: {
-      email: "testStudent@gmail.com",
-      password: "password",
-      classRoom: "1.A",
-      lastName: "RRRR",
-      username: "TestStudent",
-      name: "RIRIRIR",
-      role: STUDENT,
-      picture: null,
-    },
-  });
-
-  const newTeacher = await prisma.teacher.create({
-    data: {
-      email: "testTeacher@gmail.com",
-      password: "password",
-      lastName: "Test",
-      name: "Tester",
-      username: "TestTeacher",
-      role: TEACHER,
-    },
-  });
-
-  const newAdmin = await prisma.admin.create({
-    data: {
-      email: "testAdmin@gmail.com",
-      password: "password",
-      name: "Admin",
-      lastName: "TestAdmin",
-      role: ADMIN,
-      username: "testAdmin",
-    },
-  });
-
   console.log(
     newBook,
     newCategory,
     newAuthor,
-    newAdmin,
-    newTeacher,
-    newStudent,
     secondBook,
     thirdBook
   );
