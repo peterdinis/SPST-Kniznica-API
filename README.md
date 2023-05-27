@@ -18,4 +18,5 @@
 - Express
 - Postgresql
 - Prisma
+- Docker
 - Fly.io - Deploy(Future)
