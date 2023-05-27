@@ -114,10 +114,6 @@ export const teacherProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteAllBorrowedBooks = async (req: Request, res: Response) => {
-  return;
-}
-
 export const updateProfile = async (req: Request, res: Response) => {
   return;
 }

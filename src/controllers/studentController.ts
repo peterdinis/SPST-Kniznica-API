@@ -176,25 +176,6 @@ export const deleteProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteAllBorrowedBooks = async (req: Request, res: Response) => {
-  const {username} = req.params;
-
-  const findStudent = await db.booking.findFirst({
-    where: {
-      username
-    },
-  })
-
-  const deleteAllBookings = await db.booking.deleteMany({
-    where: {
-      username: findStudent!.username
-    }
-  });
-
-  return res.json(deleteAllBookings);
-}
-
-
 export const newPassword = async (req: Request, res: Response) => {
   const {username} = req.params;
   const {newPassword} = req.body;

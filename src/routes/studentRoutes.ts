@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  deleteAllBorrowedBooks,
   deleteProfile,
   findAllPaginatedStudents,
   getAllStudents,
@@ -24,7 +23,6 @@ router.get("/student/profile", verifyToken, studentProfile);
 router.patch("/student/profile/update/:username", updateProfile);
 router.patch("/student/password/:username/new", newPassword);
 router.delete("/student/profile/delete/:username", deleteProfile);
-router.delete("/student/delete/bookings/:username", deleteAllBorrowedBooks);
 
 
 export default router;
