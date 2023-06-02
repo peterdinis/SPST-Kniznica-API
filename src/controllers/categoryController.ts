@@ -12,7 +12,7 @@ export const displayAllCategoriesFn = async (req: Request, res: Response) => {
   try {
     const allCategories = await db.category.findMany({
       include: {
-        Books: true,
+        books: true,
       },
     });
     return res.json(allCategories);
@@ -45,7 +45,7 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
         externalId: Number(externalId),
       },
       include: {
-        Books: true,
+        books: true,
       },
     });
 

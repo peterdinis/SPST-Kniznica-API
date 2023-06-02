@@ -34,7 +34,7 @@ model Category {
   externalId  Int    @default(2000)
   name        String
   description String
-  Books       Book[]
+  books      Book[]
 }
 
 model Student {
