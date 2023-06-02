@@ -101,7 +101,8 @@ model Author {
   externalId  Int     @default(2020202)
   name        String
   lastName    String
-  picture     String?
+  pictureId   Int?
+  picture     Image[]
   birthYear   Int
   deathYear   Int?
   country     String
@@ -116,4 +117,5 @@ model Image {
   path      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  authors   Author[]
 }
