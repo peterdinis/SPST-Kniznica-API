@@ -8,10 +8,6 @@ import {
   createAdminLoginType,
 } from "../validators/adminSchema";
 
-export const adminExample = (req: Request, res: Response) => {
-  return res.send("Admin example route");
-};
-
 export const registerAdmin = async (
   req: Request<{}, {}, createAdminRegisterType>,
   res: Response
