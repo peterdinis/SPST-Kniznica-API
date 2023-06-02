@@ -41,7 +41,7 @@ model Student {
   id        Int      @id @default(autoincrement())
   name      String   @default("FOO")
   lastName  String   @default("FOO")
-  username  String   @default("FOO")
+  username  String   @default("FOO") @unique
   email     String
   password  String
   picture   String?
@@ -56,7 +56,7 @@ model Teacher {
   id              Int      @id @default(autoincrement())
   name            String   @default("FOO")
   lastName        String   @default("FOO")
-  username        String   @default("FOO")
+  username        String   @default("FOO") @unique
   email           String
   password        String
   role            String   @default("TEACHER")
@@ -73,7 +73,7 @@ model Admin {
   id              Int      @id @default(autoincrement())
   name            String   @default("FOO")
   lastName        String   @default("FOO")
-  username        String   @default("FOO")
+  username        String   @default("FOO") @unique
   email           String
   password        String
   hasPermToCreate Boolean  @default(true)
