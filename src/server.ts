@@ -24,8 +24,6 @@ app.use(
   cors({
     origin: true,
     methods: "*",
-    credentials: true,
-    allowedHeaders: "*"
   })
 );
 app.use(compression());

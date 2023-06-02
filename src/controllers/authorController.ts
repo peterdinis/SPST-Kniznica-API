@@ -69,7 +69,7 @@ export const searchForAuthor = async (req: Request, res: Response) => {
 };
 
 export const createAuthor = async (
-  req: Request<{}, {}, createAuthorType>,
+  req: any,
   res: Response
 ) => {
   try {

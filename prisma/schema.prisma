@@ -109,5 +109,4 @@ model Author {
   litPeriod   String
   books       Book[]
   imageData   Bytes  @default(dbgenerated("'default_image_data'"))
-  imagePath   String @default(dbgenerated("'default_image_path'"))
 }
