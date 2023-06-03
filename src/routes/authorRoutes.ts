@@ -8,7 +8,7 @@ import {
   searchForAuthor,
   updateAuthor,
 } from "../controllers/authorController";
-import { upload } from "../middleware/multer.js";
+import { upload } from "../middleware/multer";
 
 const router = express.Router();
 
