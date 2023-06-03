@@ -108,5 +108,5 @@ model Author {
   description String
   litPeriod   String
   books       Book[]
-  imageData   Bytes  @default(dbgenerated("'default_image_data'"))
+  image       Bytes  @default(dbgenerated("'default_image_data'"))
 }
