@@ -4,8 +4,7 @@
   "main": "server.ts",
   "scripts": {
     "seeder": "ts-node prisma/seed.ts",
-    "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "test": "set PORT=8111 && jest --watchAll --verbose"
+    "dev": "nodemon --config nodemon.json ./src/server.ts"
   },
   "keywords": [
     "API",
