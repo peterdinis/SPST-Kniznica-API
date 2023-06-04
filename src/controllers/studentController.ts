@@ -177,8 +177,7 @@ export const deleteProfile = async (req: Request, res: Response) => {
 };
 
 export const newPassword = async (req: Request, res: Response) => {
-  const {username} = req.params;
-  const {newPassword} = req.body;
+  const {username, newPassword} = req.body;
 
   const findStudent = await db.student.findFirst({
     where: {
