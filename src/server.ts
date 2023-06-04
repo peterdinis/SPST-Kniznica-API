@@ -26,6 +26,7 @@ app.use(
     methods: "*",
   })
 );
+
 app.use(compression());
 app.use(express.json());
 app.use(morgan("dev"));
