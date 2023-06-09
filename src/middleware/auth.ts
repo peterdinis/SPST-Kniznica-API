@@ -3,7 +3,7 @@ import { Response, NextFunction, Request } from "express";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 interface CustomRequest extends Request {
-  user?: any;
+  user?: unknown;
 }
 
 export const verifyToken = async (
