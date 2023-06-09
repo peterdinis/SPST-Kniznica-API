@@ -1,6 +1,6 @@
 {
   "name": "spst-kniznica-api",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "main": "server.ts",
   "scripts": {
     "seeder": "ts-node prisma/seed.ts",
@@ -44,6 +44,6 @@
     "nodemon": "^2.0.22",
     "prisma": "^4.15.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }

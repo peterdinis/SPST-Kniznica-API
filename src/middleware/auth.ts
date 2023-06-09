@@ -1,8 +1,13 @@
 import jwt from "jsonwebtoken";
-import { Response, NextFunction } from "express";
+import { Response, NextFunction, Request } from "express";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
+
+interface CustomRequest extends Request {
+  user?: unknown;
+}
 
 export const verifyToken = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -19,11 +24,11 @@ export const verifyToken = async (
 
     const verified = jwt.verify(
       token,
-      process.env.JWT_SECRET as unknown as string
+      process.env.JWT_SECRET as string
     );
     req.user = verified;
     next();
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    getErrorMessage(err);
   }
 };
