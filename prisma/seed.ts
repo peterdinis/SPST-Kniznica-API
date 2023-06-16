@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { ADMIN, STUDENT, TEACHER } from "../src/constants/roleConstants";
 
 const prisma = new PrismaClient();
 
@@ -25,6 +24,7 @@ async function main() {
       description: "ROROROROR",
       lastName: "FOFOFOFOF",
       litPeriod: "DOROROROROR",
+      image: "https://www.computerhope.com/jargon/r/random-dice.jpg",
     },
   });
 
