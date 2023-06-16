@@ -2,7 +2,6 @@ import db from "../db";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
-import { createAuthorType } from "../validators/authorSchema";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
