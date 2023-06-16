@@ -56,7 +56,7 @@ export const teacherRegister = async (
       data: {
         ...req.body,
         password: passwordHash
-      } as any
+      }
     });
 
     return res.json(createNewTeacher);
