@@ -67,6 +67,7 @@ export const searchForAuthor = async (req: Request, res: Response) => {
   }
 };
 
+// TODO: Remove any later
 export const createAuthor = async (
   req: { file: { image: string; }; body: any },
   res: Response
