@@ -3,10 +3,6 @@ import cron from "node-cron";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import { DateTime } from 'luxon';
 
-const date = new Date();
-
-const londonTime = date.toLocaleString("en-GB", {timeZone: "Europe/London"});
-
 export async function displayBooksOrderedByCreationDate() {
   try {
     // Retrieve all books from the database and order them by creation date in ascending order
