@@ -27,14 +27,16 @@ model Book {
   authorId    Int
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Borrowed    Booking[]
+  createdAt   DateTime  @default(now())
 }
 
 model Category {
-  id          Int    @id @default(autoincrement())
-  externalId  Int    @default(2000)
+  id          Int      @id @default(autoincrement())
+  externalId  Int      @default(2000)
   name        String
   description String
   books       Book[]
+  createdAt   DateTime @default(now())
 }
 
 model Student {
@@ -49,7 +51,6 @@ model Student {
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Teacher {
@@ -88,20 +89,21 @@ model Admin {
 }
 
 model Booking {
-  id       Int    @id @default(autoincrement())
-  from     String
-  to       String
-  username String @default("Custom user")
-  bookId   Int
-  book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  id        Int      @id @default(autoincrement())
+  from      String
+  to        String
+  username  String   @default("Custom user")
+  bookId    Int
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }
 
 model Author {
-  id          Int    @id @default(autoincrement())
-  externalId  Int    @default(2020202)
+  id          Int      @id @default(autoincrement())
+  externalId  Int      @default(2020202)
   name        String
   lastName    String
-  picture     String @default("ororo")
+  picture     String   @default("ororo")
   birthYear   Int
   deathYear   Int?
   country     String
@@ -109,11 +111,13 @@ model Author {
   litPeriod   String
   books       Book[]
   image       String
+  createdAt   DateTime @default(now())
 }
 
 model Message {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   header      String
   body        String
   forUsername String
+  createdAt   DateTime @default(now())
 }
