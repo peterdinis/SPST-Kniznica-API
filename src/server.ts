@@ -50,6 +50,7 @@ app.use(messageRoutes);
 
 testCron();
 displayBooksOrderedByCreationDate();
+displayBooksOrderedByCreationDate();
 
 app.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`)
