@@ -15,6 +15,7 @@ import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import { testCron } from "./cron/testCron";
 import messageRoutes from "./routes/messageRoutes";
+import { displayBooksOrderedByCreationDate } from "./cron/bookCron";
 
 export const app: Application = express();
 
@@ -48,6 +49,7 @@ app.use(authorRoutes);
 app.use(messageRoutes);
 
 testCron();
+displayBooksOrderedByCreationDate();
 
 app.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`)

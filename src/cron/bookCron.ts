@@ -1,5 +1,10 @@
 import db from "../db";
 import cron from "node-cron";
+import { getErrorMessage } from "../helpers/catchErrorMessage";
+
+const date = new Date();
+
+const londonTime = date.toLocaleString("en-GB", {timeZone: "Europe/London"});
 
 export async function displayBooksOrderedByCreationDate() {
   try {
@@ -9,13 +14,14 @@ export async function displayBooksOrderedByCreationDate() {
         createdAt: "asc",
       },
     });
-  } catch (error) {
-    console.error("Error displaying books ordered by creation date:", error);
+    console.log(books);
+  } catch (error: unknown) {
+    getErrorMessage(error);
   }
 }
 
 // Schedule the job to run at your desired interval
-cron.schedule("0 9 * * *", async () => {
-  console.log("Running job to display books ordered by creation date...");
+cron.schedule('0 9 * * *', async () => {
+  console.log('Running job to display books ordered by creation date...');
   await displayBooksOrderedByCreationDate();
-});
+}, { scheduled: true, timezone: londonTime });
