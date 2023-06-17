@@ -110,3 +110,9 @@ model Author {
   books       Book[]
   image       String
 }
+
+model Message {
+  id     Int    @id @default(autoincrement())
+  header String
+  body   String
+}
