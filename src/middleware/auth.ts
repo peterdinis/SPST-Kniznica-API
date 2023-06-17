@@ -22,10 +22,7 @@ export const verifyToken = async (
       token = token.slice(7, token.length).trimLeft();
     }
 
-    const verified = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string
-    );
+    const verified = jwt.verify(token, process.env.JWT_SECRET as string);
     req.user = verified;
     next();
   } catch (err: unknown) {
