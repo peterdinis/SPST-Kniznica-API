@@ -13,6 +13,7 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
+import { testCron } from "./cron/testCron";
 
 export const app: Application = express();
 
@@ -43,6 +44,8 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
+
+testCron();
 
 app.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`)
