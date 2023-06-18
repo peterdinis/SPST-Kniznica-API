@@ -38,7 +38,6 @@ model Category {
   description String
   books       Book[]
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model Student {
@@ -116,7 +115,6 @@ model Author {
   books       Book[]
   image       String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
 
 model Message {
@@ -125,5 +123,4 @@ model Message {
   body        String
   forUsername String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
 }
