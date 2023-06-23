@@ -146,6 +146,14 @@ export const createBooking = async (
       },
     });
 
+    await db.message.create({
+      data: {
+        body: `${username} si požčial knihu ${bookId}`,
+        forUsername: username,
+        header: "Požičanie knihy"
+      }
+    })
+
     return res.json(createNewBooking);
   } catch (err) {
     getErrorMessage(err);
@@ -190,6 +198,14 @@ export const returnBook = async (
         status: AVAIABLE,
       },
     });
+
+    await db.message.create({
+      data: {
+        body: `${username} si vrátil knihu ${bookId}`,
+        forUsername: username,
+        header: "Vrátenie knihy"
+      }
+    })
 
     return res.json(removeBookFromBooking);
   } catch (err) {

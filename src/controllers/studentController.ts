@@ -76,6 +76,14 @@ export const studentRegister = async (
       },
     });
 
+    await db.message.create({
+      data: {
+        body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
+        forUsername: username,
+        header: "Registrácia"
+      }
+    })
+
     return res.status(201).json(createNewStudent);
   } catch (err) {
     getErrorMessage(err);
