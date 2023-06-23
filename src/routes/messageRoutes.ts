@@ -4,7 +4,7 @@ import { deleteMessage, getAllMessages, getMyMessages, messageDetail } from "../
 const router = express.Router();
 
 router.get("/messages/all", getAllMessages);
-router.get("/message/my/:username", getMyMessages);
+router.get("/messages/my/:username", getMyMessages);
 router.get("/message/:id", messageDetail);
 router.delete("/message/delete/:id", deleteMessage);
 
