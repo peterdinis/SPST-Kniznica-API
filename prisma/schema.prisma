@@ -28,7 +28,6 @@ model Book {
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Borrowed    Booking[]
   createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
 }
 
 model Category {
@@ -52,7 +51,6 @@ model Student {
   role      String   @default("STUDENT")
   classRoom String   @default("1.A")
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Teacher {
@@ -69,7 +67,6 @@ model Teacher {
   hasPermToUpdate Boolean  @default(true)
   canSeeBooking   Boolean  @default(false)
   createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
 }
 
 model Admin {
@@ -87,7 +84,6 @@ model Admin {
   canSeeBookings  Boolean  @default(true)
   role            String   @default("ADMIN")
   createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
 }
 
 model Booking {
@@ -98,7 +94,6 @@ model Booking {
   bookId    Int
   book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Author {
@@ -108,7 +103,7 @@ model Author {
   lastName    String
   picture     String   @default("ororo")
   birthYear   Int
-  deathYear   Int?
+  isAlive     Boolean  @default(false)
   country     String
   description String
   litPeriod   String
