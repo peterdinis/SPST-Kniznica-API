@@ -9,7 +9,11 @@ const paginate = paginator(prisma);
 
 export const getAllAuthors = async (req: Request, res: Response) => {
   try {
-    const allAuthors = await db.author.findMany();
+    const allAuthors = await db.author.findMany({
+      include: {
+        books: true,
+      }, 
+    });
     return res.json(allAuthors);
   } catch (err) {
     getErrorMessage(err);
