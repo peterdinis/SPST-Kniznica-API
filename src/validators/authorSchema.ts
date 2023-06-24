@@ -9,7 +9,7 @@ export const createAuthor = z.object({
         required_error: "Last name is required"
     }),
 
-    picture: z.string({
+    image: z.string({
         required_error: "Picture is required"
     }),
 
@@ -17,9 +17,9 @@ export const createAuthor = z.object({
         required_error: "BirthYear is required and must be a number" 
     }),
 
-    deathYear: z.number({
-        required_error: "DeathYear is required and must be a number"
-    }).optional(),
+    isAlive: z.boolean({
+        required_error: "isAlive must be boolean"
+    }),
 
     country: z.string({
         required_error: "Country is required"
