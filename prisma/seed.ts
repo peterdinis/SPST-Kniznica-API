@@ -20,6 +20,7 @@ async function main() {
         100000 + Math.random() * 900000
       ) as unknown as number,
       birthYear: 2001,
+      isAlive: true,
       country: "Slovakia",
       description: "ROROROROR",
       lastName: "FOFOFOFOF",
