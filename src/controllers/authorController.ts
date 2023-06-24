@@ -68,16 +68,14 @@ export const searchForAuthor = async (req: Request, res: Response) => {
 };
 
 export const createAuthor = async (
-  req: any,
+  req: Request,
   res: Response
 ) => {
   try {
-    const {image} = req.file;
     const createNewAuthor = await db.author.create({
       data: {
         externalId: Math.floor(100000 + Math.random() * 900000),
         ...req.body,
-        image,
       },
     });
 

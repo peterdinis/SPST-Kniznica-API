@@ -101,7 +101,6 @@ model Author {
   externalId  Int      @default(2020202)
   name        String
   lastName    String
-  picture     String   @default("ororo")
   birthYear   Int
   isAlive     Boolean  @default(false)
   country     String
