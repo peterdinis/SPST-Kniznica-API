@@ -93,3 +93,7 @@ export const adminProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
+
+export const updateProfile = async() =>{
+  return;
+}
