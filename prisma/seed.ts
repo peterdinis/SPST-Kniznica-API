@@ -81,19 +81,13 @@ async function main() {
     data: {
       header: "Moja sprava",
       body: "Moje body",
-      forUsername: "Pre uživateľa"
-    }
+      forUsername: "Pre uživateľa",
+    },
   });
 
-  console.log(
-    newBook,
-    newCategory,
-    newAuthor,
-    secondBook,
-    thirdBook,
-    message
-  );
+  console.log(newBook, newCategory, newAuthor, secondBook, thirdBook, message);
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
