@@ -7,11 +7,28 @@ import {
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import dayjs from "dayjs";
+import paginator from "prisma-paginate";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+const paginate = paginator(prisma);
 
 export const getAllBooking = async (req: Request, res: Response) => {
   try {
     const allBookings = await db.booking.findMany();
     return res.json(allBookings);
+  } catch (err) {
+    getErrorMessage(err);
+  }
+};
+
+export const findAllPaginatedBookings = async (req: Request, res: Response) => {
+  try {
+    const allPaginatedBooking = await paginate.booking.paginate({
+      page: Number(req.query.page) as unknown as number,
+      limit: Number(req.query.limit) as unknown as number,
+    });
+    return res.json(allPaginatedBooking);
   } catch (err) {
     getErrorMessage(err);
   }
