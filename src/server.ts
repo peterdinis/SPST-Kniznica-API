@@ -14,6 +14,7 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import messageRoutes from "./routes/messageRoutes";
+
 export const app: Application = express();
 
 if (process.env.NODE_ENV === "development") {
