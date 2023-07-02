@@ -22,7 +22,9 @@ export const registerTeacherSchema = z.object({
 
     role: z.string({
         required_error: "Role is required"
-    })
+    }),
+
+    isDeactivated: z.boolean({}).optional()
 });
 
 export const loginTeacherSchema = z.object({
@@ -33,6 +35,8 @@ export const loginTeacherSchema = z.object({
     password: z.string({
         required_error: "Password is required"
     }),
+
+    isDeactivated: z.boolean({}).optional()
 })
 
 export type createTeacherRegisterType = z.infer<typeof registerTeacherSchema>;

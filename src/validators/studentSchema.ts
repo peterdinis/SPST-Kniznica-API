@@ -27,7 +27,9 @@ export const registerStudentSchema = z.object({
 
     classRoom: z.string({
         required_error: "Classroom is required"
-    })
+    }),
+
+    isDeactivated: z.boolean({}).optional()
 });
 
 export const loginStudentSchema = z.object({
@@ -38,6 +40,8 @@ export const loginStudentSchema = z.object({
     password: z.string({
         required_error: "Password is required"
     }),
+
+    isDeactivated: z.boolean({}).optional()
 })
 
 export type createStudentRegisterType = z.infer<typeof registerStudentSchema>;
