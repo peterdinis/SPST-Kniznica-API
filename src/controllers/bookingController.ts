@@ -85,8 +85,8 @@ export const createBooking = async (
       }
     })
 
-    if(findBookForBorrow!.status === AVAIABLE) {
-      return res.status(409).json("Nemôžem vykonať operáciu lebo kniha je ")
+    if(findBookForBorrow!.status !== AVAIABLE) {
+      return res.status(409).json("Nemôžem vykonať operáciu lebo kniha nie je dostupná")
     }
 
     const testStudentUsername = await db.student.findFirst({

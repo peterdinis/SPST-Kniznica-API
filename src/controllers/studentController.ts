@@ -56,6 +56,9 @@ export const studentRegister = async (
     const existingUser = await db.student.findFirst({
       where: {
         email,
+        NOT: {
+          isDeactivated: true
+        }
       },
     });
 
@@ -99,6 +102,9 @@ export const studentLogin = async (
     const user = await db.student.findFirst({
       where: {
         email,
+        NOT: {
+          isDeactivated: true
+        }
       },
     });
 
@@ -172,13 +178,17 @@ export const deleteProfile = async (req: Request, res: Response) => {
       },
     });
 
-    const deleteUser = await db.student.delete({
+    const deactivatedUser = await db.student.update({
       where: {
         id: user!.id,
       },
-    });
 
-    return res.status(200).json(deleteUser);
+      data: {
+        isDeactivated: true
+      }
+    })
+
+    return res.status(200).json(deactivatedUser);
   } catch (err) {
     getErrorMessage(err);
   }
