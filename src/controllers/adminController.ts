@@ -97,3 +97,7 @@ export const adminProfile = async (req: Request, res: Response) => {
 export const updateProfile = async() =>{
   return;
 }
+
+export const restartTeacherProfile = async() => {};
+
+export const restartStudentProfile = async() => {};
