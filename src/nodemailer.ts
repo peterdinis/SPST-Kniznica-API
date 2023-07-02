@@ -6,7 +6,7 @@ export const transporter = nodemailer.createTransport({
   port: 587,
   secure: false, // Set to true if using a secure connection (TLS/STARTTLS)
   auth: {
-    user: "your_email@example.com",
-    pass: "your_password",
+    user: process.env.EMAIL as unknown as string,
+    pass: process.env.PASSWORD as unknown as string
   },
 });
