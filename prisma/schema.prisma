@@ -40,17 +40,18 @@ model Category {
 }
 
 model Student {
-  id        Int      @id @default(autoincrement())
-  name      String   @default("FOO")
-  lastName  String   @default("FOO")
-  username  String   @unique @default("FOO")
-  email     String
-  password  String
-  picture   String?
-  isLogged  Boolean  @default(false)
-  role      String   @default("STUDENT")
-  classRoom String   @default("1.A")
-  createdAt DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  name          String   @default("FOO")
+  lastName      String   @default("FOO")
+  username      String   @unique @default("FOO")
+  email         String
+  password      String
+  picture       String?
+  isLogged      Boolean  @default(false)
+  role          String   @default("STUDENT")
+  classRoom     String   @default("1.A")
+  createdAt     DateTime @default(now())
+  isDeactivated Boolean  @default(false)
 }
 
 model Teacher {
@@ -67,6 +68,7 @@ model Teacher {
   hasPermToUpdate Boolean  @default(true)
   canSeeBooking   Boolean  @default(false)
   createdAt       DateTime @default(now())
+  isDeactivated   Boolean  @default(false)
 }
 
 model Admin {
