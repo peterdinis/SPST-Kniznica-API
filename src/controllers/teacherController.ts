@@ -55,7 +55,8 @@ export const teacherRegister = async (
     const createNewTeacher = await db.teacher.create({
       data: {
         ...req.body,
-        password: passwordHash
+        password: passwordHash,
+        isDeactivated: false
       }
     });
 
@@ -83,6 +84,9 @@ export const teacherLogin = async (
     const user = await db.teacher.findFirst({
       where: {
         email,
+        NOT: {
+          isDeactivated: true
+        }
       },
     });
 
@@ -155,13 +159,17 @@ export const deleteProfile = async (req: Request, res: Response) => {
       },
     });
 
-    const deleteUser = await db.teacher.delete({
+    const deactivatedUser = await db.student.update({
       where: {
         id: user!.id,
       },
-    });
 
-    return res.status(200).json(deleteUser);
+      data: {
+        isDeactivated: true
+      }
+    })
+
+    return res.status(200).json(deactivatedUser);
   } catch (err) {
     getErrorMessage(err);
   }
