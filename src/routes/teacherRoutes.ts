@@ -7,6 +7,8 @@ import {
   teacherLogin,
   teacherProfile,
   teacherRegister,
+  updateProfile,
+  deactivatedProfile
 } from "../controllers/teacherController";
 
 const router = express.Router();
@@ -17,5 +19,7 @@ router.get("/teacher/info/:id", getTeacherInfo);
 router.post("/teacher/register", teacherRegister);
 router.post("/teacher/login", teacherLogin);
 router.get("/teacher/profile", verifyToken, teacherProfile);
+router.patch("/teacher/profile/update/:username", updateProfile);
+router.delete("/teacher/profile/delete/:username", deactivatedProfile);
 
 export default router;

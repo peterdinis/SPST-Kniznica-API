@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import db from "../db";
-import { createTeacherRegisterType, createTeacherLoginType } from "../validators/teacherSchema";
+import {
+  createTeacherRegisterType,
+  createTeacherLoginType,
+} from "../validators/teacherSchema";
 import bcrypt from "bcrypt";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import jwt from "jsonwebtoken";
@@ -42,13 +45,12 @@ export const getTeacherInfo = async (req: Request, res: Response) => {
   return res.json(findOneTeacher);
 };
 
-
 export const teacherRegister = async (
   req: Request<{}, {}, createTeacherRegisterType>,
   res: Response
 ) => {
   try {
-    const { password, username} = req.body;
+    const { password, username } = req.body;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
@@ -56,24 +58,23 @@ export const teacherRegister = async (
       data: {
         ...req.body,
         password: passwordHash,
-        isDeactivated: false
-      }
+        isDeactivated: false,
+      },
     });
 
     await db.message.create({
       data: {
         body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
         forUsername: username,
-        header: "Registrácia"
-      }
-    })
+        header: "Registrácia",
+      },
+    });
 
     return res.json(createNewTeacher);
   } catch (err) {
     getErrorMessage(err);
   }
 };
-
 
 export const teacherLogin = async (
   req: Request<{}, {}, createTeacherLoginType>,
@@ -85,8 +86,8 @@ export const teacherLogin = async (
       where: {
         email,
         NOT: {
-          isDeactivated: true
-        }
+          isDeactivated: true,
+        },
       },
     });
 
@@ -148,9 +149,9 @@ export const updateProfile = async (req: Request, res: Response) => {
   } catch (err) {
     getErrorMessage(err);
   }
-}
+};
 
-export const deleteProfile = async (req: Request, res: Response) => {
+export const deactivatedProfile = async (req: Request, res: Response) => {
   try {
     const { username } = req.params;
     const user = await db.teacher.findFirst({
@@ -159,18 +160,18 @@ export const deleteProfile = async (req: Request, res: Response) => {
       },
     });
 
-    const deactivatedUser = await db.student.update({
+    const deactivatedUser = await db.teacher.update({
       where: {
         id: user!.id,
       },
 
       data: {
-        isDeactivated: true
-      }
-    })
+        isDeactivated: true,
+      },
+    });
 
     return res.status(200).json(deactivatedUser);
   } catch (err) {
     getErrorMessage(err);
   }
-}
+};

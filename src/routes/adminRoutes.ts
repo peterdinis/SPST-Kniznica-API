@@ -3,6 +3,9 @@ import {
   adminProfile,
   loginAdmin,
   registerAdmin,
+  restartStudentProfile,
+  restartTeacherProfile,
+  updateProfile,
 } from "../controllers/adminController";
 
 const router = express.Router();
@@ -10,5 +13,8 @@ const router = express.Router();
 router.post("/admin/register", registerAdmin);
 router.post("/admin/login", loginAdmin);
 router.get("/admin/profile", adminProfile);
+router.patch("/admin/profile/update/:username", updateProfile);
+router.patch("/admin/reactivate/teacher/:username", restartTeacherProfile);
+router.patch("/admin/reactivate/student/:username", restartStudentProfile);
 
 export default router;
