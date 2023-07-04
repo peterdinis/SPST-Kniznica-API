@@ -150,7 +150,7 @@ export const updateProfile = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteProfile = async (req: Request, res: Response) => {
+export const deactivatedProfile = async (req: Request, res: Response) => {
   try {
     const { username } = req.params;
     const user = await db.teacher.findFirst({
