@@ -213,5 +213,7 @@ export const newPassword = async (req: Request, res: Response) => {
     }
   });
 
+  console.log(setupNewPassword);
+
   return res.json(setupNewPassword);
 }
