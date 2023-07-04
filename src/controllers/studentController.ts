@@ -57,8 +57,8 @@ export const studentRegister = async (
       where: {
         email,
         NOT: {
-          isDeactivated: true
-        }
+          isDeactivated: true,
+        },
       },
     });
 
@@ -83,9 +83,9 @@ export const studentRegister = async (
       data: {
         body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
         forUsername: username,
-        header: "Registrácia"
-      }
-    })
+        header: "Registrácia",
+      },
+    });
 
     return res.status(201).json(createNewStudent);
   } catch (err) {
@@ -103,8 +103,8 @@ export const studentLogin = async (
       where: {
         email,
         NOT: {
-          isDeactivated: true
-        }
+          isDeactivated: true,
+        },
       },
     });
 
@@ -184,9 +184,9 @@ export const deactivatedProfile = async (req: Request, res: Response) => {
       },
 
       data: {
-        isDeactivated: true
-      }
-    })
+        isDeactivated: true,
+      },
+    });
 
     return res.status(200).json(deactivatedUser);
   } catch (err) {
