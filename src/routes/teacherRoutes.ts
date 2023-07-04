@@ -4,7 +4,6 @@ import {
   findAllPaginatedTeacher,
   getAllTeachers,
   getTeacherInfo,
-  newPassword,
   teacherLogin,
   teacherProfile,
   teacherRegister,
@@ -18,6 +17,5 @@ router.get("/teacher/info/:id", getTeacherInfo);
 router.post("/teacher/register", teacherRegister);
 router.post("/teacher/login", teacherLogin);
 router.get("/teacher/profile", verifyToken, teacherProfile);
-router.patch("/teacher/password/:username/new", newPassword);
 
 export default router;

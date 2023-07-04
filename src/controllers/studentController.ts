@@ -193,27 +193,3 @@ export const deleteProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-export const newPassword = async (req: Request, res: Response) => {
-  const {username, newPassword} = req.body;
-
-  const findStudent = await db.student.findFirst({
-    where: {
-      username
-    },
-  })
-
-  const setupNewPassword = await db.student.update({
-    where: {
-      id: findStudent!.id
-    },
-
-    data: {
-      password: newPassword
-    }
-  });
-
-  console.log(setupNewPassword);
-
-  return res.json(setupNewPassword);
-}
