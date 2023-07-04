@@ -159,7 +159,7 @@ export const deactivatedProfile = async (req: Request, res: Response) => {
       },
     });
 
-    const deactivatedUser = await db.student.update({
+    const deactivatedUser = await db.teacher.update({
       where: {
         id: user!.id,
       },
