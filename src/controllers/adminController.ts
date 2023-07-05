@@ -94,30 +94,6 @@ export const adminProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const updateProfile = async(req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.admin.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const updateUser = await db.admin.update({
-      where: {
-        id: user!.id,
-      },
-      data: {
-        ...req.body,
-      },
-    });
-
-    return res.json(updateUser);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-}
-
 export const restartTeacherProfile = async(req: Request, res: Response) => {
   try {
     const { username } = req.params;

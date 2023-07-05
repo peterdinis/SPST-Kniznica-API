@@ -79,14 +79,6 @@ export const studentRegister = async (
       },
     });
 
-    await db.message.create({
-      data: {
-        body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
-        forUsername: username,
-        header: "Registrácia",
-      },
-    });
-
     return res.status(201).json(createNewStudent);
   } catch (err) {
     getErrorMessage(err);
@@ -140,30 +132,6 @@ export const studentProfile = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(user);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
-export const updateProfile = async (req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.student.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const updateUser = await db.student.update({
-      where: {
-        id: user!.id,
-      },
-      data: {
-        ...req.body,
-      },
-    });
-
-    return res.json(updateUser);
   } catch (err) {
     getErrorMessage(err);
   }

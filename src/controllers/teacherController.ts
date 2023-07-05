@@ -62,14 +62,6 @@ export const teacherRegister = async (
       },
     });
 
-    await db.message.create({
-      data: {
-        body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
-        forUsername: username,
-        header: "Registrácia",
-      },
-    });
-
     return res.json(createNewTeacher);
   } catch (err) {
     getErrorMessage(err);
@@ -122,30 +114,6 @@ export const teacherProfile = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(user);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
-export const updateProfile = async (req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.teacher.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const updateUser = await db.teacher.update({
-      where: {
-        id: user!.id,
-      },
-      data: {
-        ...req.body,
-      },
-    });
-
-    return res.json(updateUser);
   } catch (err) {
     getErrorMessage(err);
   }
