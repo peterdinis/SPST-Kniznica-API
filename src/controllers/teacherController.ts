@@ -62,14 +62,6 @@ export const teacherRegister = async (
       },
     });
 
-    await db.message.create({
-      data: {
-        body: `${username} sa zaregistroval do applikácie. Registrácia bola úspešná`,
-        forUsername: username,
-        header: "Registrácia",
-      },
-    });
-
     return res.json(createNewTeacher);
   } catch (err) {
     getErrorMessage(err);
