@@ -7,7 +7,6 @@ import {
   studentLogin,
   studentProfile,
   studentRegister,
-  updateProfile,
 } from "../controllers/studentController";
 import { verifyToken } from "../middleware/auth";
 
@@ -19,7 +18,6 @@ router.get("/student/:paginate", findAllPaginatedStudents);
 router.post("/student/register", studentRegister);
 router.post("/student/login", studentLogin);
 router.get("/student/profile", verifyToken, studentProfile);
-router.patch("/student/profile/update/:username", updateProfile);
 router.delete("/student/profile/delete/:username", deactivatedProfile);
 
 export default router;
