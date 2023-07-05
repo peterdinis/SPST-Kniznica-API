@@ -44,7 +44,7 @@ model Student {
   name          String   @default("FOO")
   lastName      String   @default("FOO")
   username      String   @unique @default("FOO")
-  email         String
+  email         String   @unique @default("foo@gmail.com")
   password      String
   picture       String?
   isLogged      Boolean  @default(false)
@@ -59,7 +59,7 @@ model Teacher {
   name            String   @default("FOO")
   lastName        String   @default("FOO")
   username        String   @unique @default("FOO")
-  email           String
+  email           String   @unique @default("foo@gmail.com")
   password        String
   role            String   @default("TEACHER")
   isLogged        Boolean  @default(false)
@@ -76,7 +76,7 @@ model Admin {
   name            String   @default("FOO")
   lastName        String   @default("FOO")
   username        String   @unique @default("FOO")
-  email           String
+  email           String   @unique @default("foo@gmail.com")
   password        String
   hasPermToCreate Boolean  @default(true)
   isLogged        Boolean  @default(false)
