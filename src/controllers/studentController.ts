@@ -90,9 +90,9 @@ export const studentRegister = async (
     // await emailService.sendEmail(to, subject, content);
 
      // Emit a notification event to the specific student's socket connection
-     const studentId = createNewStudent.id; // Assuming the created student has an "id" property
+     /* const studentId = createNewStudent.id; // Assuming the created student has an "id" property
      const message = "Congratulations! You have successfully registered.";
-     io.emit("sendNotificationToStudent", studentId, message);
+     io.emit("sendNotificationToStudent", studentId, message); */
 
     return res.status(201).json(createNewStudent);
   } catch (err) {

@@ -63,9 +63,9 @@ app.use(authorRoutes);
 io.on("connection", (socket) => {
   console.log("A user connected");
 
-  socket.on("sendNotificationToStudent", (studentId, message) => {
-    socket.to(`student-${studentId}`).emit("notification", message);
-  });
+  // Send notification to the connected client
+  socket.emit("notification", "Hello, you have a new notification!");
+  
 
   // Disconnect event
   socket.on("disconnect", () => {
