@@ -127,3 +127,12 @@ model Notification {
   admin         Admin?   @relation(fields: [adminId], references: [id])
   adminId       Int?
 }
+
+model Email {
+  id       Int      @id @default(autoincrement())
+  to       String
+  subject  String
+  content  String
+  status   String   @default("pending")
+  createdAt DateTime @default(now())
+}
