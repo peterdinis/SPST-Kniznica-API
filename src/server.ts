@@ -13,8 +13,13 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
+import http from 'http';
+import { Server } from 'socket.io';
 
 export const app: Application = express();
+const server = http.createServer(app);
+const io = new Server(server);
+
 
 if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
@@ -44,6 +49,23 @@ app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
 
-app.listen(PORT, () => {
+// Socket.IO connection
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+/*   // Listen for new notifications
+  socket.on('newNotification', (notification) => {
+    // Save the notification to the database using Prisma
+    // Emit the notification to all connected clients
+    io.emit('newNotification', notification);
+  }); */
+
+  // Disconnect event
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
+
+server.listen(PORT, () => {
     console.log(`Applikácia beží na porte ${PORT}`)
 });

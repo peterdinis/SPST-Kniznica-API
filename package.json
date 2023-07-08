@@ -45,6 +45,7 @@
     "@types/morgan": "^1.9.4",
     "@types/node-cron": "^3.0.7",
     "@types/nodemailer": "^6.4.8",
+    "@types/socket.io": "^3.0.2",
     "nodemon": "^2.0.22",
     "prisma": "^4.16.2",
     "ts-node": "^10.9.1",
