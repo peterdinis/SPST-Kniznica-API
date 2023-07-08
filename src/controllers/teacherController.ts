@@ -118,28 +118,3 @@ export const teacherProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-export const deactivatedProfile = async (req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.teacher.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const deactivatedUser = await db.teacher.update({
-      where: {
-        id: user!.id,
-      },
-
-      data: {
-        isDeactivated: true,
-      },
-    });
-
-    return res.status(200).json(deactivatedUser);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
