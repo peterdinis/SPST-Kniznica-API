@@ -52,6 +52,7 @@ model Student {
   classRoom     String   @default("1.A")
   createdAt     DateTime @default(now())
   isDeactivated Boolean  @default(false)
+  notifications Notification[]
 }
 
 model Teacher {
@@ -69,6 +70,7 @@ model Teacher {
   canSeeBooking   Boolean  @default(false)
   createdAt       DateTime @default(now())
   isDeactivated   Boolean  @default(false)
+  notifications Notification[]
 }
 
 model Admin {
@@ -86,6 +88,7 @@ model Admin {
   canSeeBookings  Boolean  @default(true)
   role            String   @default("ADMIN")
   createdAt       DateTime @default(now())
+  notifications Notification[]
 }
 
 model Booking {
@@ -113,14 +116,23 @@ model Author {
   createdAt   DateTime @default(now())
 }
 
-model SNotification {
-  id       Int      @id @default(autoincrement())
-  message  String
-  createdAt DateTime @default(now())
+model Notification {
+  id            Int      @id @default(autoincrement())
+  message       String
+  createdAt     DateTime @default(now())
+  student       Student? @relation(fields: [studentId], references: [id])
+  studentId     Int?
+  teacher       Teacher? @relation(fields: [teacherId], references: [id])
+  teacherId     Int?
+  admin         Admin?   @relation(fields: [adminId], references: [id])
+  adminId       Int?
 }
 
-model TNotification {
+model Email {
   id       Int      @id @default(autoincrement())
-  message  String
+  to       String
+  subject  String
+  content  String
+  status   String   @default("pending")
   createdAt DateTime @default(now())
 }

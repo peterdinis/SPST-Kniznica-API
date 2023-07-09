@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  deactivatedProfile,
   findAllPaginatedStudents,
   getAllStudents,
   getStudentInfo,
@@ -18,6 +17,5 @@ router.get("/student/:paginate", findAllPaginatedStudents);
 router.post("/student/register", studentRegister);
 router.post("/student/login", studentLogin);
 router.get("/student/profile", verifyToken, studentProfile);
-router.delete("/student/profile/delete/:username", deactivatedProfile);
 
 export default router;

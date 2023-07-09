@@ -13,8 +13,21 @@ import adminRoutes from "./routes/adminRoutes";
 import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
+import http from "http";
+import { Server } from "socket.io";
+
+/* Todo: Later update setupp */
 
 export const app: Application = express();
+const server = http.createServer(app);
+export const io = new Server(server, {
+  cors: {
+    origin: "*",
+    allowedHeaders: "*",
+    methods: "*",
+    exposedHeaders: "*",
+  }
+});
 
 if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
@@ -22,8 +35,10 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: true,
+    origin: "http://localhost:3000",
+    allowedHeaders: "*",
     methods: "*",
+    exposedHeaders: "*",
   })
 );
 
@@ -33,7 +48,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 dotenv.config();
 
-const PORT = process.env.PORT as unknown as number || 8111;
+const PORT = (process.env.PORT as unknown as number) || 8111;
 
 app.use(exampleRoute);
 app.use(bookRoutes);
@@ -44,6 +59,16 @@ app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Applikácia beží na porte ${PORT}`)
+// Socket.IO connection
+io.on("connection", (socket) => {
+  console.log("A user connected");
+  
+
+  // Disconnect event
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+  });
+});
+server.listen(PORT, () => {
+  console.log(`Applikácia beží na porte ${PORT}`);
 });

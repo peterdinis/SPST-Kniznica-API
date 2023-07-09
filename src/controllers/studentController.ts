@@ -9,6 +9,7 @@ import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
+import { EmailService } from "../nodemailer";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -50,8 +51,9 @@ export const studentRegister = async (
   res: Response
 ) => {
   try {
-    const { email, password, username } = req.body;
+    const { email, password } = req.body;
     const salt = await bcrypt.genSalt();
+    const emailService = new EmailService();
 
     const existingUser = await db.student.findFirst({
       where: {
@@ -78,6 +80,13 @@ export const studentRegister = async (
         password: passwordHash,
       },
     });
+
+    // TODO: Later update this
+    const to = email;
+    const subject = "Registrácia bola úspešná";
+    const content = "Ak vám prišiel tento email to znamená že registrácia bola úspšená.";
+
+    // await emailService.sendEmail(to, subject, content);
 
     return res.status(201).json(createNewStudent);
   } catch (err) {
@@ -132,31 +141,6 @@ export const studentProfile = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json(user);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
-export const deactivatedProfile = async (req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.student.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const deactivatedUser = await db.student.update({
-      where: {
-        id: user!.id,
-      },
-
-      data: {
-        isDeactivated: true,
-      },
-    });
-
-    return res.status(200).json(deactivatedUser);
   } catch (err) {
     getErrorMessage(err);
   }
