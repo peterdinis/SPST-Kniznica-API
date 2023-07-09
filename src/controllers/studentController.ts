@@ -10,7 +10,6 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { EmailService } from "../nodemailer";
-import { io } from "../server"
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -88,11 +87,6 @@ export const studentRegister = async (
     const content = "Ak vám prišiel tento email to znamená že registrácia bola úspšená.";
 
     // await emailService.sendEmail(to, subject, content);
-
-     // Emit a notification event to the specific student's socket connection
-     /* const studentId = createNewStudent.id; // Assuming the created student has an "id" property
-     const message = "Congratulations! You have successfully registered.";
-     io.emit("sendNotificationToStudent", studentId, message); */
 
     return res.status(201).json(createNewStudent);
   } catch (err) {

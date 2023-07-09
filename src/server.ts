@@ -62,9 +62,6 @@ app.use(authorRoutes);
 // Socket.IO connection
 io.on("connection", (socket) => {
   console.log("A user connected");
-
-  // Send notification to the connected client
-  socket.emit("notification", "Hello, you have a new notification!");
   
 
   // Disconnect event
