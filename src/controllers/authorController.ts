@@ -39,6 +39,9 @@ export const getOneAuthor = async (req: Request, res: Response) => {
       where: {
         externalId: Number(externalId),
       },
+      include: {
+        books: true
+      }
     });
 
     if (!oneAuthor) {
