@@ -1,7 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import exampleRoute from "./routes/exampleRoute";
 import bookRoutes from "./routes/bookRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
@@ -50,7 +49,6 @@ dotenv.config();
 
 const PORT = (process.env.PORT as unknown as number) || 8111;
 
-app.use(exampleRoute);
 app.use(bookRoutes);
 app.use(categoryRoutes);
 app.use(teacherRoutes);
