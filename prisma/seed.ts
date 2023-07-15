@@ -77,15 +77,7 @@ async function main() {
     },
   });
 
-  const message = await prisma.message.create({
-    data: {
-      header: "Moja sprava",
-      body: "Moje body",
-      forUsername: "Pre uživateľa",
-    },
-  });
-
-  console.log(newBook, newCategory, newAuthor, secondBook, thirdBook, message);
+  console.log(newBook, newCategory, newAuthor, secondBook, thirdBook);
 }
 
 main()
