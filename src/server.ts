@@ -6,6 +6,7 @@ import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
 import helmet from "helmet";
 import teacherRoutes from "./routes/teacherRoutes";
+import notificationRoutes from "./routes/notificationRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import adminRoutes from "./routes/adminRoutes";
@@ -54,6 +55,7 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
+app.use(notificationRoutes);
 
 // Socket.IO connection
 io.on('connection', (socket: Socket) => {
