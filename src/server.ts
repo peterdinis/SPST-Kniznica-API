@@ -6,6 +6,7 @@ import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
 import helmet from "helmet";
 import teacherRoutes from "./routes/teacherRoutes";
+import notificationRoutes from "./routes/notificationRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import adminRoutes from "./routes/adminRoutes";
@@ -13,9 +14,7 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import http from "http";
-import { Server } from "socket.io";
-
-/* Todo: Later update setupp */
+import { Server, Socket} from "socket.io";
 
 export const app: Application = express();
 const server = http.createServer(app);
@@ -34,7 +33,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL as unknown as string,
     allowedHeaders: "*",
     methods: "*",
     exposedHeaders: "*",
@@ -56,15 +55,14 @@ app.use(studentRoutes);
 app.use(bookingRoutes);
 app.use(adminRoutes);
 app.use(authorRoutes);
+app.use(notificationRoutes);
 
 // Socket.IO connection
-io.on("connection", (socket) => {
-  console.log("A user connected");
-  
+io.on('connection', (socket: Socket) => {
+  console.log('A client connected');
 
-  // Disconnect event
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
+  socket.on('disconnect', () => {
+    console.log('A client disconnected');
   });
 });
 server.listen(PORT, () => {

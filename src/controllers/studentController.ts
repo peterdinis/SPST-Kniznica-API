@@ -9,6 +9,8 @@ import jwt from "jsonwebtoken";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
+import { io} from '../server'
+
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -78,6 +80,16 @@ export const studentRegister = async (
         password: passwordHash,
       },
     });
+
+    const createNotification = await db.notification.create({
+      data: {
+        studentId: createNewStudent.id,
+        message: "Registrácia bola úspešná",
+      }
+    })
+
+    io.emit('newNotification', createNotification);
+
 
     return res.status(201).json(createNewStudent);
   } catch (err) {

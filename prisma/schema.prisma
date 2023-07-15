@@ -119,6 +119,7 @@ model Author {
 model Notification {
   id            Int      @id @default(autoincrement())
   message       String
+  username      String?   @default("Que")
   createdAt     DateTime @default(now())
   student       Student? @relation(fields: [studentId], references: [id])
   studentId     Int?
@@ -126,13 +127,4 @@ model Notification {
   teacherId     Int?
   admin         Admin?   @relation(fields: [adminId], references: [id])
   adminId       Int?
-}
-
-model Email {
-  id       Int      @id @default(autoincrement())
-  to       String
-  subject  String
-  content  String
-  status   String   @default("pending")
-  createdAt DateTime @default(now())
 }
