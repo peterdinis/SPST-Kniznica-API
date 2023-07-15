@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import { io } from "../server";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -12,7 +13,7 @@ export const getAllAuthors = async (req: Request, res: Response) => {
     const allAuthors = await db.author.findMany({
       include: {
         books: true,
-      }, 
+      },
     });
     return res.json(allAuthors);
   } catch (err) {
@@ -40,8 +41,8 @@ export const getOneAuthor = async (req: Request, res: Response) => {
         externalId: Number(externalId),
       },
       include: {
-        books: true
-      }
+        books: true,
+      },
     });
 
     if (!oneAuthor) {
@@ -74,10 +75,7 @@ export const searchForAuthor = async (req: Request, res: Response) => {
   }
 };
 
-export const createAuthor = async (
-  req: Request,
-  res: Response
-) => {
+export const createAuthor = async (req: Request, res: Response) => {
   try {
     const createNewAuthor = await db.author.create({
       data: {
@@ -85,6 +83,14 @@ export const createAuthor = async (
         ...req.body,
       },
     });
+
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Vytvorený nový autor - ${req.body.name}`,
+      },
+    });
+
+    io.emit("newNotification", createNotification);
 
     return res.json(createNewAuthor);
   } catch (err) {
@@ -109,6 +115,14 @@ export const updateAuthor = async (req: Request, res: Response) => {
       throw new Error("No author found");
     }
 
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Upravený autor - ${id}`,
+      },
+    });
+
+    io.emit("newNotification", createNotification);
+
     return res.json(authorForUpdate);
   } catch (err) {
     getErrorMessage(err);
@@ -128,6 +142,14 @@ export const deleteAuthor = async (req: Request, res: Response) => {
     if (!authorForDelete) {
       throw new Error("Author not found");
     }
+
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Zmazaný autor - ${id}`,
+      },
+    });
+
+    io.emit("newNotification", createNotification);
 
     return res.json(authorForDelete);
   } catch (err) {

@@ -4,6 +4,7 @@ import { createBookType } from "../validators/bookSchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
+import { io} from '../server'
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -137,6 +138,14 @@ export const createBookFn = async (
       },
     });
 
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Vytvorená nová kniha - ${name}`,
+      }
+    })
+
+    io.emit('newNotification', createNotification);
+
     return res.json(newBook);
   } catch (err) {
     getErrorMessage(err);
@@ -160,6 +169,14 @@ export const updateBookFn = async (req: Request, res: Response) => {
       return res.status(404).json("Book not found");
     }
 
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Kniha z id bola upravená - ${id}`,
+      }
+    })
+
+    io.emit('newNotification', createNotification);
+
     return res.json(bookForUpdate);
   } catch (err) {
     getErrorMessage(err);
@@ -179,6 +196,13 @@ export const deleteBookFn = async (req: Request, res: Response) => {
       return res.status(404).json("Book not found");
     }
 
+    const createNotification = await db.notification.create({
+      data: {
+        message: `Kniha z id bola zmazaná - ${id}`,
+      }
+    })
+
+    io.emit('newNotification', createNotification);
     return res.json(book);
   } catch (err) {
     getErrorMessage(err);
