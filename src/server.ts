@@ -13,7 +13,7 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import http from "http";
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 
 /* Todo: Later update setupp */
 
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL as unknown as string,
     allowedHeaders: "*",
     methods: "*",
     exposedHeaders: "*",
@@ -58,7 +58,7 @@ app.use(adminRoutes);
 app.use(authorRoutes);
 
 // Socket.IO connection
-io.on("connection", (socket) => {
+io.on("connection", (socket: Socket) => {
   console.log("A user connected");
   
 
