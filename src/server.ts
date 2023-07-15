@@ -13,9 +13,8 @@ import compression from "compression";
 import authorRoutes from "./routes/authorRoutes";
 import errorHandler from "errorhandler";
 import http from "http";
-import { Server, Socket } from "socket.io";
-
-/* Todo: Later update setupp */
+import { Server} from "socket.io";
+import SocketServer from "./SocketServer";
 
 export const app: Application = express();
 const server = http.createServer(app);
@@ -58,15 +57,10 @@ app.use(adminRoutes);
 app.use(authorRoutes);
 
 // Socket.IO connection
-io.on("connection", (socket: Socket) => {
-  console.log("A user connected");
-  
+io.on('connection', socket => {
+  SocketServer(socket)
+})
 
-  // Disconnect event
-  socket.on("disconnect", () => {
-    console.log("A user disconnected");
-  });
-});
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
 });
