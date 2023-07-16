@@ -11,8 +11,7 @@
     "NodeJs",
     "Typescript",
     "Prisma",
-    "PostgreSQL",
-    "Fly.IO"
+    "PostgreSQL"
   ],
   "author": "Peter Dinis",
   "license": "ISC",
