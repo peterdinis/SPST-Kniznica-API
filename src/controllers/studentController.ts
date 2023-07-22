@@ -168,18 +168,21 @@ export const uploadPicture = async (req: Request, res: Response) => {
     }
 
     const avatar = req.file?.buffer || null; // Get the image buffer from multer
-    console.log(avatar);
 
     const updatedStudent = await prisma.student.update({
       where: { id: parseInt(id) },
       data: { picture: avatar },
     });
 
-    console.log(updatedStudent)
+    // Update the studentPersonalInfo in the response to include the picture field
+    const updatedStudentInfo = {
+      ...student,
+      picture: updatedStudent.picture,
+    };
 
-    return res.json(201).json("Fotka bola nahraná");
+    return res.json(updatedStudentInfo);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Something went wrong" });
   }
-}
+};
