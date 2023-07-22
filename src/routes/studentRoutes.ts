@@ -19,6 +19,6 @@ router.get("/student/:paginate", findAllPaginatedStudents);
 router.post("/student/register", studentRegister);
 router.post("/student/login", studentLogin);
 router.get("/student/profile", verifyToken, studentProfile);
-router.post("/student/:id/upload", upload.single("avatar"), uploadPicture);
+router.put("/student/:id/upload", upload.single("avatar"), uploadPicture);
 
 export default router;
