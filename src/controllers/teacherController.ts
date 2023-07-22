@@ -9,6 +9,7 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import jwt from "jsonwebtoken";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
+import { TEACHER } from "../constants/roles";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -50,9 +51,13 @@ export const teacherRegister = async (
   res: Response
 ) => {
   try {
-    const { password, username } = req.body;
+    const { password, role} = req.body;
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+
+    if(role !== TEACHER) {
+      return res.status(409).send("Role must be always teacher");
+    }
 
     const createNewTeacher = await db.teacher.create({
       data: {

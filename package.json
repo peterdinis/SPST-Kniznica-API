@@ -1,6 +1,6 @@
 {
   "name": "spst-kniznica-api",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "main": "server.ts",
   "scripts": {
     "seeder": "ts-node prisma/seed.ts",
@@ -11,8 +11,7 @@
     "NodeJs",
     "Typescript",
     "Prisma",
-    "PostgreSQL",
-    "Fly.IO"
+    "PostgreSQL"
   ],
   "author": "Peter Dinis",
   "license": "ISC",
@@ -28,9 +27,11 @@
     "helmet": "^6.0.1",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.3",
     "prisma-paginate": "^4.2.2",
     "socket.io": "^4.7.1",
+    "uuid": "^9.0.0",
     "zod": "^3.20.2"
   },
   "devDependencies": {
@@ -43,9 +44,11 @@
     "@types/helmet": "^4.0.0",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/morgan": "^1.9.4",
+    "@types/multer": "^1.4.7",
     "@types/node-cron": "^3.0.7",
     "@types/nodemailer": "^6.4.8",
     "@types/socket.io": "^3.0.2",
+    "@types/uuid": "^9.0.2",
     "nodemon": "^2.0.22",
     "prisma": "^5.0.0",
     "ts-node": "^10.9.1",

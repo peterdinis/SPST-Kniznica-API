@@ -10,6 +10,7 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { io} from '../server'
+import { STUDENT } from "../constants/roles";
 
 
 const prisma = new PrismaClient();
@@ -52,7 +53,7 @@ export const studentRegister = async (
   res: Response
 ) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     const salt = await bcrypt.genSalt();
 
     const existingUser = await db.student.findFirst({
@@ -70,6 +71,10 @@ export const studentRegister = async (
 
     if (password.length < 4) {
       return res.status(400).send("Password must be at least 4 characters");
+    }
+
+    if(role !== STUDENT) {
+      return res.status(409).send("Role must be always student");
     }
 
     const passwordHash = await bcrypt.hash(password, salt);
@@ -146,5 +151,40 @@ export const studentProfile = async (req: Request, res: Response) => {
     return res.status(200).json(user);
   } catch (err) {
     getErrorMessage(err);
+  }
+};
+
+
+export const uploadPicture = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const student = await prisma.student.findUnique({
+      where: { id: parseInt(id) },
+    });
+
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    const avatar = req.file?.buffer || null; // Get the image buffer from multer
+
+    const updatedStudent = await prisma.student.update({
+      where: { id: parseInt(id) },
+      data: { picture: avatar },
+    });
+
+    // Update the studentPersonalInfo in the response to include the picture field
+    const updatedStudentInfo = {
+      ...student,
+      picture: updatedStudent.picture,
+    };
+
+    console.log(updatedStudentInfo);
+
+    return res.json(updatedStudentInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };

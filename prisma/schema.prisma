@@ -46,7 +46,7 @@ model Student {
   username      String   @unique @default("FOO")
   email         String   @unique @default("foo@gmail.com")
   password      String
-  picture       String?
+  picture       Bytes? 
   isLogged      Boolean  @default(false)
   role          String   @default("STUDENT")
   classRoom     String   @default("1.A")
