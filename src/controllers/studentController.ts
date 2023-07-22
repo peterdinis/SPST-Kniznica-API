@@ -180,6 +180,8 @@ export const uploadPicture = async (req: Request, res: Response) => {
       picture: updatedStudent.picture,
     };
 
+    console.log(updatedStudentInfo);
+
     return res.json(updatedStudentInfo);
   } catch (error) {
     console.error(error);
