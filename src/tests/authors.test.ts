@@ -315,76 +315,206 @@ it("test_create_author_data_structure", async () => {
   expect(res.json.mock.calls[0][0]).toHaveProperty("externalId");
 });
 
-it('test_update_author_success', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockResolvedValue({ id: 1, name: 'John Doe' });
-    db.notification.create = jest.fn().mockResolvedValue({ message: 'Upravený autor - 1' });
-    io.emit = jest.fn();
+it("test_update_author_success", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest.fn().mockResolvedValue({ id: 1, name: "John Doe" });
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValue({ message: "Upravený autor - 1" });
+  io.emit = jest.fn();
 
+  await updateAuthor(req, res);
+
+  expect(db.author.update).toHaveBeenCalledWith({
+    where: { id: 1 },
+    data: { name: "John Doe" },
+  });
+  expect(db.notification.create).toHaveBeenCalledWith({
+    data: { message: "Upravený autor - 1" },
+  });
+  expect(io.emit).toHaveBeenCalledWith("newNotification", {
+    message: "Upravený autor - 1",
+  });
+  expect(res.json).toHaveBeenCalledWith({ id: 1, name: "John Doe" });
+});
+
+it("test_update_author_no_author_found", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest.fn().mockResolvedValue(null);
+
+  try {
     await updateAuthor(req, res);
+  } catch (err) {
+    expect(err.message).toBe("No author found");
+  }
+});
 
-    expect(db.author.update).toHaveBeenCalledWith({ where: { id: 1 }, data: { name: 'John Doe' } });
-    expect(db.notification.create).toHaveBeenCalledWith({ data: { message: 'Upravený autor - 1' } });
-    expect(io.emit).toHaveBeenCalledWith('newNotification', { message: 'Upravený autor - 1' });
-    expect(res.json).toHaveBeenCalledWith({ id: 1, name: 'John Doe' });
-  });
+it("test_update_author_prisma_error", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest
+    .fn()
+    .mockRejectedValue(new Error("PrismaClient error"));
 
-  it('test_update_author_no_author_found', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockResolvedValue(null);
-
-    try {
-      await updateAuthor(req, res);
-    } catch (err) {
-      expect(err.message).toBe('No author found');
-    }
-  });
-
-  it('test_update_author_prisma_error', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockRejectedValue(new Error('PrismaClient error'));
-
-    try {
-      await updateAuthor(req, res);
-    } catch (err) {
-      expect(err.message).toBe('PrismaClient error');
-    }
-  });
-
-  it('test_update_author_notification_emitted', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockResolvedValue({ id: 1, name: 'John Doe' });
-    db.notification.create = jest.fn().mockResolvedValue({ message: 'Upravený autor - 1' });
-    io.emit = jest.fn();
-
+  try {
     await updateAuthor(req, res);
+  } catch (err) {
+    expect(err.message).toBe("PrismaClient error");
+  }
+});
 
-    expect(io.emit).toHaveBeenCalledWith('newNotification', { message: 'Upravený autor - 1' });
+it("test_update_author_notification_emitted", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest.fn().mockResolvedValue({ id: 1, name: "John Doe" });
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValue({ message: "Upravený autor - 1" });
+  io.emit = jest.fn();
+
+  await updateAuthor(req, res);
+
+  expect(io.emit).toHaveBeenCalledWith("newNotification", {
+    message: "Upravený autor - 1",
   });
+});
 
-  it('test_update_author_error_handling', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockRejectedValue(new Error('PrismaClient error'));
-    getErrorMessage = jest.fn();
+it("test_update_author_error_handling", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest
+    .fn()
+    .mockRejectedValue(new Error("PrismaClient error"));
+  getErrorMessage = jest.fn();
 
-    await updateAuthor(req, res);
+  await updateAuthor(req, res);
 
-    expect(getErrorMessage).toHaveBeenCalledWith(new Error('PrismaClient error'));
+  expect(getErrorMessage).toHaveBeenCalledWith(new Error("PrismaClient error"));
+});
+
+it("test_update_author_returns_json", async () => {
+  const req = { params: { id: 1 }, body: { name: "John Doe" } };
+  const res = { json: jest.fn() };
+  db.author.update = jest.fn().mockResolvedValue({ id: 1, name: "John Doe" });
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValue({ message: "Upravený autor - 1" });
+  io.emit = jest.fn();
+
+  await updateAuthor(req, res);
+
+  expect(res.json).toHaveBeenCalledWith({ id: 1, name: "John Doe" });
+});
+
+it("test_delete_author_successfully", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  const authorForDelete = { id: 1, name: "John Doe" };
+  db.author.delete = jest.fn().mockResolvedValueOnce(authorForDelete);
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValueOnce({ message: `Zmazaný autor - ${req.params.id}` });
+  io.emit = jest.fn();
+
+  await deleteAuthor(req, res);
+
+  expect(db.author.delete).toHaveBeenCalledWith({
+    where: { id: Number(req.params.id) },
   });
-
-  it('test_update_author_returns_json', async () => {
-    const req = { params: { id: 1 }, body: { name: 'John Doe' } };
-    const res = { json: jest.fn() };
-    db.author.update = jest.fn().mockResolvedValue({ id: 1, name: 'John Doe' });
-    db.notification.create = jest.fn().mockResolvedValue({ message: 'Upravený autor - 1' });
-    io.emit = jest.fn();
-
-    await updateAuthor(req, res);
-
-    expect(res.json).toHaveBeenCalledWith({ id: 1, name: 'John Doe' });
+  expect(db.notification.create).toHaveBeenCalledWith({
+    data: { message: `Zmazaný autor - ${req.params.id}` },
   });
+  expect(io.emit).toHaveBeenCalledWith("newNotification", {
+    message: `Zmazaný autor - ${req.params.id}`,
+  });
+  expect(res.json).toHaveBeenCalledWith(authorForDelete);
+});
+
+it("test_create_notification_successfully", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  const authorForDelete = { id: 1, name: "John Doe" };
+  db.author.delete = jest.fn().mockResolvedValueOnce(authorForDelete);
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValueOnce({ message: `Zmazaný autor - ${req.params.id}` });
+  io.emit = jest.fn();
+
+  await deleteAuthor(req, res);
+
+  expect(db.author.delete).toHaveBeenCalledWith({
+    where: { id: Number(req.params.id) },
+  });
+  expect(db.notification.create).toHaveBeenCalledWith({
+    data: { message: `Zmazaný autor - ${req.params.id}` },
+  });
+  expect(io.emit).toHaveBeenCalledWith("newNotification", {
+    message: `Zmazaný autor - ${req.params.id}`,
+  });
+  expect(res.json).toHaveBeenCalledWith(authorForDelete);
+});
+
+it("test_emit_new_notification_successfully", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  const authorForDelete = { id: 1, name: "John Doe" };
+  db.author.delete = jest.fn().mockResolvedValueOnce(authorForDelete);
+  db.notification.create = jest
+    .fn()
+    .mockResolvedValueOnce({ message: `Zmazaný autor - ${req.params.id}` });
+  io.emit = jest.fn();
+
+  await deleteAuthor(req, res);
+
+  expect(db.author.delete).toHaveBeenCalledWith({
+    where: { id: Number(req.params.id) },
+  });
+  expect(db.notification.create).toHaveBeenCalledWith({
+    data: { message: `Zmazaný autor - ${req.params.id}` },
+  });
+  expect(io.emit).toHaveBeenCalledWith("newNotification", {
+    message: `Zmazaný autor - ${req.params.id}`,
+  });
+  expect(res.json).toHaveBeenCalledWith(authorForDelete);
+});
+
+it("test_throw_error_if_author_not_found", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  db.author.delete = jest.fn().mockResolvedValueOnce(null);
+
+  try {
+    await deleteAuthor(req, res);
+  } catch (err) {
+    expect(err.message).toBe("Author not found");
+  }
+});
+
+it("test_handles_errors_thrown_by_get_error_message", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  db.author.delete = jest
+    .fn()
+    .mockRejectedValueOnce(new Error("Database error"));
+  getErrorMessage = jest.fn().mockReturnValueOnce("Error message");
+
+  await deleteAuthor(req, res);
+
+  expect(getErrorMessage).toHaveBeenCalledWith(new Error("Database error"));
+});
+
+it("test_calls_db_author_delete_with_correct_parameters", async () => {
+  const req = { params: { id: 1 } };
+  const res = { json: jest.fn() };
+  db.author.delete = jest.fn().mockResolvedValueOnce(null);
+
+  try {
+    await deleteAuthor(req, res);
+  } catch (err) {
+    expect(db.author.delete).toHaveBeenCalledWith({
+      where: { id: Number(req.params.id) },
+    });
+  }
+});
