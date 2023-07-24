@@ -3,7 +3,6 @@
   "version": "2.6.6",
   "main": "server.ts",
   "scripts": {
-    "seeder": "ts-node prisma/seed.ts",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
     "test": "jest --coverage"
   },
