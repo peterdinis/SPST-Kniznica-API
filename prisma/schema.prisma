@@ -23,9 +23,9 @@ model Book {
   year        Int
   quantity    Int       @default(1)
   categoryId  Int       @default(1)
-  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: SetDefault)
   authorId    Int
-  Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Author      Author    @relation(fields: [authorId], references: [id], onDelete: SetDefault)
   Borrowed    Booking[]
   createdAt   DateTime  @default(now())
 }
@@ -97,7 +97,7 @@ model Booking {
   to        String
   username  String   @default("Custom user")
   bookId    Int
-  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: SetDefault)
   createdAt DateTime @default(now())
 }
 
