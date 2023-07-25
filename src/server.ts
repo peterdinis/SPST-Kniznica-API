@@ -66,6 +66,7 @@ io.on('connection', (socket: Socket) => {
     console.log('A client disconnected');
   });
 });
+
 server.listen(PORT, () => {
   console.log(`Applikácia beží na porte ${PORT}`);
 });
