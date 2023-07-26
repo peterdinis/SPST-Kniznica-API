@@ -9,7 +9,6 @@ import { getErrorMessage } from "../helpers/catchErrorMessage";
 import dayjs from "dayjs";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
-import { io} from '../server'
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -163,16 +162,6 @@ export const createBooking = async (
         status: NONAVAIABLE,
       },
     });
-
-    const createNotification = await db.notification.create({
-      data: {
-        username,
-        message: "Požičanie knihy bolo úspešné",
-      }
-    })
-
-    io.emit('newNotification', createNotification);
-
     return res.json(createNewBooking);
   } catch (err) {
     getErrorMessage(err);
@@ -217,15 +206,6 @@ export const returnBook = async (
         status: AVAIABLE,
       },
     });
-
-    const createNotification = await db.notification.create({
-      data: {
-        username,
-        message: "Vrátenie knihy bolo úspenšné",
-      }
-    })
-
-    io.emit('newNotification', createNotification);
 
     return res.json(removeBookFromBooking);
   } catch (err) {

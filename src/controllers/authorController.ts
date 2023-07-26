@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
-import { io } from "../server";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -84,14 +83,6 @@ export const createAuthor = async (req: Request, res: Response) => {
       },
     });
 
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Vytvorený nový autor - ${req.body.name}`,
-      },
-    });
-
-    io.emit("newNotification", createNotification);
-
     return res.json(createNewAuthor);
   } catch (err) {
     getErrorMessage(err);
@@ -115,14 +106,6 @@ export const updateAuthor = async (req: Request, res: Response) => {
       throw new Error("No author found");
     }
 
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Upravený autor - ${id}`,
-      },
-    });
-
-    io.emit("newNotification", createNotification);
-
     return res.json(authorForUpdate);
   } catch (err) {
     getErrorMessage(err);
@@ -142,14 +125,6 @@ export const deleteAuthor = async (req: Request, res: Response) => {
     if (!authorForDelete) {
       throw new Error("Author not found");
     }
-
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Zmazaný autor - ${id}`,
-      },
-    });
-
-    io.emit("newNotification", createNotification);
 
     return res.json(authorForDelete);
   } catch (err) {
