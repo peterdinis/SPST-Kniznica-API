@@ -48,14 +48,12 @@ model Student {
   username      String         @unique @default("FOO")
   email         String         @unique @default("foo@gmail.com")
   password      String
-  picture       Bytes?
-  isLogged      Boolean        @default(false)
-  role          String         @default("STUDENT")
-  classRoom     String         @default("1.A")
-  createdAt     DateTime       @default(now())
-  isDeactivated Boolean        @default(false)
-  notifications Notification[]
-  updatedAt   DateTime  @updatedAt @default(now())
+  picture       Bytes? 
+  isLogged      Boolean  @default(false)
+  role          String   @default("STUDENT")
+  classRoom     String   @default("1.A")
+  createdAt     DateTime @default(now())
+  isDeactivated Boolean  @default(false)
 }
 
 model Teacher {
@@ -65,16 +63,14 @@ model Teacher {
   username        String         @unique @default("FOO")
   email           String         @unique @default("foo@gmail.com")
   password        String
-  role            String         @default("TEACHER")
-  isLogged        Boolean        @default(false)
-  hasPermToCreate Boolean        @default(true)
-  hasPermToDelete Boolean        @default(true)
-  hasPermToUpdate Boolean        @default(true)
-  canSeeBooking   Boolean        @default(false)
-  createdAt       DateTime       @default(now())
-  isDeactivated   Boolean        @default(false)
-  notifications   Notification[]
-  updatedAt   DateTime  @updatedAt @default(now())
+  role            String   @default("TEACHER")
+  isLogged        Boolean  @default(false)
+  hasPermToCreate Boolean  @default(true)
+  hasPermToDelete Boolean  @default(true)
+  hasPermToUpdate Boolean  @default(true)
+  canSeeBooking   Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  isDeactivated   Boolean  @default(false)
 }
 
 model Admin {
@@ -84,16 +80,14 @@ model Admin {
   username        String         @unique @default("FOO")
   email           String         @unique @default("foo@gmail.com")
   password        String
-  hasPermToCreate Boolean        @default(true)
-  isLogged        Boolean        @default(false)
-  specialCode     Int            @default(1000)
-  hasPermToDelete Boolean        @default(true)
-  hasPermToUpdate Boolean        @default(true)
-  canSeeBookings  Boolean        @default(true)
-  role            String         @default("ADMIN")
-  createdAt       DateTime       @default(now())
-  notifications   Notification[]
-  updatedAt   DateTime  @updatedAt @default(now())
+  hasPermToCreate Boolean  @default(true)
+  isLogged        Boolean  @default(false)
+  specialCode     Int      @default(1000)
+  hasPermToDelete Boolean  @default(true)
+  hasPermToUpdate Boolean  @default(true)
+  canSeeBookings  Boolean  @default(true)
+  role            String   @default("ADMIN")
+  createdAt       DateTime @default(now())
 }
 
 model Booking {
@@ -120,19 +114,4 @@ model Author {
   books       Book[]
   image       String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime  @updatedAt @default(now())
-}
-
-model Notification {
-  id        Int      @id @default(autoincrement())
-  message   String
-  username  String?  @default("Que")
-  createdAt DateTime @default(now())
-  student   Student? @relation(fields: [studentId], references: [id])
-  studentId Int?
-  teacher   Teacher? @relation(fields: [teacherId], references: [id])
-  teacherId Int?
-  admin     Admin?   @relation(fields: [adminId], references: [id])
-  adminId   Int?
-  wasReaded  DateTime  @updatedAt @default(now())
 }
