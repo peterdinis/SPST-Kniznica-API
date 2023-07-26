@@ -125,7 +125,7 @@ export const deleteAuthor = async (req: Request, res: Response) => {
     if (!authorForDelete) {
       throw new Error("Author not found");
     }
-    
+
     return res.json(authorForDelete);
   } catch (err) {
     getErrorMessage(err);
