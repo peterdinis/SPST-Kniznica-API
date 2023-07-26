@@ -134,4 +134,5 @@ model Notification {
   teacherId Int?
   admin     Admin?   @relation(fields: [adminId], references: [id])
   adminId   Int?
+  createdAt   DateTime @default(now())
 }
