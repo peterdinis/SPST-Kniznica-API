@@ -4,7 +4,6 @@ import { createCategoryType } from "../validators/categorySchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { getErrorMessage } from "../helpers/catchErrorMessage";
-import { io} from '../server'
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -95,14 +94,6 @@ export const createCategoryFn = async (
       },
     });
 
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Vytvorená nová kategória - ${req.body.name}`,
-      }
-    })
-
-    io.emit('newNotification', createNotification);
-
     return res.json(newCategory);
   } catch (err) {
     getErrorMessage(err);
@@ -126,14 +117,6 @@ export const updateCategory = async (req: Request, res: Response) => {
       return res.status(404).json("Category not found");
     }
 
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Upravená kategória - ${id}`,
-      }
-    })
-
-    io.emit('newNotification', createNotification);
-
     return res.json(categoryForUpdate);
   } catch (err) {
     getErrorMessage(err);
@@ -148,18 +131,6 @@ export const deleteCategory = async (req: Request, res: Response) => {
         id: Number(id),
       },
     });
-
-    if (!categoryForDelete) {
-      return res.status(404).json("Category not found");
-    }
-
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Zmazaná kategória - ${id}`,
-      }
-    })
-
-    io.emit('newNotification', createNotification);
 
     return res.json(categoryForDelete);
   } catch (err) {
