@@ -6,7 +6,6 @@ import categoryRoutes from "./routes/categoryRoutes";
 import morgan from "morgan";
 import helmet from "helmet";
 import teacherRoutes from "./routes/teacherRoutes";
-import notificationRoutes from "./routes/notificationRoutes";
 import studentRoutes from "./routes/studentRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import adminRoutes from "./routes/adminRoutes";
