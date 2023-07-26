@@ -80,19 +80,12 @@ export const createAuthor = async (req: Request, res: Response) => {
     const createNewAuthor = await db.author.create({
       data: {
         externalId: Math.floor(100000 + Math.random() * 900000),
-        ...req.body,
+        books: [],
+        ...req.body
       },
     });
-
-    const createNotification = await db.notification.create({
-      data: {
-        message: `Vytvorený nový autor - ${req.body.name}`,
-      },
-    });
-
-    io.emit("newNotification", createNotification);
     console.log(createNewAuthor);
-    return res.json(createNewAuthor);
+   // return res.json(createNewAuthor);
   } catch (err) {
     getErrorMessage(err);
   }
