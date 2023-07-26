@@ -91,7 +91,7 @@ export const createAuthor = async (req: Request, res: Response) => {
     });
 
     io.emit("newNotification", createNotification);
-
+    console.log(createNewAuthor);
     return res.json(createNewAuthor);
   } catch (err) {
     getErrorMessage(err);
