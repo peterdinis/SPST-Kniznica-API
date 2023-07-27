@@ -79,11 +79,9 @@ export const createAuthor = async (req: Request, res: Response) => {
     const createNewAuthor = await db.author.create({
       data: {
         externalId: Math.floor(100000 + Math.random() * 900000),
-        books: [],
         ...req.body
       },
     });
-
     return res.json(createNewAuthor);
   } catch (err) {
     getErrorMessage(err);
