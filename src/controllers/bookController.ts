@@ -97,19 +97,21 @@ export const createBookFn = async (
       year,
       quantity,
       publisher,
-      categoryId,
-      authorId,
+      authorName, // Add authorName to the request body
+      categoryName, // Add categoryName to the request body
     } = req.body;
 
-    const newCategoryForBook = await db.category.findUnique({
+    // Find the category by name
+    const newCategoryForBook = await db.category.findFirst({
       where: {
-        id: categoryId,
+        name: categoryName,
       },
     });
 
-    const authorForBook = await db.book.findUnique({
+    // Find the author by name
+    const authorForBook = await db.author.findFirst({
       where: {
-        id: authorId as unknown as number,
+        name: authorName, 
       },
     });
 
