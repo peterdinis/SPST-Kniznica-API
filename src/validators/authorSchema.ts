@@ -19,7 +19,7 @@ export const createAuthor = z.object({
 
     isAlive: z.boolean({
         required_error: "isAlive must be boolean"
-    }),
+    }).optional(),
 
     country: z.string({
         required_error: "Country is required"
