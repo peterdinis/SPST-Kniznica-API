@@ -111,7 +111,7 @@ export const createBookFn = async (
     // Find the author by name
     const authorForBook = await db.author.findFirst({
       where: {
-        name: authorName, 
+        fullName: authorName, 
       },
     });
 
