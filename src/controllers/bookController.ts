@@ -97,8 +97,8 @@ export const createBookFn = async (
       year,
       quantity,
       publisher,
-      authorName, // Add authorName to the request body
-      categoryName, // Add categoryName to the request body
+      authorName, 
+      categoryName,
     } = req.body;
 
     // Find the category by name
@@ -116,11 +116,11 @@ export const createBookFn = async (
     });
 
     if (!newCategoryForBook) {
-      return res.status(404).json("Category not found");
+      return res.status(409).json("Category not found");
     }
 
     if (!authorForBook) {
-      return res.status(404).json("Author not found");
+      return res.status(409).json("Author not found");
     }
 
     const newBook = await db.book.create({
