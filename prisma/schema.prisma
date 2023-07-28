@@ -23,11 +23,12 @@ model Book {
   year        Int
   quantity    Int       @default(1)
   categoryId  Int       @default(1)
-  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: SetDefault)
   authorId    Int
-  Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Author      Author    @relation(fields: [authorId], references: [id], onDelete: SetDefault)
   Borrowed    Booking[]
   createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt @default(now())
 }
 
 model Category {
@@ -37,14 +38,15 @@ model Category {
   description String
   books       Book[]
   createdAt   DateTime @default(now())
+  updatedAt   DateTime  @updatedAt @default(now())
 }
 
 model Student {
-  id            Int      @id @default(autoincrement())
-  name          String   @default("FOO")
-  lastName      String   @default("FOO")
-  username      String   @unique @default("FOO")
-  email         String   @unique @default("foo@gmail.com")
+  id            Int            @id @default(autoincrement())
+  name          String         @default("FOO")
+  lastName      String         @default("FOO")
+  username      String         @unique @default("FOO")
+  email         String         @unique @default("foo@gmail.com")
   password      String
   picture       Bytes? 
   isLogged      Boolean  @default(false)
@@ -55,11 +57,11 @@ model Student {
 }
 
 model Teacher {
-  id              Int      @id @default(autoincrement())
-  name            String   @default("FOO")
-  lastName        String   @default("FOO")
-  username        String   @unique @default("FOO")
-  email           String   @unique @default("foo@gmail.com")
+  id              Int            @id @default(autoincrement())
+  name            String         @default("FOO")
+  lastName        String         @default("FOO")
+  username        String         @unique @default("FOO")
+  email           String         @unique @default("foo@gmail.com")
   password        String
   role            String   @default("TEACHER")
   isLogged        Boolean  @default(false)
@@ -72,11 +74,11 @@ model Teacher {
 }
 
 model Admin {
-  id              Int      @id @default(autoincrement())
-  name            String   @default("FOO")
-  lastName        String   @default("FOO")
-  username        String   @unique @default("FOO")
-  email           String   @unique @default("foo@gmail.com")
+  id              Int            @id @default(autoincrement())
+  name            String         @default("FOO")
+  lastName        String         @default("FOO")
+  username        String         @unique @default("FOO")
+  email           String         @unique @default("foo@gmail.com")
   password        String
   hasPermToCreate Boolean  @default(true)
   isLogged        Boolean  @default(false)
@@ -94,8 +96,9 @@ model Booking {
   to        String
   username  String   @default("Custom user")
   bookId    Int
-  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: SetDefault)
   createdAt DateTime @default(now())
+  updatedAt   DateTime  @updatedAt @default(now())
 }
 
 model Author {

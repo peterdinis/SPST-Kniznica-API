@@ -97,28 +97,30 @@ export const createBookFn = async (
       year,
       quantity,
       publisher,
-      categoryId,
-      authorId,
+      authorName, 
+      categoryName,
     } = req.body;
 
-    const newCategoryForBook = await db.category.findUnique({
+    // Find the category by name
+    const newCategoryForBook = await db.category.findFirst({
       where: {
-        id: categoryId,
+        name: categoryName,
       },
     });
 
-    const authorForBook = await db.book.findUnique({
+    // Find the author by name
+    const authorForBook = await db.author.findFirst({
       where: {
-        id: authorId as unknown as number,
+        name: authorName, 
       },
     });
 
     if (!newCategoryForBook) {
-      return res.status(404).json("Category not found");
+      return res.status(409).json("Category not found");
     }
 
     if (!authorForBook) {
-      return res.status(404).json("Author not found");
+      return res.status(409).json("Author not found");
     }
 
     const newBook = await db.book.create({
