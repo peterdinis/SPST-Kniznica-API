@@ -9,6 +9,10 @@ export const createAuthor = z.object({
         required_error: "Last name is required"
     }),
 
+    fullname: z.string({
+        required_error: "Full name must be required"
+    }),
+
     image: z.string({
         required_error: "Picture is required"
     }),
