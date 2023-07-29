@@ -101,14 +101,12 @@ export const createBookFn = async (
       categoryName,
     } = req.body;
 
-    // Find the category by name
     const newCategoryForBook = await db.category.findFirst({
       where: {
         name: categoryName,
       },
     });
-
-    // Find the author by name
+    
     const authorForBook = await db.author.findFirst({
       where: {
         fullName: authorName, 
