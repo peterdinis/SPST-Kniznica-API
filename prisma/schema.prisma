@@ -55,6 +55,8 @@ model Student {
   createdAt     DateTime @default(now())
   isDeactivated Boolean  @default(false)
   updatedAt     DateTime @default(now()) @updatedAt
+  imageTitle      String?
+  image           String?
 }
 
 model Teacher {
@@ -73,6 +75,8 @@ model Teacher {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now()) @updatedAt
   isDeactivated   Boolean  @default(false)
+  imageTitle      String?
+  image           String?
 }
 
 model Admin {
@@ -91,6 +95,8 @@ model Admin {
   role            String   @default("ADMIN")
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now()) @updatedAt
+  imageTitle      String?
+  image           String?
 }
 
 model Booking {
@@ -119,10 +125,4 @@ model Author {
   image       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
-}
-
-model Image {
-  id          Int      @id @default(autoincrement())
-  title       String
-  image       String
 }
