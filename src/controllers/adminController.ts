@@ -96,7 +96,7 @@ export const adminProfile = async (req: Request, res: Response) => {
 
 export const restartTeacherProfile = async(req: Request, res: Response) => {
   try {
-    const { username } = req.params;
+    const { username } = req.body;
     const user = await db.teacher.findFirst({
       where: {
         username,
@@ -122,7 +122,7 @@ export const restartTeacherProfile = async(req: Request, res: Response) => {
 
 export const restartStudentProfile = async(req: Request, res: Response) => {
   try {
-    const { username } = req.params;
+    const { username } = req.body;
     const user = await db.student.findFirst({
       where: {
         username,
