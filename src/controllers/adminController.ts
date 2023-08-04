@@ -103,6 +103,20 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
       },
     });
 
+    const checkStudentBookings = await db.booking.findMany({
+      where: {
+        username: user!.username
+      }
+    })
+
+
+    // delete all student borrowed books
+    await db.booking.deleteMany({
+      where: {
+        id: checkStudentBookings[0].id
+      }
+    })
+
     const deactivatedUser = await db.student.delete({
       where: {
         id: user!.id,
@@ -118,11 +132,26 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
 export const deactivatedTeacherProfile = async (req: Request, res: Response) => {
   try {
     const { username } = req.body;
+
     const user = await db.teacher.findFirst({
       where: {
         username,
       },
     });
+
+    const checkStudentBookings = await db.booking.findMany({
+      where: {
+        username: user!.username
+      }
+    })
+
+
+    // delete all teacher borrowed books
+    await db.booking.deleteMany({
+      where: {
+        id: checkStudentBookings[0].id
+      }
+    })
 
     const deactivatedUser = await db.teacher.delete({
       where: {
