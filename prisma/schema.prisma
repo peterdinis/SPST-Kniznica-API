@@ -53,10 +53,7 @@ model Student {
   role          String   @default("STUDENT")
   classRoom     String   @default("1.A")
   createdAt     DateTime @default(now())
-  isDeactivated Boolean  @default(false)
   updatedAt     DateTime @default(now()) @updatedAt
-  imageTitle      String?
-  image           String?
 }
 
 model Teacher {
@@ -74,9 +71,6 @@ model Teacher {
   canSeeBooking   Boolean  @default(false)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @default(now()) @updatedAt
-  isDeactivated   Boolean  @default(false)
-  imageTitle      String?
-  image           String?
 }
 
 model Admin {
