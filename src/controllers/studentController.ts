@@ -58,9 +58,6 @@ export const studentRegister = async (
     const existingUser = await db.student.findFirst({
       where: {
         email,
-        NOT: {
-          isDeactivated: true,
-        },
       },
     });
 
@@ -101,9 +98,6 @@ export const studentLogin = async (
     const user = await db.student.findFirst({
       where: {
         email,
-        NOT: {
-          isDeactivated: true,
-        },
       },
     });
 

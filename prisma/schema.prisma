@@ -120,11 +120,3 @@ model Author {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
 }
-
-model Message {
-  id          Int      @id @default(autoincrement())
-  username    String
-  content     String
-  isTeacher   Boolean @default(false)
-  isAdmin     Boolean @default(false)
-}
