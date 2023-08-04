@@ -1,7 +1,7 @@
 import express from "express";
 import {
   adminProfile,
-  deactivatedProfile,
+  deactivatedStudentProfile,
   deactivatedTeacherProfile,
   loginAdmin,
   registerAdmin,
@@ -16,6 +16,6 @@ router.post("/admin/login", loginAdmin);
 router.get("/admin/profile", adminProfile);
 router.patch("/admin/reactivate/teacher", restartTeacherProfile);
 router.patch("/admin/reactivate/student", restartStudentProfile);
-router.delete("/student/profile/delete", deactivatedProfile);
+router.delete("/student/profile/delete", deactivatedStudentProfile);
 router.delete("/teacher/profile/delete", deactivatedTeacherProfile);
 export default router;

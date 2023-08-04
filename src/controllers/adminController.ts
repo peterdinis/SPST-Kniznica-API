@@ -145,7 +145,7 @@ export const restartStudentProfile = async(req: Request, res: Response) => {
   }
 };
 
-export const deactivatedProfile = async (req: Request, res: Response) => {
+export const deactivatedStudentProfile = async (req: Request, res: Response) => {
   try {
     const { username } = req.body;
     const user = await db.student.findFirst({
