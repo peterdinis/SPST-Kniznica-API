@@ -94,73 +94,18 @@ export const adminProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const restartTeacherProfile = async(req: Request, res: Response) => {
+export const deactivatedStudentProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.params;
-    const user = await db.teacher.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const deactivatedUser = await db.teacher.update({
-      where: {
-        id: user!.id,
-      },
-
-      data: {
-        isDeactivated: false
-      }
-    })
-
-    return res.status(200).json(deactivatedUser);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-
-};
-
-export const restartStudentProfile = async(req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
+    const { username } = req.body;
     const user = await db.student.findFirst({
       where: {
         username,
       },
     });
 
-    const deactivatedUser = await db.student.update({
+    const deactivatedUser = await db.student.delete({
       where: {
         id: user!.id,
-      },
-
-      data: {
-        isDeactivated: false
-      }
-    })
-
-    return res.status(200).json(deactivatedUser);
-  } catch (err) {
-    getErrorMessage(err);
-  }
-};
-
-export const deactivatedProfile = async (req: Request, res: Response) => {
-  try {
-    const { username } = req.params;
-    const user = await db.student.findFirst({
-      where: {
-        username,
-      },
-    });
-
-    const deactivatedUser = await db.student.update({
-      where: {
-        id: user!.id,
-      },
-
-      data: {
-        isDeactivated: true,
       },
     });
 
@@ -172,20 +117,16 @@ export const deactivatedProfile = async (req: Request, res: Response) => {
 
 export const deactivatedTeacherProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.params;
+    const { username } = req.body;
     const user = await db.teacher.findFirst({
       where: {
         username,
       },
     });
 
-    const deactivatedUser = await db.teacher.update({
+    const deactivatedUser = await db.teacher.delete({
       where: {
         id: user!.id,
-      },
-
-      data: {
-        isDeactivated: true,
       },
     });
 
