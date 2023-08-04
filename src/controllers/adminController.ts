@@ -103,6 +103,10 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
       },
     });
 
+    if(!user) {
+      return res.status(409).json("Žiak neexistuje");
+    }
+
     const checkStudentBookings = await db.booking.findMany({
       where: {
         username: user!.username
@@ -138,6 +142,10 @@ export const deactivatedTeacherProfile = async (req: Request, res: Response) => 
         username,
       },
     });
+
+    if(!user) {
+      return res.status(409).json("Učiteľ neexistue");
+    }
 
     const checkStudentBookings = await db.booking.findMany({
       where: {
