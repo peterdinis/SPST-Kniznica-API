@@ -96,10 +96,10 @@ export const adminProfile = async (req: Request, res: Response) => {
 
 export const deactivatedStudentProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.body;
+    const { studentId } = req.params; 
     const user = await db.student.findFirst({
       where: {
-        username,
+        id: Number(studentId)
       },
     });
 
@@ -135,11 +135,11 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
 
 export const deactivatedTeacherProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.body;
+    const { teacherId} = req.params;
 
     const user = await db.teacher.findFirst({
       where: {
-        username,
+        id: Number(teacherId)
       },
     });
 
