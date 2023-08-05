@@ -137,39 +137,3 @@ export const studentProfile = async (req: Request, res: Response) => {
     getErrorMessage(err);
   }
 };
-
-
-export const uploadPicture = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  try {
-    const student = await prisma.student.findUnique({
-      where: { id: parseInt(id) },
-    });
-
-    if (!student) {
-      return res.status(404).json({ error: "Student not found" });
-    }
-
-    const avatar = req.file?.buffer || null; // Get the image buffer from multer
-    console.log(avatar);
-/*     
-    const updatedStudent = await prisma.student.update({
-      where: { id: parseInt(id) },
-      data: { picture: avatar },
-    });
-
-    // Update the studentPersonalInfo in the response to include the picture field
-    const updatedStudentInfo = {
-      ...student,
-      picture: updatedStudent.picture,
-    };
-
-    console.log(updatedStudentInfo);
-
-    return res.json(updatedStudentInfo); */
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Something went wrong" });
-  }
-};
