@@ -63,7 +63,6 @@ export const teacherRegister = async (
       data: {
         ...req.body,
         password: passwordHash,
-        isDeactivated: false,
       },
     });
 
@@ -82,9 +81,6 @@ export const teacherLogin = async (
     const user = await db.teacher.findFirst({
       where: {
         email,
-        NOT: {
-          isDeactivated: true,
-        },
       },
     });
 

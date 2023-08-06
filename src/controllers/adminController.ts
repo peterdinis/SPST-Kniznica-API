@@ -96,12 +96,30 @@ export const adminProfile = async (req: Request, res: Response) => {
 
 export const deactivatedStudentProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.body;
+    const { studentId } = req.params; 
     const user = await db.student.findFirst({
       where: {
-        username,
+        id: Number(studentId)
       },
     });
+
+    if(!user) {
+      return res.status(409).json("Žiak neexistuje");
+    }
+
+    const checkStudentBookings = await db.booking.findMany({
+      where: {
+        username: user!.username
+      }
+    })
+
+
+    // delete all student borrowed books
+    await db.booking.deleteMany({
+      where: {
+        id: checkStudentBookings[0].id
+      }
+    })
 
     const deactivatedUser = await db.student.delete({
       where: {
@@ -117,12 +135,31 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
 
 export const deactivatedTeacherProfile = async (req: Request, res: Response) => {
   try {
-    const { username } = req.body;
+    const { teacherId} = req.params;
+
     const user = await db.teacher.findFirst({
       where: {
-        username,
+        id: Number(teacherId)
       },
     });
+
+    if(!user) {
+      return res.status(409).json("Učiteľ neexistue");
+    }
+
+    const checkStudentBookings = await db.booking.findMany({
+      where: {
+        username: user!.username
+      }
+    })
+
+
+    // delete all teacher borrowed books
+    await db.booking.deleteMany({
+      where: {
+        id: checkStudentBookings[0].id
+      }
+    })
 
     const deactivatedUser = await db.teacher.delete({
       where: {
