@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import db from "../db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import {
   createAdminRegisterType,
   createAdminLoginType,
@@ -41,7 +40,7 @@ export const registerAdmin = async (
 
     return res.status(201).json(createNewAdmin);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -77,7 +76,7 @@ export const loginAdmin = async (
       token,
     });
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -90,7 +89,7 @@ export const adminProfile = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -127,7 +126,7 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
 
     return res.status(200).json(deactivatedUser);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -165,6 +164,6 @@ export const deactivatedTeacherProfile = async (req: Request, res: Response) => 
 
     return res.status(200).json(deactivatedUser);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };

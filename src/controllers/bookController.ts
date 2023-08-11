@@ -3,7 +3,6 @@ import db from "../db";
 import { createBookType } from "../validators/bookSchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -13,7 +12,7 @@ export const displayAllBooksFn = async (req: Request, res: Response) => {
     const allBooks = await db.book.findMany();
     return res.json(allBooks);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -25,7 +24,7 @@ export const findAllPaginatedBooks = async (req: Request, res: Response) => {
     });
     return res.json(allPaginatedBooks);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -59,7 +58,7 @@ export const displayOneBookFn = async (req: Request, res: Response) => {
       category: findCategory,
     });
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -79,7 +78,7 @@ export const searchBook = async (req: Request, res: Response) => {
 
     return res.json(books);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -139,7 +138,7 @@ export const createBookFn = async (
 
     return res.json(newBook);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -162,7 +161,7 @@ export const updateBookFn = async (req: Request, res: Response) => {
 
     return res.json(bookForUpdate);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -228,6 +227,6 @@ export const deleteBookFn = async (req: Request, res: Response) => {
 
     return res.json(book);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };

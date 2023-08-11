@@ -5,7 +5,6 @@ import {
   createTeacherLoginType,
 } from "../validators/teacherSchema";
 import bcrypt from "bcrypt";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import jwt from "jsonwebtoken";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
@@ -27,7 +26,7 @@ export const findAllPaginatedTeacher = async (req: Request, res: Response) => {
     });
     return res.json(allPaginatedTeachers);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -68,7 +67,7 @@ export const teacherRegister = async (
 
     return res.json(createNewTeacher);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -103,7 +102,7 @@ export const teacherLogin = async (
       token,
     });
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -116,6 +115,6 @@ export const teacherProfile = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };

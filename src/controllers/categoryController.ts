@@ -3,7 +3,6 @@ import db from "../db";
 import { createCategoryType } from "../validators/categorySchema";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -17,7 +16,7 @@ export const displayAllCategoriesFn = async (req: Request, res: Response) => {
     });
     return res.json(allCategories);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -32,7 +31,7 @@ export const findAllPaginatedCategoriesFn = async (
     });
     return res.json(allPaginatedCategories);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -55,7 +54,7 @@ export const categoryDetailsFn = async (req: Request, res: Response) => {
 
     return res.json(oneCategoy);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -75,7 +74,7 @@ export const searchForCategory = async (req: Request, res: Response) => {
 
     return res.json(category);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -96,7 +95,7 @@ export const createCategoryFn = async (
 
     return res.json(newCategory);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -119,7 +118,7 @@ export const updateCategory = async (req: Request, res: Response) => {
 
     return res.json(categoryForUpdate);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
