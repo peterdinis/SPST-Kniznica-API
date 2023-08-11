@@ -1,6 +1,6 @@
 {
   "name": "spst-kniznica-api",
-  "version": "2.8",
+  "version": "2.9",
   "main": "server.ts",
   "scripts": {
     "dev": "nodemon --config nodemon.json ./src/server.ts"
