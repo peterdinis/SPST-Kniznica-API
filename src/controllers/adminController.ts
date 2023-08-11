@@ -113,8 +113,6 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
       }
     })
 
-
-    // delete all student borrowed books
     await db.booking.deleteMany({
       where: {
         id: checkStudentBookings[0].id
@@ -152,9 +150,7 @@ export const deactivatedTeacherProfile = async (req: Request, res: Response) => 
         username: user!.username
       }
     })
-
-
-    // delete all teacher borrowed books
+    
     await db.booking.deleteMany({
       where: {
         id: checkStudentBookings[0].id
