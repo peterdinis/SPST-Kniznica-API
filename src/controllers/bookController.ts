@@ -228,7 +228,6 @@ export const deleteBookFn = async (req: Request, res: Response) => {
 
     return res.json(book);
   } catch (err) {
-    // Handle and report the error
-    return res.status(500).json({ error: "An error occurred while processing the request." });
+    getErrorMessage(err);
   }
 };
