@@ -169,6 +169,7 @@ export const updateBookFn = async (req: Request, res: Response) => {
 export const deleteBookFn = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+
     const book = await db.book.delete({
       where: {
         id: Number(id),
@@ -178,8 +179,56 @@ export const deleteBookFn = async (req: Request, res: Response) => {
     if (!book) {
       return res.status(404).json("Book not found");
     }
+
+    // Find all categories with books that have this id
+    const categoriesWithBook = await db.category.findMany({
+      where: {
+        books: {
+          some: {
+            id: Number(id)
+          }
+        }
+      }
+    });
+
+    // Find all authors with books that have this id
+    const authorsWithBook = await db.author.findMany({
+      where: {
+        books: {
+          some: {
+            id: Number(id)
+          }
+        }
+      }
+    });
+
+    // Remove the book from categories and authors
+    await Promise.all([
+      ...categoriesWithBook.map(category => db.category.update({
+        where: { id: category.id },
+        data: {
+          books: {
+            disconnect: {
+              id: Number(id)
+            }
+          }
+        }
+      })),
+      ...authorsWithBook.map(author => db.author.update({
+        where: { id: author.id },
+        data: {
+          books: {
+            disconnect: {
+              id: Number(id)
+            }
+          }
+        }
+      }))
+    ]);
+
     return res.json(book);
   } catch (err) {
-    getErrorMessage(err);
+    // Handle and report the error
+    return res.status(500).json({ error: "An error occurred while processing the request." });
   }
 };
