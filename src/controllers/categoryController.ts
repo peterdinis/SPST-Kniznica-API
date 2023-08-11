@@ -156,7 +156,6 @@ export const deleteCategory = async (req: Request, res: Response) => {
 
     return res.json(categoryForDelete);
   } catch (err) {
-    // Handle and report the error
-    return res.status(500).json({ error: "An error occurred while processing the request." });
+   return res.status(500).json(err);
   }
 };
