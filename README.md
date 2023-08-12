@@ -17,4 +17,4 @@
 - Typescript
 - Express
 - Postgresql
-- **Prisma**
+- Prisma
