@@ -133,26 +133,6 @@ export const deleteCategory = async (req: Request, res: Response) => {
       },
     });
 
-    // Find books with the same category ID
-    const findBooksWithSameCategory = await db.book.findMany({
-      where: {
-        categoryId: Number(id)
-      }
-    });
-
-    // Update books to set categoryId to 0
-    const bookIdsToUpdate = findBooksWithSameCategory.map(book => book.id);
-    await db.book.updateMany({
-      where: {
-        id: {
-          in: bookIdsToUpdate
-        }
-      },
-      data: {
-        categoryId: 0 // Set to 0 (no category)
-      }
-    });
-
     return res.json(categoryForDelete);
   } catch (err) {
    return res.status(500).json(err);
