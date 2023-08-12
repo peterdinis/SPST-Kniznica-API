@@ -5,7 +5,6 @@ import {
   returnBookingType,
 } from "../validators/bookingSchema";
 import { AVAIABLE, NONAVAIABLE } from "../constants/bookStatus";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import dayjs from "dayjs";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
@@ -18,7 +17,7 @@ export const getAllBooking = async (req: Request, res: Response) => {
     const allBookings = await db.booking.findMany();
     return res.json(allBookings);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -30,7 +29,7 @@ export const findAllPaginatedBookings = async (req: Request, res: Response) => {
     });
     return res.json(allPaginatedBooking);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -45,7 +44,7 @@ export const getMyBorrowedBooks = async (req: Request, res: Response) => {
 
     return res.json(myBooking);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -64,7 +63,7 @@ export const bookingInfo = async (req: Request, res: Response) => {
 
     return res.json(bookInfo);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -164,7 +163,7 @@ export const createBooking = async (
     });
     return res.json(createNewBooking);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -209,6 +208,6 @@ export const returnBook = async (
 
     return res.json(removeBookFromBooking);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };

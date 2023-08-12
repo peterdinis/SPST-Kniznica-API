@@ -2,7 +2,6 @@ import db from "../db";
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import paginator from "prisma-paginate";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 const prisma = new PrismaClient();
 const paginate = paginator(prisma);
@@ -16,7 +15,7 @@ export const getAllAuthors = async (req: Request, res: Response) => {
     });
     return res.json(allAuthors);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -28,7 +27,7 @@ export const findAllPaginatedAuthors = async (req: Request, res: Response) => {
     });
     return res.json(allPaginatedAuthors);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -50,7 +49,7 @@ export const getOneAuthor = async (req: Request, res: Response) => {
 
     return res.json(oneAuthor);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -70,7 +69,7 @@ export const searchForAuthor = async (req: Request, res: Response) => {
 
     return res.json(authors);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -84,7 +83,7 @@ export const createAuthor = async (req: Request, res: Response) => {
     });
     return res.json(createNewAuthor);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -107,7 +106,7 @@ export const updateAuthor = async (req: Request, res: Response) => {
 
     return res.json(authorForUpdate);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 

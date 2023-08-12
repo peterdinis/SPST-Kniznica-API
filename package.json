@@ -1,9 +1,12 @@
 {
   "name": "spst-kniznica-api",
-  "version": "2.8",
+  "version": "2.9",
   "main": "server.ts",
   "scripts": {
-    "dev": "nodemon --config nodemon.json ./src/server.ts"
+    "dev": "nodemon --config nodemon.json ./src/server.ts",
+    "prisma": "npx prisma",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [
     "NodeJs",

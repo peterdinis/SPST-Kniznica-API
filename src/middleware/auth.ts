@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { Response, NextFunction, Request } from "express";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 
 interface CustomRequest extends Request {
   user?: unknown;
@@ -26,6 +25,6 @@ export const verifyToken = async (
     req.user = verified;
     next();
   } catch (err: unknown) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };

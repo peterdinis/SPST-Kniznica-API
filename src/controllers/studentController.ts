@@ -6,7 +6,6 @@ import {
 } from "../validators/studentSchema";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { getErrorMessage } from "../helpers/catchErrorMessage";
 import paginator from "prisma-paginate";
 import { PrismaClient } from "@prisma/client";
 import { STUDENT } from "../constants/roles";
@@ -28,7 +27,7 @@ export const findAllPaginatedStudents = async (req: Request, res: Response) => {
     });
     return res.json(allPaginatedStudents);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -85,7 +84,7 @@ export const studentRegister = async (
 
     return res.status(201).json(createNewStudent);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -121,7 +120,7 @@ export const studentLogin = async (
       token,
     });
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
 
@@ -134,6 +133,6 @@ export const studentProfile = async (req: Request, res: Response) => {
 
     return res.status(200).json(user);
   } catch (err) {
-    getErrorMessage(err);
+    return res.status(500).json(err);
   }
 };
