@@ -124,26 +124,6 @@ export const deleteAuthor = async (req: Request, res: Response) => {
       throw new Error("Author not found");
     }
 
-    // Find books with the same author ID
-    const findBooksWithSameAuthor = await db.book.findMany({
-      where: {
-        authorId: Number(id)
-      }
-    });
-
-    // Update books to set categoryId to 0
-    const bookIdsToUpdate = findBooksWithSameAuthor.map(book => book.id);
-    await db.book.updateMany({
-      where: {
-        id: {
-          in: bookIdsToUpdate
-        }
-      },
-      data: {
-        authorId: 0 // Set to 0 (no category)
-      }
-    });
-
     return res.json(authorForDelete);
   } catch (err) {
     // Handle and report the error

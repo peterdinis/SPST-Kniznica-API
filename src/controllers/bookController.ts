@@ -179,52 +179,6 @@ export const deleteBookFn = async (req: Request, res: Response) => {
       return res.status(404).json("Book not found");
     }
 
-    // Find all categories with books that have this id
-    const categoriesWithBook = await db.category.findMany({
-      where: {
-        books: {
-          some: {
-            id: Number(id)
-          }
-        }
-      }
-    });
-
-    // Find all authors with books that have this id
-    const authorsWithBook = await db.author.findMany({
-      where: {
-        books: {
-          some: {
-            id: Number(id)
-          }
-        }
-      }
-    });
-
-    // Remove the book from categories and authors
-    await Promise.all([
-      ...categoriesWithBook.map(category => db.category.update({
-        where: { id: category.id },
-        data: {
-          books: {
-            disconnect: {
-              id: Number(id)
-            }
-          }
-        }
-      })),
-      ...authorsWithBook.map(author => db.author.update({
-        where: { id: author.id },
-        data: {
-          books: {
-            disconnect: {
-              id: Number(id)
-            }
-          }
-        }
-      }))
-    ]);
-
     return res.json(book);
   } catch (err) {
     return res.status(500).json(err);
