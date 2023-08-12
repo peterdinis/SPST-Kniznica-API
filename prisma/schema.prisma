@@ -23,7 +23,7 @@ model Book {
   year        Int
   quantity    Int       @default(1)
   categoryId  Int       @default(1)
-  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: SetDefault)
+  Category    Category  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   authorId    Int
   Author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade)
   Borrowed    Booking[]
