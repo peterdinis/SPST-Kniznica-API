@@ -19,12 +19,13 @@ if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
 }
 
+// This will be for development in producition origin will be deployed frontend url
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL as unknown as string,
+    origin: "*",
     allowedHeaders: "*",
     methods: "*",
-    exposedHeaders: "*",
+    exposedHeaders: "*", 
   })
 );
 
