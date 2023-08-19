@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL as unknown as string,
+    origin: "*",
     allowedHeaders: "*",
     methods: "*",
     exposedHeaders: "*",
