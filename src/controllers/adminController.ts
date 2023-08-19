@@ -105,19 +105,6 @@ export const deactivatedStudentProfile = async (req: Request, res: Response) => 
     if(!user) {
       return res.status(409).json("Žiak neexistuje");
     }
-
-    const checkStudentBookings = await db.booking.findMany({
-      where: {
-        username: user!.username
-      }
-    })
-
-    await db.booking.deleteMany({
-      where: {
-        id: checkStudentBookings[0].id
-      }
-    })
-
     const deactivatedUser = await db.student.delete({
       where: {
         id: user!.id,
@@ -144,18 +131,6 @@ export const deactivatedTeacherProfile = async (req: Request, res: Response) => 
       return res.status(409).json("Učiteľ neexistue");
     }
 
-    const checkStudentBookings = await db.booking.findMany({
-      where: {
-        username: user!.username
-      }
-    })
-    
-    await db.booking.deleteMany({
-      where: {
-        id: checkStudentBookings[0].id
-      }
-    })
-
     const deactivatedUser = await db.teacher.delete({
       where: {
         id: user!.id,
@@ -164,6 +139,7 @@ export const deactivatedTeacherProfile = async (req: Request, res: Response) => 
 
     return res.status(200).json(deactivatedUser);
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };
