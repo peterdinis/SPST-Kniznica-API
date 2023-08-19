@@ -1,10 +1,11 @@
 {
   "name": "spst-kniznica-api",
-  "main": "./src/server.ts",
+  "main": "server.ts",
   "scripts": {
     "dev": "nodemon --config nodemon.json ./src/server.ts",
     "migrate": "prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "start": "node ./src/server.ts"
   },
   "keywords": [
     "NodeJs",
