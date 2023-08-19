@@ -16,7 +16,7 @@ router.post("/authors", createAuthor);
 router.get("/authors/search", searchForAuthor);
 router.get("/authors/paginate", findAllPaginatedAuthors);
 router.get("/authors/:externalId", getOneAuthor);
-router.patch("/author/:id", updateAuthor);
+router.put("/author/:id", updateAuthor);
 router.delete("/author/:id", deleteAuthor);
 
 export default router;
