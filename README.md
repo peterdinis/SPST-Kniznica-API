@@ -2,14 +2,23 @@
 
 - api for spst library project
 
-## How to run
+## Database Setup:
 
+Create a PostgreSQL database.
+
+Configure your database connection URL in the .env 
+DATABASE_URL="postgresql://username:password@localhost:5432/yourdb"
+
+## Prisma setup
+
+npx prisma migrate dev
+
+## How to run
 - clone the repo
 - create .env file and copy variables from .env.local
-- npm install
-- update database_url in env.local to match your database credentials
-- run npx prisma init for initialize prismarun npx prisma migrate dev and create migration
-- run npm run seeder for seeding database
+- setup database
+- setup prisma
+- run npm run dev
 
 ## Technologies
 
