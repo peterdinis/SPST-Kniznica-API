@@ -26,4 +26,4 @@ npx prisma migrate dev
 - Typescript
 - Express
 - Postgresql
-- **Prisma**
+-  Prisma
