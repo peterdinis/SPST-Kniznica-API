@@ -89,7 +89,8 @@ export const createCategoryFn = async (
 
     const newCategory = await db.category.create({
       data: {
-        ...req.body,
+        name: req.body.name,
+        description: req.body.description
       },
     });
 
