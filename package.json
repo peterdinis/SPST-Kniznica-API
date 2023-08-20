@@ -1,6 +1,6 @@
 {
   "name": "spst-kniznica-api",
-  "main": "server.ts",
+  "main": "./src/server.ts",
   "scripts": {
     "dev": "nodemon --config nodemon.json ./src/server.ts",
     "migrate": "prisma migrate deploy",
