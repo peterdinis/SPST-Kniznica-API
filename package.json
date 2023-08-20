@@ -1,7 +1,7 @@
 {
   "name": "spst-kniznica-api",
   "scripts": {
-    "dev": "nodemon --config nodemon.json ./src/server.ts",
+    "dev": "nodemon --config nodemon.json ./src/server.ts && tsc",
     "migrate": "prisma migrate deploy",
     "postinstall": "prisma generate",
     "build": "rimraf ./build && tsc",
