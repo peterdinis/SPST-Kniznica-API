@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "nodemon --config nodemon.json ./src/server.ts",
     "migrate": "prisma migrate deploy",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "build": "rimraf ./build && tsc"
   },
   "keywords": [
     "NodeJs",
@@ -27,6 +28,7 @@
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
     "prisma-paginate": "^4.2.2",
+    "rimraf": "^5.0.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
