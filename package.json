@@ -5,7 +5,6 @@
     "dev": "nodemon --config nodemon.json ./src/server.ts && tsc",
     "migrate": "prisma migrate deploy",
     "postinstall": "prisma generate",
-    "build": "tsc . -p",
     "start": "prisma migrate deploy && node ./build/server.js"
   },
   "keywords": [
