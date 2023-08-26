@@ -5,8 +5,8 @@
     "dev": "nodemon --config nodemon.json ./src/server.ts && tsc",
     "migrate": "prisma migrate deploy",
     "postinstall": "prisma generate",
-    "start": "prisma migrate deploy && node ./build/server.js",
-    "build": "prisma generate && tsc"
+    "start": "node ./build/server.js",
+    "build": "prisma migrate deploy && prisma generate && npm run generate && tsc"
   },
   "keywords": [
     "NodeJs",
@@ -30,7 +30,8 @@
     "morgan": "^1.10.0",
     "prisma-paginate": "^4.2.2",
     "rimraf": "^5.0.1",
-    "zod": "^3.20.2"
+    "zod": "^3.20.2",
+    "prisma": "^5.1.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -44,7 +45,6 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^20.5.1",
     "nodemon": "^2.0.22",
-    "prisma": "^5.1.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"
   }
