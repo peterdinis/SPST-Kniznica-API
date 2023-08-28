@@ -6,7 +6,7 @@
     "migrate": "prisma migrate deploy",
     "postinstall": "prisma generate",
     "start": "node ./build/server.js",
-    "build": "prisma migrate deploy && prisma generate && rimraf dist && swc ./src -d dist"
+    "build": "npm install && prisma migrate deploy "
   },
   "keywords": [
     "NodeJs",
