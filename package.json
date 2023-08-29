@@ -7,7 +7,7 @@
     "start": "node dist/server.js",
     "migrate:dev": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
-    "migrate:status": "prisma migrate status",
+    "migrate:status": "prisma migrate status", 
     "generate": "prisma generate"
   },
   "keywords": [
