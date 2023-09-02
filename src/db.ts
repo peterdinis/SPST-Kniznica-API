@@ -1,5 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { DataSource } from "typeorm"
 
-const db = new PrismaClient();
-
-export default db;
+export const myDataSource = new DataSource({
+    type: "mysql",
+    host: "localhost",
+    port: 3306,
+    username: "test",
+    password: "test",
+    database: "test",
+    entities: ["src/entities/entity/*.ts"],
+    logging: true,
+    synchronize: true,
+})
