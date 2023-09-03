@@ -8,7 +8,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "outDir": "./build",
-    "rootDir": "src"
+    "rootDir": "src",
+    "emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
