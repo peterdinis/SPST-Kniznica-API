@@ -14,4 +14,5 @@ router.post("/admin/login", loginAdmin);
 router.get("/admin/profile", adminProfile);
 router.delete("/student/profile/delete/:studentId", deactivatedStudentProfile);
 router.delete("/teacher/profile/delete/:teacherId", deactivatedTeacherProfile);
+
 export default router;
